@@ -40,7 +40,7 @@ public class FilterInteraction : MonoBehaviour {
     //Scale Factor
     private float scaleFactor;
 
-    private bool scalingActive = true;
+    private bool filterActive = true;
     private bool touched = false;
 
 
@@ -59,25 +59,32 @@ public class FilterInteraction : MonoBehaviour {
 
     void Start() {
         // assign parent objects of filter interactor
-        controller = timelineInteractor.transform.parent.gameObject;
+        controller = filterInteractor.transform.parent.gameObject;
         camrig = controller.transform.parent.gameObject;
 
         // find child objects of filter interactor
-        topLeft = timelineInteractor.transform.Find("TopLeft").gameObject;
-        topRight = timelineInteractor.transform.Find("TopRight").gameObject;
-        bottomLeft = timelineInteractor.transform.Find("BottomLeft").gameObject;
-        bottomRight = timelineInteractor.transform.Find("BottomRight").gameObject;
-        center = timelineInteractor.transform.Find("Center").gameObject;
+        topLeft = filterInteractor.transform.Find("TopLeft").gameObject;
+        topRight = filterInteractor.transform.Find("TopRight").gameObject;
+        bottomLeft = filterInteractor.transform.Find("BottomLeft").gameObject;
+        bottomRight = filterInteractor.transform.Find("BottomRight").gameObject;
+        center = filterInteractor.transform.Find("Center").gameObject;
 
         // load Materials
 
         //standardMaterial = (Material)Resources.Load("Timeline/Materials/DefaultMaterial", typeof(Material));
 
-        matTimespan = (Material)Resources.Load("Materials/TurquisMaterial", typeof(Material));
-        matRegion = (Material)Resources.Load("Materials/TurquisMaterial", typeof(Material));
-        matType = (Material)Resources.Load("Materials/TurquisMaterial", typeof(Material));
-        matExhibition = (Material)Resources.Load("Materials/TurquisMaterial", typeof(Material));
+        matTimespan = (Material)Resources.Load("Experiments/Materials/experiment1", typeof(Material));
+        matRegion = (Material)Resources.Load("Experiments/Materials/experiment2", typeof(Material));
+        matType = (Material)Resources.Load("Experiments/Materials/experiment3", typeof(Material));
+        matExhibition = (Material)Resources.Load("Experiments/Materials/experiment4", typeof(Material));
         matApply = (Material)Resources.Load("Materials/PinkMaterial", typeof(Material));
+
+
+        topLeft.GetComponent<MeshRenderer>().material = matRegion;
+        topRight.GetComponent<MeshRenderer>().material = matTimespan;
+        bottomLeft.GetComponent<MeshRenderer>().material = matExhibition;
+        bottomLeft.GetComponent<MeshRenderer>().material = matType;
+        center.GetComponent<MeshRenderer>().material = standardMaterial;
 
 
         scaleFactor = 1f;

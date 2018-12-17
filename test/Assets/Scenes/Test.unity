@@ -3683,6 +3683,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000012871988812, guid: 4bdf4d8920cb798448661dbaef3a5cea,
     type: 2}
   m_PrefabInternal: {fileID: 766714547}
+--- !u!1 &766714549 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000010387120362, guid: 4bdf4d8920cb798448661dbaef3a5cea,
+    type: 2}
+  m_PrefabInternal: {fileID: 766714547}
 --- !u!1 &808829102
 GameObject:
   m_ObjectHideFlags: 0
@@ -4967,15 +4972,14 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1141949596}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8d03f1c0dc7fe340b251fb216749607, type: 3}
+  m_Script: {fileID: 11500000, guid: 44a8d3ba0adb2aa4ebad02f03e67cd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
-  camrig: {fileID: 0}
-  cube: {fileID: 0}
-  scaleFactor: 2
+  filterInteractor: {fileID: 766714549}
+  standardMaterial: {fileID: 2100000, guid: c105f1e09ab8b4c4c908e3a36160b9cd, type: 2}
+  selectedMaterial: {fileID: 2100000, guid: 3d41b90b480e7481da3b180052a44f97, type: 2}
   speed: 0.1
 --- !u!114 &1141949602
 MonoBehaviour:
@@ -7422,7 +7426,7 @@ MonoBehaviour:
   lebensdaten: "* 6.1.1909 Bern, \u2020 19.4.1958 Interlaken"
   bio: "Grafiker und Zeichner, Kinderbuchillustrator und -autor. Original- und Gebrauchsgrafik,
     Wandbild, B\xFChnenbild. Vater von Kaspar Fischer"
-  picture: {fileID: 2100000, guid: 51fb3d8d1af26ec47bb4af603c83509b, type: 2}
+  picture: {fileID: 0}
 --- !u!1 &1871644459
 GameObject:
   m_ObjectHideFlags: 0
@@ -7469,7 +7473,7 @@ MonoBehaviour:
   bio: "Bildhauer und Plastiker. Bauplastik, Figur, Akt, Torso, Portr\xE4tb\xFCste
     und Tier. Relief und Denkmal. Sch\xFCler von Antoine Bourdelle in Paris, t\xE4tig
     in Basel, Genf, Peney, Dornach"
-  picture: {fileID: 2100000, guid: 963d296fb2d85ee43b9267b0668c540d, type: 2}
+  picture: {fileID: 0}
 --- !u!1 &1948200534
 GameObject:
   m_ObjectHideFlags: 0
@@ -7881,6 +7885,21 @@ MonoBehaviour:
   snapToNearestFloor: 1
   applyPlayareaParentOffset: 0
   customRaycast: {fileID: 0}
+--- !u!114 &2010824012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2010823998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44a8d3ba0adb2aa4ebad02f03e67cd12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filterInteractor: {fileID: 766714549}
+  standardMaterial: {fileID: 2100000, guid: c105f1e09ab8b4c4c908e3a36160b9cd, type: 2}
+  selectedMaterial: {fileID: 2100000, guid: 3d41b90b480e7481da3b180052a44f97, type: 2}
+  speed: 0.1
 --- !u!114 &2010824014
 MonoBehaviour:
   m_ObjectHideFlags: 0
