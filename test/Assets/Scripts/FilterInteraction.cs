@@ -37,6 +37,12 @@ public class FilterInteraction : MonoBehaviour {
     private Material matExhibitionSelected;
     private Material matApplySelected;
 
+    //selections
+    private bool timespanSelected = false;
+    private bool regionSelected = false;
+    private bool typeSelected = false;
+    private bool exhibitionSelected = false;
+
     //Scale Factor
     private float scaleFactor;
 
@@ -83,7 +89,7 @@ public class FilterInteraction : MonoBehaviour {
         topLeft.GetComponent<MeshRenderer>().material = matRegion;
         topRight.GetComponent<MeshRenderer>().material = matTimespan;
         bottomLeft.GetComponent<MeshRenderer>().material = matExhibition;
-        bottomLeft.GetComponent<MeshRenderer>().material = matType;
+        bottomRight.GetComponent<MeshRenderer>().material = matType;
         center.GetComponent<MeshRenderer>().material = standardMaterial;
 
 
@@ -99,90 +105,92 @@ public class FilterInteraction : MonoBehaviour {
     void FixedUpdate() {
         device = SteamVR_Controller.Input((int)trackedObj.index);
 
-        /*
-        if (scalingActive)
-        {
-        }
-        */
 
-        // Checks for Touchpad touch swipe  
-        /*
-        if (device.GetTouch(SteamVR_Controller.ButtonMask.Touchpad))
-        {
-            if (!touched) {
-                touched = true;
-                y_move = device.GetAxis().y;
-            }
-
-            else {
-                y_current = device.GetAxis().y;
-                movement = y_move - y_current;
-                scaleFactor += movement * speed;
-                //Debug.Log("Movement " + movement);
-                Debug.Log("Scalefactor " + scaleFactor);
-
-                // set scale of camrig, for the moment ignore values below 0
-                if (scaleFactor > 0)
-                {
-                    Transform transform = camrig.transform;
-                    camrig.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
-                }
-
-                y_move = y_current;                
-                
-            }
-        }
-        */
-
-        // Checks for Touchpad clicks for stepwise scaling      
+        // Checks for Touchpad input     
         if (device.GetPressUp(SteamVR_Controller.ButtonMask.Touchpad))
         {
             camrigX = 0;
             camrigY = 0;
             camrigZ = 0;
 
-            //scale up (zoom out)
-            if (device.GetAxis().y > 0)
+            //center
+
+
+            //top left
+            if (device.GetAxis().x < 0 && device.GetAxis().y > 0)
             {
-                scaleFactor *= 2;
+                Debug.Log("top left");
 
-                Debug.Log("Scalefactor " + scaleFactor);
+                // update selection 
+                regionSelected = !regionSelected;
 
-                if (scaleFactor < 1025)
+                // update material
+                if (regionSelected)
                 {
-                    //Transform transform = cube.transform;
-                    camrig.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
+                    topLeft.GetComponent<MeshRenderer>().material = selectedMaterial;
+                }
+                else {
+                    topLeft.GetComponent<MeshRenderer>().material = standardMaterial;
                 }
             }
 
-            // scale down (zoom in)
-            else
+            //top right
+            else if (device.GetAxis().x > 0 && device.GetAxis().y > 0)
             {
-                scaleFactor /= 2;
-                //Debug.Log("Movement " + movement);
-                Debug.Log("Scalefactor " + scaleFactor);
+                Debug.Log("top right");
 
-                // set scale of camrig, for the moment ignore values below 0
-                
-                if (scaleFactor > 0) {
-                    // Transform transform = cube.transform;
-                    camrig.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
+                // update selection 
+                timespanSelected = !timespanSelected;
 
-                    // adjust cam hight
-                    if (camrigY < 1) {
-                        camrig.transform.localPosition = new Vector3(camrigX, 1.0f, camrigZ);
-                    }
-                }
-
-                /*
-                // set scale of cube, for the moment ignore values below 0
-                if (scaleFactor > 0)
+                // update material
+                if (timespanSelected)
                 {
-                    Transform transform = cube.transform;
-                    cube.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
+                    topRight.GetComponent<MeshRenderer>().material = selectedMaterial;
                 }
-                */
+                else
+                {
+                    topRight.GetComponent<MeshRenderer>().material = standardMaterial;
+                }
             }
+
+            //top left
+            else if (device.GetAxis().x < 0 && device.GetAxis().y < 0)
+            {
+                Debug.Log("bottom left");
+
+                // update selection 
+                exhibitionSelected = !exhibitionSelected;
+
+                // update material
+                if (exhibitionSelected)
+                {
+                    bottomLeft.GetComponent<MeshRenderer>().material = selectedMaterial;
+                }
+                else
+                {
+                    bottomLeft.GetComponent<MeshRenderer>().material = standardMaterial;
+                }
+            }
+
+            //top right
+            else if (device.GetAxis().x > 0 && device.GetAxis().y < 0)
+            {
+                Debug.Log("bottom right");
+
+                // update selection 
+                typeSelected = !typeSelected;
+
+                // update material
+                if (typeSelected)
+                {
+                    bottomRight.GetComponent<MeshRenderer>().material = selectedMaterial;
+                }
+                else
+                {
+                    bottomRight.GetComponent<MeshRenderer>().material = standardMaterial;
+                }
+            }
+
         }
 
 
