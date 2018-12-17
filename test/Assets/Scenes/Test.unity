@@ -2008,7 +2008,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 370012532}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14, y: 1, z: -26}
+  m_LocalPosition: {x: 15.4, y: 1.2, z: -6.2}
   m_LocalScale: {x: 1, y: 1, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3893,7 +3893,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 910666614}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31, y: 1, z: 48}
+  m_LocalPosition: {x: 31, y: 1.2, z: 48}
   m_LocalScale: {x: 1, y: 1, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6103,7 +6103,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1610534163}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21, y: 1, z: 1}
+  m_LocalPosition: {x: 21, y: 1.2, z: 1}
   m_LocalScale: {x: 2, y: 2, z: 0.02}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7169,6 +7169,7 @@ MonoBehaviour:
   controller: {fileID: 2010823998}
   camrig: {fileID: 2010824005}
   cube: {fileID: 910666614}
+  scaleFactor: 2
   speed: 1
 --- !u!114 &2010824007
 MonoBehaviour:
@@ -7273,6 +7274,7 @@ MonoBehaviour:
   controller: {fileID: 2010823993}
   camrig: {fileID: 2010824005}
   cube: {fileID: 910666614}
+  scaleFactor: 1.5
   speed: 1
 --- !u!1 &2017077457
 GameObject:

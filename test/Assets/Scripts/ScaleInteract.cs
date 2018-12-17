@@ -15,7 +15,8 @@ public class ScaleInteract : MonoBehaviour {
     public GameObject cube;
 
     //Scale Factor
-    private float scaleFactor;
+    public float scaleFactor = 2;
+    private float currentScaleFactor;
 
     private bool scalingActive = true;
     private bool touched = false;
@@ -35,7 +36,7 @@ public class ScaleInteract : MonoBehaviour {
 
 
     void Start() {
-        scaleFactor = 1f;
+        currentScaleFactor = 1f;
     }
 
 
@@ -90,25 +91,25 @@ public class ScaleInteract : MonoBehaviour {
             camrigZ = camrig.transform.localPosition.z;
 
             //scale up (zoom out)
-            if (device.GetAxis().y > 0 && scaleFactor < 1025)
+            if (device.GetAxis().y > 0 && currentScaleFactor < 1025)
             {
-                scaleFactor *= 2;
+                currentScaleFactor *= scaleFactor;
 
-                Debug.Log("Scalefactor " + scaleFactor);
+                Debug.Log("Scalefactor " + currentScaleFactor);
 
                 Transform transform = cube.transform;
-                camrig.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
+                camrig.transform.localScale = new Vector3(currentScaleFactor, currentScaleFactor, currentScaleFactor);
             }
 
             // scale down (zoom in)
-            else if (device.GetAxis().y < 0 && scaleFactor > 1)
+            else if (device.GetAxis().y < 0 && currentScaleFactor > 1)
             {
-                scaleFactor /= 2;
+                currentScaleFactor /= scaleFactor;
 
-                Debug.Log("Scalefactor " + scaleFactor);
+                Debug.Log("Scalefactor " + currentScaleFactor);
 
                 Transform transform = cube.transform;
-                camrig.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
+                camrig.transform.localScale = new Vector3(currentScaleFactor, currentScaleFactor, currentScaleFactor);
 
                 // adjust cam hight
                 /*
