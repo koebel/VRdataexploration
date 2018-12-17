@@ -4,15 +4,38 @@ using UnityEngine.SceneManagement;
 
 
 [RequireComponent(typeof(SteamVR_TrackedObject))]
-public class Filter : MonoBehaviour {
+public class FilterInteraction : MonoBehaviour {
 
     SteamVR_TrackedObject trackedObj;
     SteamVR_Controller.Device device;
 
-    // Timeline Interactor
-    public GameObject controller;
-    public GameObject camrig;
-    public GameObject filterUI;
+    // Filter Interactor
+    public GameObject filterInteractor;
+    private GameObject controller;
+    private GameObject camrig;
+    
+    // child objects
+    private GameObject topLeft;
+    private GameObject topRight;
+    private GameObject bottomLeft;
+    private GameObject bottomRight;
+    private GameObject center;
+
+    // materials for main menu
+    public Material standardMaterial;
+    public Material selectedMaterial;
+
+    private Material matTimespan;
+    private Material matRegion;
+    private Material matType;
+    private Material matExhibition;
+    private Material matApply;
+
+    private Material matTimespanSelected;
+    private Material matRegionSelected;
+    private Material matTypeSelected;
+    private Material matExhibitionSelected;
+    private Material matApplySelected;
 
     //Scale Factor
     private float scaleFactor;
@@ -35,6 +58,28 @@ public class Filter : MonoBehaviour {
 
 
     void Start() {
+        // assign parent objects of filter interactor
+        controller = timelineInteractor.transform.parent.gameObject;
+        camrig = controller.transform.parent.gameObject;
+
+        // find child objects of filter interactor
+        topLeft = timelineInteractor.transform.Find("TopLeft").gameObject;
+        topRight = timelineInteractor.transform.Find("TopRight").gameObject;
+        bottomLeft = timelineInteractor.transform.Find("BottomLeft").gameObject;
+        bottomRight = timelineInteractor.transform.Find("BottomRight").gameObject;
+        center = timelineInteractor.transform.Find("Center").gameObject;
+
+        // load Materials
+
+        //standardMaterial = (Material)Resources.Load("Timeline/Materials/DefaultMaterial", typeof(Material));
+
+        matTimespan = (Material)Resources.Load("Materials/TurquisMaterial", typeof(Material));
+        matRegion = (Material)Resources.Load("Materials/TurquisMaterial", typeof(Material));
+        matType = (Material)Resources.Load("Materials/TurquisMaterial", typeof(Material));
+        matExhibition = (Material)Resources.Load("Materials/TurquisMaterial", typeof(Material));
+        matApply = (Material)Resources.Load("Materials/PinkMaterial", typeof(Material));
+
+
         scaleFactor = 1f;
     }
 
