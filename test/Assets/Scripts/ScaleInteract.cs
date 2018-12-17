@@ -90,51 +90,34 @@ public class ScaleInteract : MonoBehaviour {
             camrigZ = camrig.transform.localPosition.z;
 
             //scale up (zoom out)
-            if (device.GetAxis().y > 0)
+            if (device.GetAxis().y > 0 && scaleFactor < 1025)
             {
                 scaleFactor *= 2;
 
                 Debug.Log("Scalefactor " + scaleFactor);
 
-                if (scaleFactor < 1025)
-                {
-                    Transform transform = cube.transform;
-                    camrig.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
-                }
+                Transform transform = cube.transform;
+                camrig.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
             }
 
             // scale down (zoom in)
-            else
+            else if (device.GetAxis().y < 0 && scaleFactor > 1)
             {
                 scaleFactor /= 2;
-                //Debug.Log("Movement " + movement);
+
                 Debug.Log("Scalefactor " + scaleFactor);
 
-                // set scale of camrig, for the moment ignore values below 0
-                
-                if (scaleFactor > 0) {
-                    Transform transform = cube.transform;
-                    camrig.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
+                Transform transform = cube.transform;
+                camrig.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
 
-                    // adjust cam hight
-                    if (camrigY < 1) {
-                        camrig.transform.localPosition = new Vector3(camrigX, 1.0f, camrigZ);
-                    }
-                }
-
+                // adjust cam hight
                 /*
-                // set scale of cube, for the moment ignore values below 0
-                if (scaleFactor > 0)
-                {
-                    Transform transform = cube.transform;
-                    cube.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
+                if (camrigY < 1) {
+                    camrig.transform.localPosition = new Vector3(camrigX, 1.0f, camrigZ);
                 }
                 */
             }
         }
-
-
-
 
         // reset y_move to zero when touch is released
         if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Touchpad))
