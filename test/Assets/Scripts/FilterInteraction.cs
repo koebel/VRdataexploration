@@ -13,6 +13,8 @@ public class FilterInteraction : MonoBehaviour {
     public GameObject filterInteractor;
     private GameObject controller;
     private GameObject camrig;
+
+    public float centerRadius = 0.5f; 
     
     // child objects
     private GameObject topLeft;
@@ -38,6 +40,7 @@ public class FilterInteraction : MonoBehaviour {
     private Material matApplySelected;
 
     //selections
+    private bool applySelected = false;
     private bool timespanSelected = false;
     private bool regionSelected = false;
     private bool typeSelected = false;
@@ -55,7 +58,7 @@ public class FilterInteraction : MonoBehaviour {
     private float y_move = 0.0f;
     private float y_current = 0.0f;
     private float movement;
-    public float speed = 0.1f;
+    private float speed = 0.1f;
 
     private float camrigX;
     private float camrigY;
@@ -109,15 +112,27 @@ public class FilterInteraction : MonoBehaviour {
         // Checks for Touchpad input     
         if (device.GetPressUp(SteamVR_Controller.ButtonMask.Touchpad))
         {
-            camrigX = 0;
-            camrigY = 0;
-            camrigZ = 0;
-
             //center
+            if (Mathf.Sqrt(Mathf.Abs(device.GetAxis().x) * Mathf.Abs(device.GetAxis().x) + Mathf.Abs(device.GetAxis().y) + Mathf.Abs(device.GetAxis().y)) < centerRadius) {
+                Debug.Log("center");
+
+                // update selection 
+                applySelected = !applySelected;
+
+                // update material
+                if (applySelected)
+                {
+                    center.GetComponent<MeshRenderer>().material = selectedMaterial;
+                }
+                else
+                {
+                    center.GetComponent<MeshRenderer>().material = standardMaterial;
+                }
+            }
 
 
             //top left
-            if (device.GetAxis().x < 0 && device.GetAxis().y > 0)
+            else if (device.GetAxis().x < 0 && device.GetAxis().y > 0)
             {
                 Debug.Log("top left");
 

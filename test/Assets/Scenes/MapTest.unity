@@ -3739,7 +3739,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &909005735
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6278,9 +6278,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   filterInteractor: {fileID: 2005818435}
+  centerRadius: 0.9
   standardMaterial: {fileID: 2100000, guid: c105f1e09ab8b4c4c908e3a36160b9cd, type: 2}
   selectedMaterial: {fileID: 2100000, guid: 3d41b90b480e7481da3b180052a44f97, type: 2}
-  speed: 0.1
 --- !u!1 &1696104688
 GameObject:
   m_ObjectHideFlags: 0
