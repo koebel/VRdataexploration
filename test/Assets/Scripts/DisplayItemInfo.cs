@@ -9,8 +9,9 @@ public class DisplayItemInfo : MonoBehaviour {
     SteamVR_Controller.Device device;
 
     private GameObject collectionItem;
-    private GameObject collectionItemParent;
+    private Transform collectionItemParent;
     private GameObject collectionItemUI;
+    private GameObject collectionItemBG;
     private Text text;
 
     // set Tag for collection item
@@ -48,44 +49,58 @@ public class DisplayItemInfo : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit, rayDistance))
             {
-                // retrieve metadata from hit object
+                // hit object
                 hitObject = hit.collider.gameObject;
+
+                // TODO check if UI is already visible, only call the following code once
 
                 if (hitObject.tag == collectionItemTag)
                 {
-                    Debug.Log("hit collection item");
                     collectionItem = hitObject;
-                    Debug.Log(collectionItem.name);
+                    //Debug.Log(collectionItem.name);
 
-                    // set collection item 
-                    //collectionItemParent = collectionItem.transform.parent;
-                    //collectionUI = collectionItemParent.transform.Find("UI").gameObject;
-                }
+                    // check if object has parent
+                    if (collectionItem.transform.parent != null) {
+                        //Debug.Log(collectionItem.transform.parent.name);
 
+                        // set collection item 
+                        collectionItemParent = collectionItem.transform.parent;
+                        collectionItemUI = collectionItemParent.transform.Find("UI").gameObject;
+                        collectionItemBG = collectionItemParent.transform.Find("background").gameObject;
+                        collectionItemUI.SetActive(true);
 
-                if (hit.collider.gameObject.tag == collectionItemTag)
-                {
-                    //collectionUI.SetActive(true);
+                        // TODO: make Background semitransparent
+                        collectionItemBG.SetActive(true);
+                    }
                 }
                 
-                // hide marker when ray hits object of different type
+                // hide UI when ray hits object of different type
                 else
                 {
-                    //collectionUI.SetActive(false);
+                    collectionItemUI.SetActive(false);
+                    collectionItemBG.SetActive(false);
+                    collectionItem = null;
+                    collectionItemParent = null;
                 }
             }
 
-            // hide marker when ray does not hit any object
+            // hide UI when ray does not hit any object
             else
             {
-                //collectionUI.SetActive(false);
+                collectionItemUI.SetActive(false);
+                collectionItemBG.SetActive(false);
+                collectionItem = null;
+                collectionItemParent = null;
             }
         }
 
-        // hide text on touch up or when ray no longer hits object
+        // hide UI on touch up or when ray no longer hits object
         if (device.GetPressUp(SteamVR_Controller.ButtonMask.Trigger))
         {
-            //collectionUI.SetActive(false);
+            collectionItemUI.SetActive(false);
+            collectionItemBG.SetActive(false);
+            collectionItem = null;
+            collectionItemParent = null;
         }
     }
 
