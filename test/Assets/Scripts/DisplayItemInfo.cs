@@ -77,8 +77,15 @@ public class DisplayItemInfo : MonoBehaviour {
                 // hide UI when ray hits object of different type
                 else
                 {
-                    collectionItemUI.SetActive(false);
-                    collectionItemBG.SetActive(false);
+                    if (collectionItemUI != null) {
+                        collectionItemUI.SetActive(false);
+                    }
+
+                    if (collectionItemBG != null)
+                    {
+                        collectionItemBG.SetActive(false);
+                    }
+
                     collectionItem = null;
                     collectionItemParent = null;
                 }
@@ -87,8 +94,16 @@ public class DisplayItemInfo : MonoBehaviour {
             // hide UI when ray does not hit any object
             else
             {
-                collectionItemUI.SetActive(false);
-                collectionItemBG.SetActive(false);
+                if (collectionItemUI != null)
+                {
+                    collectionItemUI.SetActive(false);
+                }
+
+                if (collectionItemBG != null)
+                {
+                    collectionItemBG.SetActive(false);
+                }
+
                 collectionItem = null;
                 collectionItemParent = null;
             }
@@ -97,8 +112,16 @@ public class DisplayItemInfo : MonoBehaviour {
         // hide UI on touch up or when ray no longer hits object
         if (device.GetPressUp(SteamVR_Controller.ButtonMask.Trigger))
         {
-            collectionItemUI.SetActive(false);
-            collectionItemBG.SetActive(false);
+            if (collectionItemUI != null)
+            {
+                collectionItemUI.SetActive(false);
+            }
+
+            if (collectionItemBG != null)
+            {
+                collectionItemBG.SetActive(false);
+            }
+
             collectionItem = null;
             collectionItemParent = null;
         }
