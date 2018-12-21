@@ -14,7 +14,9 @@ public class FilterInteraction : MonoBehaviour {
     private GameObject controller;
     private GameObject camrig;
 
-    public float centerRadius = 0.5f; 
+    public float centerRadius = 0.5f;
+    public float markerSize = 0.05f;
+    private float filterMenuFactor = 0.25f;
     
     // child objects
     private GameObject topLeft;
@@ -22,6 +24,7 @@ public class FilterInteraction : MonoBehaviour {
     private GameObject bottomLeft;
     private GameObject bottomRight;
     private GameObject center;
+    private GameObject marker;
 
     // materials for main menu
     public Material standardMaterial;
@@ -49,7 +52,7 @@ public class FilterInteraction : MonoBehaviour {
     //Scale Factor
     private float scaleFactor;
 
-    private bool filterActive = true;
+    private bool filterActive = false;
     private bool touched = false;
 
 
@@ -59,11 +62,6 @@ public class FilterInteraction : MonoBehaviour {
     private float y_current = 0.0f;
     private float movement;
     private float speed = 0.1f;
-
-    private float camrigX;
-    private float camrigY;
-    private float camrigZ;
-
 
 
     void Start() {
@@ -97,6 +95,21 @@ public class FilterInteraction : MonoBehaviour {
 
 
         scaleFactor = 1f;
+
+        // create Marker that indicates input position on filter
+        marker = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        Collider c = marker.GetComponent<Collider>();
+        c.enabled = false;
+        //MeshRenderer r = marker.GetComponent<MeshRenderer>();
+        //r.material.color = selectedMaterial;
+        //r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        marker.SetActive(false);
+
+        // set position
+        marker.transform.parent = filterInteractor.transform;
+        marker.transform.localScale = new Vector3(markerSize, markerSize, markerSize);
+        marker.transform.localPosition = new Vector3(0.0f, 1.11f, -0.3f);
+        
     }
 
 
@@ -108,114 +121,150 @@ public class FilterInteraction : MonoBehaviour {
     void FixedUpdate() {
         device = SteamVR_Controller.Input((int)trackedObj.index);
 
-
-        // Checks for Touchpad input     
-        if (device.GetPressUp(SteamVR_Controller.ButtonMask.Touchpad))
+        // show filter menu
+        if (device.GetPressUp(SteamVR_Controller.ButtonMask.ApplicationMenu))
         {
-            //center
-            if (Mathf.Sqrt(Mathf.Abs(device.GetAxis().x) * Mathf.Abs(device.GetAxis().x) + Mathf.Abs(device.GetAxis().y) + Mathf.Abs(device.GetAxis().y)) < centerRadius) {
-                Debug.Log("center");
-
-                // update selection 
-                applySelected = !applySelected;
-
-                // update material
-                if (applySelected)
-                {
-                    center.GetComponent<MeshRenderer>().material = selectedMaterial;
-                }
-                else
-                {
-                    center.GetComponent<MeshRenderer>().material = standardMaterial;
-                }
-            }
-
-
-            //top left
-            else if (device.GetAxis().x < 0 && device.GetAxis().y > 0)
+            // display filter
+            if (!filterActive)
             {
-                Debug.Log("top left");
+                filterInteractor.SetActive(true);
+                filterActive = true;
+            }
+            // hide filter
+            else
+            {
+                filterInteractor.SetActive(false);
+                filterActive = false;
+            }
+        }
 
-                // update selection 
-                regionSelected = !regionSelected;
+        if (filterActive) {
+            // set position of pointer on filter menu
+            if (device.GetTouch(SteamVR_Controller.ButtonMask.Touchpad)) {
 
-                // update material
-                if (regionSelected)
+                if (!touched)
                 {
-                    topLeft.GetComponent<MeshRenderer>().material = selectedMaterial;
+                    // set position before activating marker
+                    marker.transform.localPosition = new Vector3(device.GetAxis().x * filterMenuFactor, 1.11f, (device.GetAxis().y * filterMenuFactor - 0.3f));
+                    marker.SetActive(true);
                 }
                 else {
-                    topLeft.GetComponent<MeshRenderer>().material = standardMaterial;
+                    marker.transform.localPosition = new Vector3(device.GetAxis().x * filterMenuFactor, 1.11f, (device.GetAxis().y * filterMenuFactor - 0.3f));
                 }
+
+                //calculate angle of touchpoint on trackpad
+                float currAngle = Mathf.Atan2(device.GetAxis().x, device.GetAxis().y) * Mathf.Rad2Deg;
+                               
+                Debug.Log("current Angle: " + currAngle);
+                // currAngle contains a value from -180 to 180 
             }
 
-            //top right
-            else if (device.GetAxis().x > 0 && device.GetAxis().y > 0)
+            // Checks for Touchpad input     
+            if (device.GetPressUp(SteamVR_Controller.ButtonMask.Touchpad))
             {
-                Debug.Log("top right");
+                //center
+                if (Mathf.Sqrt(Mathf.Abs(device.GetAxis().x) * Mathf.Abs(device.GetAxis().x) + Mathf.Abs(device.GetAxis().y) + Mathf.Abs(device.GetAxis().y)) < centerRadius) {
+                    Debug.Log("center");
 
-                // update selection 
-                timespanSelected = !timespanSelected;
+                    // update selection 
+                    applySelected = !applySelected;
 
-                // update material
-                if (timespanSelected)
-                {
-                    topRight.GetComponent<MeshRenderer>().material = selectedMaterial;
+                    // update material
+                    if (applySelected)
+                    {
+                        center.GetComponent<MeshRenderer>().material = selectedMaterial;
+                    }
+                    else
+                    {
+                        center.GetComponent<MeshRenderer>().material = standardMaterial;
+                    }
                 }
-                else
+
+
+                //top left
+                else if (device.GetAxis().x < 0 && device.GetAxis().y > 0)
                 {
-                    topRight.GetComponent<MeshRenderer>().material = standardMaterial;
+                    Debug.Log("top left");
+
+                    // update selection 
+                    regionSelected = !regionSelected;
+
+                    // update material
+                    if (regionSelected)
+                    {
+                        topLeft.GetComponent<MeshRenderer>().material = selectedMaterial;
+                    }
+                    else {
+                        topLeft.GetComponent<MeshRenderer>().material = standardMaterial;
+                    }
                 }
-            }
 
-            //top left
-            else if (device.GetAxis().x < 0 && device.GetAxis().y < 0)
-            {
-                Debug.Log("bottom left");
-
-                // update selection 
-                exhibitionSelected = !exhibitionSelected;
-
-                // update material
-                if (exhibitionSelected)
+                //top right
+                else if (device.GetAxis().x > 0 && device.GetAxis().y > 0)
                 {
-                    bottomLeft.GetComponent<MeshRenderer>().material = selectedMaterial;
+                    Debug.Log("top right");
+
+                    // update selection 
+                    timespanSelected = !timespanSelected;
+
+                    // update material
+                    if (timespanSelected)
+                    {
+                        topRight.GetComponent<MeshRenderer>().material = selectedMaterial;
+                    }
+                    else
+                    {
+                        topRight.GetComponent<MeshRenderer>().material = standardMaterial;
+                    }
                 }
-                else
+
+                //top left
+                else if (device.GetAxis().x < 0 && device.GetAxis().y < 0)
                 {
-                    bottomLeft.GetComponent<MeshRenderer>().material = standardMaterial;
+                    Debug.Log("bottom left");
+
+                    // update selection 
+                    exhibitionSelected = !exhibitionSelected;
+
+                    // update material
+                    if (exhibitionSelected)
+                    {
+                        bottomLeft.GetComponent<MeshRenderer>().material = selectedMaterial;
+                    }
+                    else
+                    {
+                        bottomLeft.GetComponent<MeshRenderer>().material = standardMaterial;
+                    }
                 }
-            }
 
-            //top right
-            else if (device.GetAxis().x > 0 && device.GetAxis().y < 0)
-            {
-                Debug.Log("bottom right");
-
-                // update selection 
-                typeSelected = !typeSelected;
-
-                // update material
-                if (typeSelected)
+                //top right
+                else if (device.GetAxis().x > 0 && device.GetAxis().y < 0)
                 {
-                    bottomRight.GetComponent<MeshRenderer>().material = selectedMaterial;
-                }
-                else
-                {
-                    bottomRight.GetComponent<MeshRenderer>().material = standardMaterial;
+                    Debug.Log("bottom right");
+
+                    // update selection 
+                    typeSelected = !typeSelected;
+
+                    // update material
+                    if (typeSelected)
+                    {
+                        bottomRight.GetComponent<MeshRenderer>().material = selectedMaterial;
+                    }
+                    else
+                    {
+                        bottomRight.GetComponent<MeshRenderer>().material = standardMaterial;
+                    }
                 }
             }
 
         }
 
 
-
-
-        // reset y_move to zero when touch is released
+        // hide marker if touch is released
         if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Touchpad))
         {
-            y_move = 0.0f;
             touched = false;
+            marker.SetActive(false);
         }   
     }
 }
