@@ -49,19 +49,8 @@ public class FilterInteraction : MonoBehaviour {
     private bool typeSelected = false;
     private bool exhibitionSelected = false;
 
-    //Scale Factor
-    private float scaleFactor;
-
     private bool filterActive = false;
     private bool touched = false;
-
-
-    // y_move measures the movement on the trackpad
-    // values range between -1 and 1
-    private float y_move = 0.0f;
-    private float y_current = 0.0f;
-    private float movement;
-    private float speed = 0.1f;
 
 
     void Start() {
@@ -94,8 +83,6 @@ public class FilterInteraction : MonoBehaviour {
         center.GetComponent<MeshRenderer>().material = standardMaterial;
 
 
-        scaleFactor = 1f;
-
         // create Marker that indicates input position on filter
         marker = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         Collider c = marker.GetComponent<Collider>();
@@ -108,8 +95,7 @@ public class FilterInteraction : MonoBehaviour {
         // set position
         marker.transform.parent = filterInteractor.transform;
         marker.transform.localScale = new Vector3(markerSize, markerSize, markerSize);
-        marker.transform.localPosition = new Vector3(0.0f, 1.11f, -0.3f);
-        
+        marker.transform.localPosition = new Vector3(0.0f, 1.11f, -0.3f);    
     }
 
 
@@ -179,7 +165,6 @@ public class FilterInteraction : MonoBehaviour {
                         center.GetComponent<MeshRenderer>().material = standardMaterial;
                     }
                 }
-
 
                 //top left
                 else if (device.GetAxis().x < 0 && device.GetAxis().y > 0)
@@ -256,7 +241,6 @@ public class FilterInteraction : MonoBehaviour {
                     }
                 }
             }
-
         }
 
 
