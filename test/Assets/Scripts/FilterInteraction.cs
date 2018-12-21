@@ -51,6 +51,7 @@ public class FilterInteraction : MonoBehaviour {
 
     private bool filterActive = false;
     private bool touched = false;
+    private float currAngle = 0.0f;
 
 
     void Start() {
@@ -139,10 +140,8 @@ public class FilterInteraction : MonoBehaviour {
                 }
 
                 //calculate angle of touchpoint on trackpad
-                float currAngle = Mathf.Atan2(device.GetAxis().x, device.GetAxis().y) * Mathf.Rad2Deg;
-                               
-                Debug.Log("current Angle: " + currAngle);
-                // currAngle contains a value from -180 to 180 
+                currAngle = Mathf.Atan2(device.GetAxis().x, device.GetAxis().y) * Mathf.Rad2Deg + 180;
+                // currAngle contains a value from 0 to 360              
             }
 
             // Checks for Touchpad input     
@@ -150,7 +149,6 @@ public class FilterInteraction : MonoBehaviour {
             {
                 //center
                 if (Mathf.Sqrt(Mathf.Abs(device.GetAxis().x) * Mathf.Abs(device.GetAxis().x) + Mathf.Abs(device.GetAxis().y) + Mathf.Abs(device.GetAxis().y)) < centerRadius) {
-                    Debug.Log("center");
 
                     // update selection 
                     applySelected = !applySelected;
@@ -167,10 +165,9 @@ public class FilterInteraction : MonoBehaviour {
                 }
 
                 //top left
-                else if (device.GetAxis().x < 0 && device.GetAxis().y > 0)
+                //else if (device.GetAxis().x < 0 && device.GetAxis().y > 0)
+                else if (currAngle > 90 && currAngle < 180)
                 {
-                    Debug.Log("top left");
-
                     // update selection 
                     regionSelected = !regionSelected;
 
@@ -185,10 +182,9 @@ public class FilterInteraction : MonoBehaviour {
                 }
 
                 //top right
-                else if (device.GetAxis().x > 0 && device.GetAxis().y > 0)
+                //else if (device.GetAxis().x > 0 && device.GetAxis().y > 0)
+                else if (currAngle > 180 && currAngle < 270)
                 {
-                    Debug.Log("top right");
-
                     // update selection 
                     timespanSelected = !timespanSelected;
 
@@ -203,11 +199,10 @@ public class FilterInteraction : MonoBehaviour {
                     }
                 }
 
-                //top left
-                else if (device.GetAxis().x < 0 && device.GetAxis().y < 0)
+                //bottom left
+                //else if (device.GetAxis().x < 0 && device.GetAxis().y < 0)
+                else if (currAngle < 90)
                 {
-                    Debug.Log("bottom left");
-
                     // update selection 
                     exhibitionSelected = !exhibitionSelected;
 
@@ -223,10 +218,9 @@ public class FilterInteraction : MonoBehaviour {
                 }
 
                 //top right
-                else if (device.GetAxis().x > 0 && device.GetAxis().y < 0)
+                //else if (device.GetAxis().x > 0 && device.GetAxis().y < 0)
+                else if (currAngle > 270)
                 {
-                    Debug.Log("bottom right");
-
                     // update selection 
                     typeSelected = !typeSelected;
 
