@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-
 [RequireComponent(typeof(SteamVR_TrackedObject))]
 public class FilterInteraction : MonoBehaviour {
 
@@ -16,7 +15,7 @@ public class FilterInteraction : MonoBehaviour {
 
     public float centerRadius = 0.5f;
     public float markerSize = 0.05f;
-    private float filterMenuFactor = 0.25f;
+    private float markerRadiusFactor = 0.19f;
     
     // child objects
     private GameObject topLeft;
@@ -132,11 +131,11 @@ public class FilterInteraction : MonoBehaviour {
                 if (!touched)
                 {
                     // set position before activating marker
-                    marker.transform.localPosition = new Vector3(device.GetAxis().x * filterMenuFactor, 1.11f, (device.GetAxis().y * filterMenuFactor - 0.3f));
+                    marker.transform.localPosition = new Vector3(device.GetAxis().x * markerRadiusFactor, 1.11f, (device.GetAxis().y * markerRadiusFactor - 0.3f));
                     marker.SetActive(true);
                 }
                 else {
-                    marker.transform.localPosition = new Vector3(device.GetAxis().x * filterMenuFactor, 1.11f, (device.GetAxis().y * filterMenuFactor - 0.3f));
+                    marker.transform.localPosition = new Vector3(device.GetAxis().x * markerRadiusFactor, 1.11f, (device.GetAxis().y * markerRadiusFactor - 0.3f));
                 }
 
                 //calculate angle of touchpoint on trackpad
@@ -144,11 +143,13 @@ public class FilterInteraction : MonoBehaviour {
                 // currAngle contains a value from 0 to 360              
             }
 
-            // Checks for Touchpad input     
+            // Check for Touchpad input     
             if (device.GetPressUp(SteamVR_Controller.ButtonMask.Touchpad))
             {
                 //center
                 if (Mathf.Sqrt(Mathf.Abs(device.GetAxis().x) * Mathf.Abs(device.GetAxis().x) + Mathf.Abs(device.GetAxis().y) + Mathf.Abs(device.GetAxis().y)) < centerRadius) {
+
+                    Debug.Log(CollectionDataHandling.CollectionData.testItem.geographyDescription);
 
                     // update selection 
                     applySelected = !applySelected;
