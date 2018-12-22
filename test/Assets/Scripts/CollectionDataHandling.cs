@@ -2,9 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
+
 
 public class CollectionDataHandling : MonoBehaviour
 {
+    // json file
+    private string dataFileName = "data.json";
+
+    
     // json syntax
     string jsonOpeningSyntax = "{\n\"collection\": {\n";
     string jsonClosingSyntax = "\n}\n}";
@@ -15,8 +21,6 @@ public class CollectionDataHandling : MonoBehaviour
     {
         // attributes
         public static List<CollectionItem> allItems;
-        //public static CollectionItem testItem = new CollectionItem("Test item");
-
         
         // constructor
         static CollectionData() {
@@ -33,7 +37,7 @@ public class CollectionDataHandling : MonoBehaviour
             }
         }
 
-        public static string SaveToString() {
+        public static string SaveToJsonString() {
             StringBuilder json = new StringBuilder();
 
             // open json syntax structure
@@ -63,13 +67,17 @@ public class CollectionDataHandling : MonoBehaviour
             return json.ToString();
         }
 
-        public static void ReadCollectionDataFromString(string json) {
+        public static void CreateCollectionDataFromJsonString(string json) {
+            // delete existing items in collection
+            allItems = new List<CollectionItem>();
+
             StringBuilder input = new StringBuilder(json);
             int index = 0;
             string item = "";
             bool lastInstance = false;
             CollectionItem currentItem;
 
+            // start conversion of json string
             // remove the opening syntax
             input.Remove(0, 18);
 
@@ -86,18 +94,19 @@ public class CollectionDataHandling : MonoBehaviour
                 if (index != -1) {
                     // -2 is for space and comma
                     item = input.ToString(0, index - 2);
-                    //Debug.Log(item);
                     currentItem = JsonUtility.FromJson<CollectionItem>(item);
-                    Debug.Log(currentItem.title);
+                    addCollectionItem(currentItem);
+                    //Debug.Log(currentItem.title);
                     input.Remove(0, index);
                 }
                 else
                 {
                     lastInstance = true;
                     item = input.ToString();
-                    //Debug.Log(item);
                     currentItem = JsonUtility.FromJson<CollectionItem>(item);
-                    Debug.Log(currentItem.title);
+                    // TODO: fix this, make sure that all types are set correctly
+                    addCollectionItem(currentItem);
+                    //Debug.Log(currentItem.title);
                 } 
             }
         }
@@ -122,8 +131,8 @@ public class CollectionDataHandling : MonoBehaviour
         public string artist;
         public string geographyDescription;
         public string country;
-        public Continent continent;
-        public float[] coordinates;
+        public string continent;
+        public string[] coordinates;
         public string timeDescription;
         public int timeStart;
         public int timeEnd;
@@ -143,7 +152,7 @@ public class CollectionDataHandling : MonoBehaviour
             objectRef = "R123";
             geographyDescription = "somewhere under the rainbow";
             country = "CH";
-            continent = Continent.EUROPE;
+            //continent = Continent.EUROPE;
             description = "something";
 
         }
@@ -166,21 +175,23 @@ public class CollectionDataHandling : MonoBehaviour
 
     public void Start()
     {
+        LoadData();
+
         // Create some collection item objects
         CollectionItem myItem = new CollectionItem("something");
         CollectionItem myItem2 = new CollectionItem("another item");
         CollectionItem myItem3 = new CollectionItem("test");
 
         // add them to collection data
-        CollectionData.addCollectionItem(myItem);
-        CollectionData.addCollectionItem(myItem2);
-        CollectionData.addCollectionItem(myItem3);
+        //CollectionData.addCollectionItem(myItem);
+        //CollectionData.addCollectionItem(myItem2);
+        //CollectionData.addCollectionItem(myItem3);
 
         // display objects
         CollectionData.displayCollectionItems();
-        string x = CollectionData.SaveToString();
+        string x = CollectionData.SaveToJsonString();
         Debug.Log(x);
-        CollectionData.ReadCollectionDataFromString(x);
+        CollectionData.CreateCollectionDataFromJsonString(x);
 
         // test writing and reading json
         // string s = myItem.SaveToString();
@@ -188,6 +199,22 @@ public class CollectionDataHandling : MonoBehaviour
         // Debug.Log(r.title);
         // this returns : {"objectID":123,"objectRef":"R123","title":"something","artist":"","geographyDescription":"somewhere under the rainbow","country":"CH","continent":3,"coordinates":[],"timeDescription":"","timeStart":0,"timeEnd":0,"material":"","size":"","origin":"","provenance":[],"description":"something"}
         //Debug.Log(myItem.getTitle());
+    }
+
+
+    public void LoadData() {
+        string filePath = Path.Combine(Application.streamingAssetsPath, dataFileName);
+
+        if (File.Exists(filePath)) {
+            // read json from file into a string
+            string dataAsJson = File.ReadAllText(filePath);
+            dataAsJson.Trim();
+            Debug.Log("trimmed data");
+            Debug.Log(dataAsJson);
+            // TODO: Trimming is not yet working!!!
+            CollectionData.CreateCollectionDataFromJsonString(dataAsJson);
+        }
+
     }
 }
 
