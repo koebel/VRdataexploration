@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-
-
 public class CollectionDataHandling : MonoBehaviour
 {
+    // json syntax
+    string jsonOpeningSyntax = "{\n\"collection\": {\n";
+    string jsonClosingSyntax = "\n}\n}";
+
 
     [System.Serializable]
     public static class CollectionData
@@ -15,6 +17,7 @@ public class CollectionDataHandling : MonoBehaviour
         public static List<CollectionItem> allItems;
         //public static CollectionItem testItem = new CollectionItem("Test item");
 
+        
         // constructor
         static CollectionData() {
             allItems = new List<CollectionItem>();
@@ -39,7 +42,7 @@ public class CollectionDataHandling : MonoBehaviour
 
             json.Append("\"collection\": {");
             json.Append("\n");
-
+            
             foreach (CollectionItem i in allItems)
             {
                 json.Append("\"object\": ");
@@ -61,8 +64,42 @@ public class CollectionDataHandling : MonoBehaviour
         }
 
         public static void ReadCollectionDataFromString(string json) {
+            StringBuilder input = new StringBuilder(json);
+            int index = 0;
+            string item = "";
+            bool lastInstance = false;
+            CollectionItem currentItem;
 
+            // remove the opening syntax
+            input.Remove(0, 18);
 
+            // remove the closing syntax
+            input.Remove(input.Length - 4, 4);
+
+            // split remainder
+            while (input.Length > 10 && !lastInstance) { 
+                // remove opening, 10 char
+                input.Remove(0, 10);
+                // get index of next opening element
+                index = input.ToString().IndexOf("\"object\": ");
+                // if not instance is found index returns -1
+                if (index != -1) {
+                    // -2 is for space and comma
+                    item = input.ToString(0, index - 2);
+                    //Debug.Log(item);
+                    currentItem = JsonUtility.FromJson<CollectionItem>(item);
+                    Debug.Log(currentItem.title);
+                    input.Remove(0, index);
+                }
+                else
+                {
+                    lastInstance = true;
+                    item = input.ToString();
+                    //Debug.Log(item);
+                    currentItem = JsonUtility.FromJson<CollectionItem>(item);
+                    Debug.Log(currentItem.title);
+                } 
+            }
         }
 
         /*
@@ -127,7 +164,7 @@ public class CollectionDataHandling : MonoBehaviour
     }
 
 
-    void Start()
+    public void Start()
     {
         // Create some collection item objects
         CollectionItem myItem = new CollectionItem("something");
@@ -137,11 +174,13 @@ public class CollectionDataHandling : MonoBehaviour
         // add them to collection data
         CollectionData.addCollectionItem(myItem);
         CollectionData.addCollectionItem(myItem2);
-        //CollectionData.addCollectionItem(myItem3);
+        CollectionData.addCollectionItem(myItem3);
 
         // display objects
         CollectionData.displayCollectionItems();
-        Debug.Log(CollectionData.SaveToString());
+        string x = CollectionData.SaveToString();
+        Debug.Log(x);
+        CollectionData.ReadCollectionDataFromString(x);
 
         // test writing and reading json
         // string s = myItem.SaveToString();
