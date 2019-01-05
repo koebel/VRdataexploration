@@ -50,6 +50,7 @@ public class FilterInteraction : MonoBehaviour {
     public Material standardMaterial;
     public Material standardCenterMaterial;
     public Material selectedMaterial;
+    public Material selectedCenterMaterial;
     public Material inactiveMaterial;
 
     private Material matTimespan;
@@ -273,7 +274,7 @@ public class FilterInteraction : MonoBehaviour {
                     // TODO change color of apply button if curser is in this region
                     if (Mathf.Sqrt(Mathf.Abs(device.GetAxis().x) * Mathf.Abs(device.GetAxis().x) + Mathf.Abs(device.GetAxis().y) * Mathf.Abs(device.GetAxis().y)) < centerRadius)
                     {
-                        applyButton.GetComponent<MeshRenderer>().material = selectedMaterial;
+                        applyButton.GetComponent<MeshRenderer>().material = selectedCenterMaterial;
                     }
                     else {
                         applyButton.GetComponent<MeshRenderer>().material = standardCenterMaterial;
