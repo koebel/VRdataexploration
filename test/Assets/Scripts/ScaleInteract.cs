@@ -28,7 +28,7 @@ public class ScaleInteract : MonoBehaviour {
     private float minScale = 1.0f;
     private bool scalingActive = true;
 
-    // materials for main menu
+    // Materials
     public Material standardMaterial;
     public Material selectedMaterial;
 
@@ -71,7 +71,7 @@ public class ScaleInteract : MonoBehaviour {
         top.GetComponent<MeshRenderer>().material = standardMaterial;
         bottom.GetComponent<MeshRenderer>().material = selectedMaterial;
 
-        // create Marker that indicates input position on filter
+        // create Marker that indicates input position on controller
         marker = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         Collider c = marker.GetComponent<Collider>();
         c.enabled = false;
@@ -128,7 +128,7 @@ public class ScaleInteract : MonoBehaviour {
         */
 
         
-        // set position of pointer on filter menu on Touchpad Touch
+        // set position of pointer on zoom controller on Touchpad Touch
         if (device.GetTouch(SteamVR_Controller.ButtonMask.Touchpad))
         {
 
@@ -203,11 +203,9 @@ public class ScaleInteract : MonoBehaviour {
             }
         }
 
-        // reset y_move to zero when touch is released
+        // hide marker and reset materials if touch is released
         if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Touchpad))
         {
-            y_move = 0.0f;
-
             // hide marke on touch up
             marker.SetActive(false);
 

@@ -48,6 +48,7 @@ public class FilterInteraction : MonoBehaviour {
 
     // Materials
     public Material standardMaterial;
+    public Material standardCenterMaterial;
     public Material selectedMaterial;
     public Material inactiveMaterial;
 
@@ -163,8 +164,8 @@ public class FilterInteraction : MonoBehaviour {
         center.GetComponent<MeshRenderer>().material = standardMaterial;
         */
 
-        filterButton.GetComponent<MeshRenderer>().material = standardMaterial;
-        applyButton.GetComponent<MeshRenderer>().material = standardMaterial;
+        filterButton.GetComponent<MeshRenderer>().material = standardCenterMaterial;
+        applyButton.GetComponent<MeshRenderer>().material = standardCenterMaterial;
 
         mainTimespan.GetComponent<MeshRenderer>().material = standardMaterial;
         mainRegion.GetComponent<MeshRenderer>().material = standardMaterial;
@@ -210,6 +211,16 @@ public class FilterInteraction : MonoBehaviour {
 
     void FixedUpdate() {
         device = SteamVR_Controller.Input((int)trackedObj.index);
+
+        // calculate angle of touchpoint on trackpad
+        currAngle = Mathf.Atan2(device.GetAxis().x, device.GetAxis().y) * Mathf.Rad2Deg + 180;
+        // currAngle contains a value from 0 to 360
+        // 60 to 300 are positions in the Menu
+
+        currAngle = (currAngle + 300) % 360;
+        // transfor value so that values from 0 to 240 apply to the Menu
+        // and values larger than 240 applies to the Meta Menu
+        // Debug.Log("Angle: " + currAngle);
 
         // show filter menu
         if (device.GetPressUp(SteamVR_Controller.ButtonMask.ApplicationMenu))
@@ -265,9 +276,52 @@ public class FilterInteraction : MonoBehaviour {
                         applyButton.GetComponent<MeshRenderer>().material = selectedMaterial;
                     }
                     else {
-                        applyButton.GetComponent<MeshRenderer>().material = standardMaterial;
+                        applyButton.GetComponent<MeshRenderer>().material = standardCenterMaterial;
+
+                        /*
+                        // TODO: Hover of buttons Main Menu?!?
+                        // code below doesn't work...
+                        if (currAngle > 0 && currAngle < 60 && !timespanSelected) {
+                            mainTimespan.GetComponent<MeshRenderer>().material = hoverMaterial;
+                        }
+
+                        else if (currAngle > 60 && currAngle < 120 && !regionSelected)
+                        {
+                            mainRegion.GetComponent<MeshRenderer>().material = hoverMaterial;
+                        }
+
+                        else if (currAngle > 120 && currAngle < 180 && !typeSelected)
+                        {
+                            mainType.GetComponent<MeshRenderer>().material = hoverMaterial;
+                        }
+
+                        else if (currAngle > 180 && currAngle < 240 && !exhibitionSelected)
+                        {
+                            mainExhibition.GetComponent<MeshRenderer>().material = hoverMaterial;
+                        }
+
+                        else if (!timespanSelected) {
+                            mainTimespan.GetComponent<MeshRenderer>().material = standardMaterial;
+                        }
+
+                        else if (!regionSelected)
+                        {
+                            mainRegion.GetComponent<MeshRenderer>().material = standardMaterial;
+                        }
+
+                        else if (!typeSelected)
+                        {
+                            mainType.GetComponent<MeshRenderer>().material = standardMaterial;
+                        }
+
+                        else if (!exhibitionSelected)
+                        {
+                            mainExhibition.GetComponent<MeshRenderer>().material = standardMaterial;
+                        }
+                        */
                     }
                 }
+
                 else
                 {
                     marker.transform.localPosition = new Vector3(device.GetAxis().x * markerRadiusFactor * (-1) + markerOffsetHorizontal, markerOffsetDepth, (device.GetAxis().y * markerRadiusFactor * (-1) + markerOffsetVertical));
@@ -280,16 +334,6 @@ public class FilterInteraction : MonoBehaviour {
                
             if (filterActive)
             {
-                // calculate angle of touchpoint on trackpad
-                currAngle = Mathf.Atan2(device.GetAxis().x, device.GetAxis().y) * Mathf.Rad2Deg + 180;
-                // currAngle contains a value from 0 to 360
-                // 60 to 300 are positions in the Menu
-
-                currAngle = (currAngle + 300) % 360;
-                // transfor value so that values from 0 to 240 apply to the Menu
-                // and values larger than 240 applies to the Meta Menu
-                Debug.Log("Angle: " + currAngle);
-
                 //check for input center
                 if (Mathf.Sqrt(Mathf.Abs(device.GetAxis().x) * Mathf.Abs(device.GetAxis().x) + Mathf.Abs(device.GetAxis().y) * Mathf.Abs(device.GetAxis().y)) < centerRadius)
                 {
@@ -348,7 +392,7 @@ public class FilterInteraction : MonoBehaviour {
                     {
                         Debug.Log("settings clicked");
                         // DO SOMETHING
-                        metaSettings.GetComponent<MeshRenderer>().material = selectedMaterial;
+                        //metaSettings.GetComponent<MeshRenderer>().material = selectedMaterial;
                     }
 
                     //check for input mainsections
@@ -519,11 +563,11 @@ public class FilterInteraction : MonoBehaviour {
         if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Touchpad))
         {
             touched = false;
-            applyButton.GetComponent<MeshRenderer>().material = standardMaterial;
+            applyButton.GetComponent<MeshRenderer>().material = standardCenterMaterial;
             marker.SetActive(false);
 
             // just for testing purposes
-            metaSettings.GetComponent<MeshRenderer>().material = standardMaterial;
+            // metaSettings.GetComponent<MeshRenderer>().material = inactiveMaterial;
         }   
     }
 }
