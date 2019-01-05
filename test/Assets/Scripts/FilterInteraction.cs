@@ -258,6 +258,15 @@ public class FilterInteraction : MonoBehaviour {
                 if (filterActive)
                 {
                     marker.transform.localPosition = new Vector3(device.GetAxis().x * markerRadiusFactorMenu * (-1) + markerOffsetHorizontal, markerOffsetDepth, (device.GetAxis().y * markerRadiusFactorMenu * (-1) + markerOffsetVertical));
+
+                    // TODO change color of apply button if curser is in this region
+                    if (Mathf.Sqrt(Mathf.Abs(device.GetAxis().x) * Mathf.Abs(device.GetAxis().x) + Mathf.Abs(device.GetAxis().y) * Mathf.Abs(device.GetAxis().y)) < centerRadius)
+                    {
+                        applyButton.GetComponent<MeshRenderer>().material = selectedMaterial;
+                    }
+                    else {
+                        applyButton.GetComponent<MeshRenderer>().material = standardMaterial;
+                    }
                 }
                 else
                 {
@@ -273,68 +282,154 @@ public class FilterInteraction : MonoBehaviour {
             {
                 // calculate angle of touchpoint on trackpad
                 currAngle = Mathf.Atan2(device.GetAxis().x, device.GetAxis().y) * Mathf.Rad2Deg + 180;
-                // currAngle contains a value from 0 to 360  
-                // TODO might need multiplication by factor -1 for correction
+                // currAngle contains a value from 0 to 360
+                // 60 to 300 are positions in the Menu
+
+                currAngle = (currAngle + 300) % 360;
+                // transfor value so that values from 0 to 240 apply to the Menu
+                // and values larger than 240 applies to the Meta Menu
                 Debug.Log("Angle: " + currAngle);
 
-                //check for input center --> go back to filter & apply selection to dataset
-                if (Mathf.Sqrt(Mathf.Abs(device.GetAxis().x) * Mathf.Abs(device.GetAxis().x) + Mathf.Abs(device.GetAxis().y) + Mathf.Abs(device.GetAxis().y)) < centerRadius)
+                //check for input center
+                if (Mathf.Sqrt(Mathf.Abs(device.GetAxis().x) * Mathf.Abs(device.GetAxis().x) + Mathf.Abs(device.GetAxis().y) * Mathf.Abs(device.GetAxis().y)) < centerRadius)
                 {
-                    // update selection 
-                    applySelected = !applySelected;
-                    // TODO apply selection to dataset
 
-                    // hide filter menu
+                    Debug.Log("Distance: " + Mathf.Sqrt(Mathf.Abs(device.GetAxis().x) * Mathf.Abs(device.GetAxis().x) + Mathf.Abs(device.GetAxis().y) * Mathf.Abs(device.GetAxis().y)));
+                    // update selection 
+
+                    // applySelected = !applySelected;
+                    // TODO apply selection to dataset :)
+
+                    Debug.Log("center clicked");
+
+                    // go back to filter, hide menu
                     filter.SetActive(true);
                     apply.SetActive(false);
                     mainMenu.SetActive(false);
                     metaMenu.SetActive(false);
                     filterActive = false;
+                }
 
+                // input outside center area
+                else {
+                    //check for input submenus
                     /*
-                    // update material
-                    if (applySelected)
+                    if (timespanSelected)
                     {
-                        center.GetComponent<MeshRenderer>().material = selectedMaterial;
+                        timespanSelected = false;
+                        // DO SOMETHING
                     }
-                    else
+
+                    if (regionSelected)
                     {
-                        center.GetComponent<MeshRenderer>().material = standardMaterial;
+                        regionSelected = false;
+
+                        mainMenu.SetActive(true);
+                        subMenuRegion.SetActive(false);
+                        // DO SOMETHING
+                    }
+
+                    if (typeSelected)
+                    {
+                        typeSelected = false;
+                        // DO SOMETHING
+                    }
+                    
+
+                    if (exhibitionSelected)
+                    {
+                        exhibitionSelected = false;
+                        // DO SOMETHING
                     }
                     */
-                }
 
+                    //check for input metamenu (bottom) --> do not implement yet
+                    if (currAngle > 240)
+                    {
+                        Debug.Log("settings clicked");
+                        // DO SOMETHING
+                        metaSettings.GetComponent<MeshRenderer>().material = selectedMaterial;
+                    }
 
-                //check for input metamenu (bottom) --> do not implement yet
-                //check for input submenus
-                if (timespanSelected)
-                {
-                    // DO SOMETHING
-                }
-
-                else if (regionSelected)
-                {
-                    // DO SOMETHING
-                }
-
-                else if (typeSelected)
-                {
-                    // DO SOMETHING
-                }
-
-                else if (exhibitionSelected)
-                {
-                    // DO SOMETHING
-                }
-
-                else {
                     //check for input mainsections
-                }
 
+                    // timespan
+                    else if (currAngle > 0 && currAngle < 60)
+                    {
+                        Debug.Log("timespan clicked");
+
+                        timespanSelected = !timespanSelected;
+
+                        // update material
+                        if (!timespanSelected)
+                        {
+                            mainTimespan.GetComponent<MeshRenderer>().material = selectedMaterial;
+                        }
+                        else
+                        {
+                            mainTimespan.GetComponent<MeshRenderer>().material = standardMaterial;
+                        }
+                    }
+
+                    // region
+                    else if (currAngle > 60 && currAngle < 120)
+                    {
+                        Debug.Log("region clicked");
+
+                        regionSelected = !regionSelected;
+
+                        // mainMenu.SetActive(false);
+                        // subMenuRegion.SetActive(true);
+
+                        // update material
+                        if (regionSelected)
+                        {
+                            mainRegion.GetComponent<MeshRenderer>().material = selectedMaterial;
+                        }
+                        else
+                        {
+                            mainRegion.GetComponent<MeshRenderer>().material = standardMaterial;
+                        }
+                    }
+
+                    // type
+                    else if (currAngle > 120 && currAngle < 180)
+                    {
+                        Debug.Log("type clicked");
+
+                        typeSelected = !typeSelected;
+
+                        // update material
+                        if (typeSelected)
+                        {
+                            mainType.GetComponent<MeshRenderer>().material = selectedMaterial;
+                        }
+                        else
+                        {
+                            mainType.GetComponent<MeshRenderer>().material = standardMaterial;
+                        }
+                    }
+
+                    // exhibition
+                    else if (currAngle > 180 && currAngle < 240)
+                    {
+                        Debug.Log("exhibition clicked");
+
+                        exhibitionSelected = !exhibitionSelected;
+
+                        // update material
+                        if (exhibitionSelected)
+                        {
+                            mainExhibition.GetComponent<MeshRenderer>().material = selectedMaterial;
+                        }
+                        else
+                        {
+                            mainExhibition.GetComponent<MeshRenderer>().material = standardMaterial;
+                        }
+                    }
+                }
 
                 /*                
-                
-
                 //top left
                 //else if (device.GetAxis().x < 0 && device.GetAxis().y > 0)
                 else if (currAngle > 90 && currAngle < 180)
@@ -424,7 +519,11 @@ public class FilterInteraction : MonoBehaviour {
         if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Touchpad))
         {
             touched = false;
+            applyButton.GetComponent<MeshRenderer>().material = standardMaterial;
             marker.SetActive(false);
+
+            // just for testing purposes
+            metaSettings.GetComponent<MeshRenderer>().material = standardMaterial;
         }   
     }
 }
