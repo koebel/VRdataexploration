@@ -24,6 +24,8 @@ public class ScaleInteract : MonoBehaviour {
     //Scale Factor
     public float scaleFactor = 2;
     private float currentScaleFactor;
+    private float maxScale = 1025.0f;
+    private float minScale = 1.0f;
     private bool scalingActive = true;
 
     // materials for main menu
@@ -34,6 +36,9 @@ public class ScaleInteract : MonoBehaviour {
     private GameObject marker;
     public float markerSize = 0.05f;
     private float markerRadiusFactor = 0.265f;
+    private float markerOffsetHorizontal = -0.275f;
+    private float markerOffsetVertical = 0.275f;
+    private float markerOffsetDepth = 0.05f;
     private bool touched = false;
 
     // y_move measures the movement on the trackpad
@@ -75,7 +80,7 @@ public class ScaleInteract : MonoBehaviour {
         // set position of marker
         marker.transform.parent = zoomInteractor.transform;
         marker.transform.localScale = new Vector3(markerSize, markerSize, markerSize);
-        marker.transform.localPosition = new Vector3(-0.275f, 0.1f, 0.275f);
+        marker.transform.localPosition = new Vector3(markerOffsetHorizontal, markerOffsetDepth, markerOffsetVertical);
     }
 
 
@@ -130,13 +135,13 @@ public class ScaleInteract : MonoBehaviour {
             if (!touched)
             {
                 // set position before activating marker
-                marker.transform.localPosition = new Vector3(device.GetAxis().x * markerRadiusFactor * (-1) - 0.275f, 0.1f, (device.GetAxis().y * markerRadiusFactor * (-1) + 0.275f));
+                marker.transform.localPosition = new Vector3(device.GetAxis().x * markerRadiusFactor * (-1) + markerOffsetHorizontal, markerOffsetDepth, (device.GetAxis().y * markerRadiusFactor * (-1) + markerOffsetVertical));
                 marker.SetActive(true);
                 touched = true;
             }
             else
             {
-                marker.transform.localPosition = new Vector3(device.GetAxis().x * markerRadiusFactor * (-1) - 0.275f, 0.1f, (device.GetAxis().y * markerRadiusFactor * (-1) + 0.275f));
+                marker.transform.localPosition = new Vector3(device.GetAxis().x * markerRadiusFactor * (-1) + markerOffsetHorizontal, markerOffsetDepth, (device.GetAxis().y * markerRadiusFactor * (-1) + markerOffsetVertical));
             }
 
             // set color of buttons when active
@@ -145,7 +150,7 @@ public class ScaleInteract : MonoBehaviour {
             {
                 bottom.GetComponent<MeshRenderer>().material = standardMaterial;
 
-                if (currentScaleFactor < 1025)
+                if (currentScaleFactor < maxScale)
                 {
                     top.GetComponent<MeshRenderer>().material = selectedMaterial;
                 }
@@ -158,7 +163,7 @@ public class ScaleInteract : MonoBehaviour {
             {
                 top.GetComponent<MeshRenderer>().material = standardMaterial;
 
-                if (currentScaleFactor > 1)
+                if (currentScaleFactor > minScale)
                 {
                     bottom.GetComponent<MeshRenderer>().material = selectedMaterial;
                 }
@@ -178,24 +183,22 @@ public class ScaleInteract : MonoBehaviour {
             camrigZ = camrig.transform.localPosition.z;
 
             //scale up (zoom out)
-            if (device.GetAxis().y > 0 && currentScaleFactor < 1025)
+            if (device.GetAxis().y > 0 && currentScaleFactor < maxScale)
             {
                 currentScaleFactor *= scaleFactor;
+                //Debug.Log("Scalefactor " + currentScaleFactor);
 
-                Debug.Log("Scalefactor " + currentScaleFactor);
-
-                Transform transform = cube.transform;
+                //Transform transform = cube.transform;
                 camrig.transform.localScale = new Vector3(currentScaleFactor, currentScaleFactor, currentScaleFactor);
             }
 
             // scale down (zoom in)
-            else if (device.GetAxis().y < 0 && currentScaleFactor > 1)
+            else if (device.GetAxis().y < 0 && currentScaleFactor > minScale)
             {
                 currentScaleFactor /= scaleFactor;
-
                 Debug.Log("Scalefactor " + currentScaleFactor);
 
-                Transform transform = cube.transform;
+                //Transform transform = cube.transform;
                 camrig.transform.localScale = new Vector3(currentScaleFactor, currentScaleFactor, currentScaleFactor);
             }
         }
@@ -207,8 +210,11 @@ public class ScaleInteract : MonoBehaviour {
 
             // hide marke on touch up
             marker.SetActive(false);
+
+            // reset materials of controller elements to standard
             top.GetComponent<MeshRenderer>().material = standardMaterial;
             bottom.GetComponent<MeshRenderer>().material = standardMaterial;
+
             touched = false;
         }   
     }
