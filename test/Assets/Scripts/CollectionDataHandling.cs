@@ -33,7 +33,7 @@ public class CollectionDataHandling : MonoBehaviour
 
         public static void displayCollectionItems() {
             foreach (CollectionItem i in allItems) {
-                Debug.Log(i.title);
+                //Debug.Log(i.title);
             }
         }
 

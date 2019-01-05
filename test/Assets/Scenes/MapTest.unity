@@ -8867,15 +8867,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1674021104}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44a8d3ba0adb2aa4ebad02f03e67cd12, type: 3}
+  m_Script: {fileID: 11500000, guid: d8a43237a1bc6f84cb89691d970359ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   filterInteractor: {fileID: 584828535}
-  centerRadius: 0.6
-  standardMaterial: {fileID: 2100000, guid: cc80e9f7a1018034688ecd7054cbb5ad, type: 2}
+  centerRadius: 0.4
+  standardMaterial: {fileID: 2100000, guid: 26df81da93d0ca546bbeb8c0ca13fe11, type: 2}
+  standardCenterMaterial: {fileID: 2100000, guid: cc80e9f7a1018034688ecd7054cbb5ad,
+    type: 2}
   selectedMaterial: {fileID: 2100000, guid: 3d41b90b480e7481da3b180052a44f97, type: 2}
+  selectedCenterMaterial: {fileID: 2100000, guid: 08be6706b9114f446a7d27ffe558bb62,
+    type: 2}
   inactiveMaterial: {fileID: 2100000, guid: d5c891e8407ec454b8ee5ce7aa2837e0, type: 2}
-  markerSize: 0.04
+  markerSize: 0.05
 --- !u!1001 &1681333089
 Prefab:
   m_ObjectHideFlags: 0

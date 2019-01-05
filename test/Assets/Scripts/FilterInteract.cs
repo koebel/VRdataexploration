@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(SteamVR_TrackedObject))]
-public class FilterInteraction : MonoBehaviour {
+public class FilterInteract : MonoBehaviour {
 
     SteamVR_TrackedObject trackedObj;
     SteamVR_Controller.Device device;
@@ -13,7 +13,7 @@ public class FilterInteraction : MonoBehaviour {
     private GameObject controller;
     private GameObject camrig;
 
-    public float centerRadius = 0.5f;
+    public float centerRadius = 0.4f;
 
     // child objects
     private GameObject filter;
