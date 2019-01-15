@@ -33,7 +33,7 @@ public class SetMaterialOfChildren : MonoBehaviour {
             // check if item has mesh
             if (temp.GetComponent<MeshRenderer>() != null) {
                 temp.GetComponent<MeshRenderer>().material = mat;
-                Debug.Log("set mat");
+                //Debug.Log("set mat");
             }
             allChildren[i] = temp;
         }

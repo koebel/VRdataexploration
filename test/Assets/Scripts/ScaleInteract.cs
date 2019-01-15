@@ -24,7 +24,7 @@ public class ScaleInteract : MonoBehaviour {
     //Scale Factor
     public float scaleFactor = 2;
     private float currentScaleFactor;
-    private float maxScale = 1025.0f;
+    private float maxScale = 300.0f;
     private float minScale = 1.0f;
     private bool scalingActive = true;
 
@@ -53,7 +53,9 @@ public class ScaleInteract : MonoBehaviour {
     private float camrigZ;
 
     void Start() {
-        currentScaleFactor = 1f * scaleFactor * scaleFactor;
+        //currentScaleFactor = 1f;
+        currentScaleFactor = maxScale/scaleFactor;
+        camrig.transform.localScale = new Vector3(currentScaleFactor, currentScaleFactor, currentScaleFactor);
 
         // find child objects of zoom interactor 
         top = zoomInteractor.transform.Find("zoom-top").gameObject;
