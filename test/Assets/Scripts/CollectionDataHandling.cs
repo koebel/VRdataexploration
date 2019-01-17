@@ -88,22 +88,46 @@ namespace CollectionDataHandlingSpace {
                 CollectionItem currentItem;
 
                 // start conversion of json string
-                // remove the opening syntax
-                input.Remove(0, 18);
+
+                // remove linebreaks
+                input.Replace("\n", "");
+
+                // remove tabs
+                input.Replace("\t", "");
+
+                // remove double spaces
+                while (input.ToString().IndexOf("  ") > 0)
+                {
+                    input = input.Replace("  ", " ");
+                }
+
+                // remove empty space after doublepoint and comma and curly braces
+                input.Replace("\": \"", "\":\"");
+                input.Replace("\", \"", "\",\"");
+                input.Replace("{ ", "{");
+                input.Replace(" }", "}");
+
+                // remove the opening syntax, seems to be of variing lenght...
+                // input.Remove(0, 18);
+                index = input.ToString().IndexOf("\"object\": ");
+                input.Remove(0, index);
 
                 // remove the closing syntax
-                input.Remove(input.Length - 4, 4);
+                input.Remove(input.Length - 2, 2);
 
                 // split remainder
-                while (input.Length > 10 && !lastInstance) { 
-                    // remove opening, 10 char
-                    input.Remove(0, 10);
+                while (input.Length > 10 && !lastInstance) {
+                    // remove opening, always 10 characters?
+                    // input.Remove(0, 10);
+                    index = input.ToString().IndexOf("{");
+                    input.Remove(0, index);
                     // get index of next opening element
                     index = input.ToString().IndexOf("\"object\": ");
                     // if not instance is found index returns -1
                     if (index != -1) {
                         // -2 is for space and comma
-                        item = input.ToString(0, index - 2);
+                        item = input.ToString(0, index-2);
+                        //Debug.Log(item);
                         currentItem = JsonUtility.FromJson<CollectionItem>(item);
                         addCollectionItem(currentItem);
                         //Debug.Log(currentItem.title);
@@ -111,14 +135,16 @@ namespace CollectionDataHandlingSpace {
                     }
                     else
                     {
+                        //Debug.Log("last item");
                         lastInstance = true;
-                        item = input.ToString();
+                        //item = input.ToString();
+                        Debug.Log(item);
                         currentItem = JsonUtility.FromJson<CollectionItem>(item);
-                        // TODO: fix this, make sure that all types are set correctly
                         addCollectionItem(currentItem);
                         //Debug.Log(currentItem.title);
                     } 
                 }
+                Debug.Log("all Items count: " + allItems.Count);
             }
 
             /*
@@ -185,17 +211,19 @@ namespace CollectionDataHandlingSpace {
         public void Start()
         {
             // TODO: Loading Data does not work yet...
-            // LoadData();
+            LoadData();
 
             // Create some collection item objects
             CollectionItem myItem = new CollectionItem("something");
             CollectionItem myItem2 = new CollectionItem("another item");
             CollectionItem myItem3 = new CollectionItem("test");
 
+            /*
             // add them to collection data
             CollectionData.addCollectionItem(myItem);
             CollectionData.addCollectionItem(myItem2);
             CollectionData.addCollectionItem(myItem3);
+            */
 
             /*
             Debug.Log("*****************************************");
@@ -207,10 +235,14 @@ namespace CollectionDataHandlingSpace {
             */
 
             // display objects
+            
+            /*
             CollectionData.displayCollectionItems();
             string x = CollectionData.SaveToJsonString();
             Debug.Log(x);
             CollectionData.CreateCollectionDataFromJsonString(x);
+            */
+            
 
             // test writing and reading json
             // string s = myItem.SaveToString();
@@ -225,12 +257,10 @@ namespace CollectionDataHandlingSpace {
             string filePath = Path.Combine(Application.streamingAssetsPath, dataFileName);
 
             if (File.Exists(filePath)) {
+                //Debug.Log("file exists");
+
                 // read json from file into a string
                 string dataAsJson = File.ReadAllText(filePath);
-                dataAsJson.Trim();
-                Debug.Log("trimmed data");
-                Debug.Log(dataAsJson);
-                // TODO: Trimming is not yet working!!!
                 CollectionData.CreateCollectionDataFromJsonString(dataAsJson);
             }
         }
