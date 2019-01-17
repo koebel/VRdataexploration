@@ -21,7 +21,7 @@ public class SetCollectionItem : MonoBehaviour {
     private float backgroundOpacity = 0.8f;
 
     private Text itemText;
-    private string demoText = "Demo Text... Lorem Ipsum bla bla bla... ";
+    private string currentItemText = "Demo Text... Lorem Ipsum bla bla bla... ";
     private string materialPath = "Objects/Materials/";
     private string picturePath;
 
@@ -53,21 +53,17 @@ public class SetCollectionItem : MonoBehaviour {
         picture.GetComponent<MeshRenderer>().material = pictureMaterial;
 
         // connect to data set
-        Debug.Log("*******************************************************");
-        Debug.Log("Collection Items script");
-        Debug.Log(CollectionDataHandling.CollectionData.allItems.Count);
-        
-
         collectionItem = (CollectionDataHandling.CollectionItem)CollectionDataHandling.CollectionData.getItemByReference(reference);
         Debug.Log(collectionItem.title);
         Debug.Log(collectionItem.objectRef);
+
         Debug.Log("*******************************************************");
 
         // set text
         itemText = ui.GetComponentInChildren<Text>();
         itemText.GetComponent<Text>().supportRichText = true;
-        itemText.text = demoText;
-        //itemText.text = demoText.Replace("<br>", "\n");
+        currentItemText = "<b>" + collectionItem.title + " </b><br><br>" + collectionItem.objectRef + "<br>" + collectionItem.country;
+        itemText.text = currentItemText.Replace("<br>", "\n");
     }
 	
 	// Update is called once per frame

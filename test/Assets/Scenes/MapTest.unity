@@ -2557,7 +2557,6 @@ GameObject:
   - component: {fileID: 228653979}
   - component: {fileID: 228653981}
   - component: {fileID: 228653980}
-  - component: {fileID: 228653982}
   m_Layer: 0
   m_Name: item with border
   m_TagString: ExcludeTeleport
@@ -2607,18 +2606,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 1438264998}
---- !u!114 &228653982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 228653978}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31cac8edf84834043ac167deaeba16a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  planePrefab: {fileID: 0}
 --- !u!1 &234545879
 GameObject:
   m_ObjectHideFlags: 0
