@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class CollectionItem : MonoBehaviour {
+using CollectionDataHandlingSpace;
+
+public class SetCollectionItem : MonoBehaviour {
 
     // variables
     public string reference;
-    private CollectionItem collectionItem;
+    private CollectionDataHandlingSpace.CollectionDataHandling.CollectionItem collectionItem;
     private GameObject collectionItemObject;
     private GameObject picture;
     private GameObject ui;
@@ -49,6 +51,17 @@ public class CollectionItem : MonoBehaviour {
 
         // set picture
         picture.GetComponent<MeshRenderer>().material = pictureMaterial;
+
+        // connect to data set
+        Debug.Log("*******************************************************");
+        Debug.Log("Collection Items script");
+        Debug.Log(CollectionDataHandling.CollectionData.allItems.Count);
+        
+
+        collectionItem = (CollectionDataHandling.CollectionItem)CollectionDataHandling.CollectionData.getItemByReference(reference);
+        Debug.Log(collectionItem.title);
+        Debug.Log(collectionItem.objectRef);
+        Debug.Log("*******************************************************");
 
         // set text
         itemText = ui.GetComponentInChildren<Text>();

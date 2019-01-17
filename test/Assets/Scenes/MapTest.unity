@@ -2089,8 +2089,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableTeleport: 1
-  targetListPolicy: {fileID: 1668046552}
-  pointerRenderer: {fileID: 201348771}
+  targetListPolicy: {fileID: 0}
+  pointerRenderer: {fileID: 0}
   activationButton: 10
   holdButtonToActivate: 1
   activateOnEnable: 0
@@ -2557,6 +2557,7 @@ GameObject:
   - component: {fileID: 228653979}
   - component: {fileID: 228653981}
   - component: {fileID: 228653980}
+  - component: {fileID: 228653982}
   m_Layer: 0
   m_Name: item with border
   m_TagString: ExcludeTeleport
@@ -2590,7 +2591,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 228653978}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e6d0b458f10b42409491ee8e5ad521e, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d81c52758f85be4a8bd3997cb933e84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   reference: RAF721
@@ -2606,6 +2607,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 1438264998}
+--- !u!114 &228653982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 228653978}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31cac8edf84834043ac167deaeba16a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planePrefab: {fileID: 0}
 --- !u!1 &234545879
 GameObject:
   m_ObjectHideFlags: 0
@@ -4139,15 +4152,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5837af0260a118e4d808bfe0405429a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoManageScriptDefines: 0
+  autoManageScriptDefines: 1
   activeScriptingDefineSymbolsWithoutSDKClasses: []
-  scriptAliasLeftController: {fileID: 201348767}
-  scriptAliasRightController: {fileID: 2088132107}
+  scriptAliasLeftController: {fileID: 0}
+  scriptAliasRightController: {fileID: 0}
   autoManageVRSettings: 1
   autoLoadSetup: 1
-  setups:
-  - {fileID: 1658717440}
-  - {fileID: 816464609}
+  setups: []
   excludeTargetGroups: 1b0000001a000000
   persistOnLoad: 0
 --- !u!4 &351880800
@@ -10561,32 +10572,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeda6d41317f444b900e374895f14e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoPopulateObjectReferences: 0
-  actualBoundaries: {fileID: 1500590105}
-  actualHeadset: {fileID: 1099656964}
-  actualLeftController: {fileID: 1362232794}
-  actualRightController: {fileID: 347375181}
-  modelAliasLeftController: {fileID: 979175301}
-  modelAliasRightController: {fileID: 1102789092}
+  autoPopulateObjectReferences: 1
+  actualBoundaries: {fileID: 0}
+  actualHeadset: {fileID: 0}
+  actualLeftController: {fileID: 0}
+  actualRightController: {fileID: 0}
+  modelAliasLeftController: {fileID: 0}
+  modelAliasRightController: {fileID: 0}
   cachedSystemSDKInfo:
     baseTypeName: VRTK.SDK_BaseSystem
     fallbackTypeName: VRTK.SDK_FallbackSystem
-    typeName: VRTK.SDK_SimSystem
+    typeName: VRTK.SDK_FallbackSystem
     descriptionIndex: 0
   cachedBoundariesSDKInfo:
     baseTypeName: VRTK.SDK_BaseBoundaries
     fallbackTypeName: VRTK.SDK_FallbackBoundaries
-    typeName: VRTK.SDK_SimBoundaries
+    typeName: VRTK.SDK_FallbackBoundaries
     descriptionIndex: 0
   cachedHeadsetSDKInfo:
     baseTypeName: VRTK.SDK_BaseHeadset
     fallbackTypeName: VRTK.SDK_FallbackHeadset
-    typeName: VRTK.SDK_SimHeadset
+    typeName: VRTK.SDK_FallbackHeadset
     descriptionIndex: 0
   cachedControllerSDKInfo:
     baseTypeName: VRTK.SDK_BaseController
     fallbackTypeName: VRTK.SDK_FallbackController
-    typeName: VRTK.SDK_SimController
+    typeName: VRTK.SDK_FallbackController
     descriptionIndex: 0
 --- !u!1001 &816990179
 Prefab:
@@ -10873,10 +10884,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ed2aa1a29b92ca4f84a26a5f6e9218b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  operation: 1
+  operation: 0
   checkType: 1
   identifiers:
-  - ArtObject
+  - 
 --- !u!4 &851466684 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 4a7677da60436d74ab6af8330833c657,
@@ -11011,8 +11022,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae52b42c532c28b4888c2a7aeded2238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  object_ref: RAF721
-  object_id: 721
+  object_ref: 
+  object_id: 0
   title: 
   artist: 
   geography: 
@@ -11197,10 +11208,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c5a0f3bea981ed42a50e67a6a646537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Venedig, Sonne am Mittag
-  year: 1949
-  artist: Max Gubler
-  artist_id: 1
+  title: 
+  year: 
+  artist: 
+  artist_id: 0
 --- !u!114 &864346532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11660,37 +11671,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae52b42c532c28b4888c2a7aeded2238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  object_ref: RVI501
-  object_id: 501
-  title: ' Shiva Nataraja'
+  object_ref: 
+  object_id: 0
+  title: 
   artist: 
-  geography: Indien, Tamil Nadu, Distrikt Tanjavur
-  continent: ASIA
-  coord_lat: 10.576717
-  coord_long: 78.95569
-  time: Chola-Dynastie, 10. Jh.
-  time_from: 901
-  time_to: 1000
-  material: Bronze
-  size: 82.4 x 77 cm
-  origin: Geschenk Eduard von der Heydt
-  provenance1: "Gabriel Jouveau-Dubreuil, Pondich\xE9ry"
-  provenance2: C.T. Loo, Paris
-  provenance3: "ab 1929 (ev. fr\xFCher): Sammlung Eduard von der Heydt, alte Inv.
-    Nr. V.J. 3"
+  geography: 
+  continent: 
+  coord_lat: 0
+  coord_long: 0
+  time: 
+  time_from: 0
+  time_to: 0
+  material: 
+  size: 
+  origin: 
+  provenance1: 
+  provenance2: 
+  provenance3: 
   provenance4: 
   provenance5: 
-  description: "Der hinduistische Gott Shiva manifestiert sich auf vielf\xE4ltige
-    Weise in der Welt, unter anderem als K\xF6nig des Tanzes. Sein Tanz ist allerdings
-    keine kunstvolle Form der Unterhaltung, sondern ein Akt kosmischer Sch\xF6pfung
-    und Zerst\xF6rung: Shiva l\xE4sst das Universum aus sich heraus entstehen, um
-    es dann wieder aufzul\xF6sen.  S\xFCdindische Meistergiesser fertigten diese Figur
-    w\xE4hrend der sogenannten Chola-Zeit als mobiles Ritualobjekt: Bronzen dieser
-    Art wurden an bestimmten, dem Gott Shiva geweihten Festen um die Tempel getragen
-    und verehrt.  Nach der Einsch\xE4tzung des Schenkers Eduard von der Heydt (1882\u22121964),
-    geh\xF6rt dieser Nataraja zu den sch\xF6nsten Exemplaren weltweit. An dieser Bewunderung
-    hat sich \xFCber die Jahre kaum etwas ge\xE4ndert. Aufgrund seiner Sch\xF6nheit
-    wurde er zu einem Wahrzeichen des Museums Rietberg."
+  description: 
 --- !u!65 &906477551
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14585,11 +14585,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1117313960}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1120214786 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 192944, guid: 4d293c8e162f3874b982baadd71153d2,
-    type: 2}
-  m_PrefabInternal: {fileID: 1674021097}
 --- !u!1001 &1120499195
 Prefab:
   m_ObjectHideFlags: 0
@@ -14821,8 +14816,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae52b42c532c28b4888c2a7aeded2238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  object_ref: RAF721
-  object_id: 721
+  object_ref: 
+  object_id: 0
   title: 
   artist: 
   geography: 
@@ -16321,11 +16316,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7e77f421d61def4e9fdcb09d76452f3, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &1237795338 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1000013131424720, guid: d7e77f421d61def4e9fdcb09d76452f3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1237795337}
 --- !u!1001 &1238591144
 Prefab:
   m_ObjectHideFlags: 0
@@ -16453,7 +16443,7 @@ MonoBehaviour:
   enableTeleport: 1
   targetListPolicy: {fileID: 0}
   pointerRenderer: {fileID: 0}
-  activationButton: 9
+  activationButton: 10
   holdButtonToActivate: 1
   activateOnEnable: 0
   activationDelay: 0
@@ -16463,7 +16453,7 @@ MonoBehaviour:
   selectAfterHoverDuration: 0
   interactWithObjects: 0
   grabToPointerTip: 0
-  attachedTo: {fileID: 2025931923}
+  attachedTo: {fileID: 0}
   controllerEvents: {fileID: 0}
   interactUse: {fileID: 0}
   customOrigin: {fileID: 0}
@@ -19456,15 +19446,15 @@ MonoBehaviour:
   showHandAxisHelpers: 1
   lockMouseToView: 1
   mouseMovementInput: 0
-  handMoveMultiplier: 0.2
-  handRotationMultiplier: 30
+  handMoveMultiplier: 0.002
+  handRotationMultiplier: 0.5
   playerMoveMultiplier: 5
   playerRotationMultiplier: 0.5
   playerSprintMultiplier: 2
   lockedCursorMultiplier: 5
   leftHandColor: {r: 1, g: 0, b: 0, a: 1}
   rightHandColor: {r: 0, g: 1, b: 0, a: 1}
-  mouseMovementKey: 325
+  mouseMovementKey: 324
   toggleControlHints: 282
   toggleMouseLock: 285
   changeHands: 9
@@ -21641,32 +21631,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeda6d41317f444b900e374895f14e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoPopulateObjectReferences: 0
-  actualBoundaries: {fileID: 1867931486}
-  actualHeadset: {fileID: 1674021101}
-  actualLeftController: {fileID: 1674021104}
-  actualRightController: {fileID: 2025931923}
-  modelAliasLeftController: {fileID: 1894194750}
-  modelAliasRightController: {fileID: 1120214786}
+  autoPopulateObjectReferences: 1
+  actualBoundaries: {fileID: 0}
+  actualHeadset: {fileID: 0}
+  actualLeftController: {fileID: 0}
+  actualRightController: {fileID: 0}
+  modelAliasLeftController: {fileID: 0}
+  modelAliasRightController: {fileID: 0}
   cachedSystemSDKInfo:
     baseTypeName: VRTK.SDK_BaseSystem
     fallbackTypeName: VRTK.SDK_FallbackSystem
-    typeName: VRTK.SDK_SteamVRSystem
+    typeName: VRTK.SDK_FallbackSystem
     descriptionIndex: 0
   cachedBoundariesSDKInfo:
     baseTypeName: VRTK.SDK_BaseBoundaries
     fallbackTypeName: VRTK.SDK_FallbackBoundaries
-    typeName: VRTK.SDK_SteamVRBoundaries
+    typeName: VRTK.SDK_FallbackBoundaries
     descriptionIndex: 0
   cachedHeadsetSDKInfo:
     baseTypeName: VRTK.SDK_BaseHeadset
     fallbackTypeName: VRTK.SDK_FallbackHeadset
-    typeName: VRTK.SDK_SteamVRHeadset
+    typeName: VRTK.SDK_FallbackHeadset
     descriptionIndex: 0
   cachedControllerSDKInfo:
     baseTypeName: VRTK.SDK_BaseController
     fallbackTypeName: VRTK.SDK_FallbackController
-    typeName: VRTK.SDK_SteamVRController
+    typeName: VRTK.SDK_FallbackController
     descriptionIndex: 0
 --- !u!1001 &1661776355
 Prefab:
@@ -21803,10 +21793,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   operation: 0
-  checkType: 3
+  checkType: 1
   identifiers:
-  - ExcludeTeleport
-  - CollectionItem
+  - 
 --- !u!1001 &1670165385
 Prefab:
   m_ObjectHideFlags: 0
@@ -21967,16 +21956,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 420908, guid: 4d293c8e162f3874b982baadd71153d2,
     type: 2}
   m_PrefabInternal: {fileID: 1674021097}
---- !u!4 &1674021099 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 408470, guid: 4d293c8e162f3874b982baadd71153d2,
-    type: 2}
-  m_PrefabInternal: {fileID: 1674021097}
---- !u!4 &1674021100 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 439042, guid: 4d293c8e162f3874b982baadd71153d2,
-    type: 2}
-  m_PrefabInternal: {fileID: 1674021097}
 --- !u!1 &1674021101 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 189822, guid: 4d293c8e162f3874b982baadd71153d2,
@@ -22008,8 +21987,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bca9ccf900ccc84c887d783321d27e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _head: {fileID: 1674021099}
-  _ears: {fileID: 1674021100}
+  _head: {fileID: 0}
+  _ears: {fileID: 0}
   wireframe: 0
 --- !u!114 &1674021106
 MonoBehaviour:
@@ -22022,8 +22001,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701f9d1dc08d8f94fbdb238e90b417f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerLeft: {fileID: 1674021104}
-  controllerRight: {fileID: 2025931923}
+  controllerLeft: {fileID: 0}
+  controllerRight: {fileID: 0}
   fadeSpeed: 1
 --- !u!114 &1674021107
 MonoBehaviour:
@@ -22049,7 +22028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c2c6e5e6b16c04b814d6d6fc6dcb95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timelineInteractor: {fileID: 42803691}
+  timelineInteractor: {fileID: 0}
   speed: 100
 --- !u!114 &1674021109
 MonoBehaviour:
@@ -22062,15 +22041,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8a43237a1bc6f84cb89691d970359ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filterInteractor: {fileID: 584828535}
+  filterInteractor: {fileID: 0}
   centerRadius: 0.4
-  standardMaterial: {fileID: 2100000, guid: 659b9bb77fd348345a8b7bb1c193beb5, type: 2}
-  standardCenterMaterial: {fileID: 2100000, guid: cc80e9f7a1018034688ecd7054cbb5ad,
-    type: 2}
-  selectedMaterial: {fileID: 2100000, guid: ba5e9098b4551f748a5e3b11be8cce84, type: 2}
-  selectedCenterMaterial: {fileID: 2100000, guid: 08be6706b9114f446a7d27ffe558bb62,
-    type: 2}
-  inactiveMaterial: {fileID: 2100000, guid: cc80e9f7a1018034688ecd7054cbb5ad, type: 2}
+  standardMaterial: {fileID: 0}
+  standardCenterMaterial: {fileID: 0}
+  selectedMaterial: {fileID: 0}
+  selectedCenterMaterial: {fileID: 0}
+  inactiveMaterial: {fileID: 0}
   markerSize: 0.05
 --- !u!1 &1680306415
 GameObject:
@@ -22115,8 +22092,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae52b42c532c28b4888c2a7aeded2238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  object_ref: RAF721
-  object_id: 721
+  object_ref: 
+  object_id: 0
   title: 
   artist: 
   geography: 
@@ -23211,7 +23188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a56c3146e3bc8304fba50ca9e0b20d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1867931486}
+  player: {fileID: 0}
 --- !u!4 &1732811543
 Transform:
   m_ObjectHideFlags: 0
@@ -23236,7 +23213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 796e64fe4266cdc43ab231697e9fc7d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1674021101}
+  player: {fileID: 0}
   interval: 2
 --- !u!1001 &1736874367
 Prefab:
@@ -23918,8 +23895,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae52b42c532c28b4888c2a7aeded2238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  object_ref: RAF721
-  object_id: 721
+  object_ref: 
+  object_id: 0
   title: 
   artist: 
   geography: 
@@ -24332,11 +24309,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703536f839b5c1d47b84e62402fc1183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  artistname: Max Gubler
-  artist_id: 1
-  lebensdaten: "* 26.5.1898 Z\xFCrich, <br>\u2020 29.7.1973 Z\xFCrich"
-  bio: 'Maler. Bruder von Eduard und Ernst Gubler. '
-  picture: {fileID: 2100000, guid: 81675f59d260d594d97098c22d6ec64d, type: 2}
+  artistname: 
+  artist_id: 0
+  lebensdaten: 
+  bio: 
+  picture: {fileID: 0}
 --- !u!1001 &1866225812
 Prefab:
   m_ObjectHideFlags: 0
@@ -24384,11 +24361,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 9234b50cf23542348ab1eb8df7bf7de8,
     type: 3}
   m_PrefabInternal: {fileID: 1866225812}
---- !u!1 &1867931486 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 146900, guid: 4d293c8e162f3874b982baadd71153d2,
-    type: 2}
-  m_PrefabInternal: {fileID: 1674021097}
 --- !u!1001 &1869917886
 Prefab:
   m_ObjectHideFlags: 0
@@ -24573,8 +24545,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae52b42c532c28b4888c2a7aeded2238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  object_ref: RAF721
-  object_id: 721
+  object_ref: 
+  object_id: 0
   title: 
   artist: 
   geography: 
@@ -24839,11 +24811,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: a08c646a1b0fa064e85f36a60946b188,
     type: 3}
   m_PrefabInternal: {fileID: 1892034296}
---- !u!1 &1894194750 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 147176, guid: 4d293c8e162f3874b982baadd71153d2,
-    type: 2}
-  m_PrefabInternal: {fileID: 1674021097}
 --- !u!1001 &1899493797
 Prefab:
   m_ObjectHideFlags: 0
@@ -26032,10 +25999,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0a56f8ea206b9343bb59b4ab0c3a35a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infopanel: {fileID: 1237795338}
+  infopanel: {fileID: 0}
   ausstellungsText: "Willkommen im virtuellen Archiv der Ausstellung von [XXXX]. Die
     Ausstellung enth\xE4lt Werke von [Name der Kunstschaffenden einf\xFCgen]. "
-  artists: {fileID: 346324431}
+  artists: {fileID: 0}
   rayDistance: 15
   swipeSpeed: 150
   scrollSpeed: 150
@@ -26050,13 +26017,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d03f1c0dc7fe340b251fb216749607, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 2025931923}
-  camrig: {fileID: 1867931486}
-  zoomInteractor: {fileID: 327405539}
-  cube: {fileID: 909005734}
-  scaleFactor: 1.5
-  standardMaterial: {fileID: 2100000, guid: cc80e9f7a1018034688ecd7054cbb5ad, type: 2}
-  selectedMaterial: {fileID: 2100000, guid: 08be6706b9114f446a7d27ffe558bb62, type: 2}
+  controller: {fileID: 0}
+  camrig: {fileID: 0}
+  zoomInteractor: {fileID: 0}
+  cube: {fileID: 0}
+  scaleFactor: 2
+  standardMaterial: {fileID: 0}
+  selectedMaterial: {fileID: 0}
   markerSize: 0.05
   speed: 0.1
 --- !u!114 &2025931926
@@ -26702,7 +26669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4643c461ba9c8934ca83417b067d06e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mat: {fileID: 2100000, guid: 659b9bb77fd348345a8b7bb1c193beb5, type: 2}
+  mat: {fileID: 2100000, guid: 08be6706b9114f446a7d27ffe558bb62, type: 2}
   root: {fileID: 2056985714}
 --- !u!1001 &2057693157
 Prefab:
@@ -26895,13 +26862,13 @@ MonoBehaviour:
     maxAllowedPerFrameDistanceDifference: 0.003
     smoothsRotation: 0
     maxAllowedPerFrameAngleDifference: 1.5
-  validCollisionColor: {r: 1, g: 1, b: 1, a: 1}
-  invalidCollisionColor: {r: 0.76862746, g: 0.76862746, b: 0.7372549, a: 1}
+  validCollisionColor: {r: 0, g: 1, b: 0, a: 1}
+  invalidCollisionColor: {r: 1, g: 0, b: 0, a: 1}
   tracerVisibility: 0
   cursorVisibility: 0
-  maximumLength: 250
-  scaleFactor: 0.01
-  cursorScaleMultiplier: 4
+  maximumLength: 100
+  scaleFactor: 0.002
+  cursorScaleMultiplier: 25
   cursorMatchTargetRotation: 0
   cursorDistanceRescale: 0
   maximumCursorScale: {x: Infinity, y: Infinity, z: Infinity}
@@ -26919,13 +26886,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableTeleport: 1
-  targetListPolicy: {fileID: 1668046552}
-  pointerRenderer: {fileID: 2088132109}
-  activationButton: 3
+  targetListPolicy: {fileID: 0}
+  pointerRenderer: {fileID: 0}
+  activationButton: 10
   holdButtonToActivate: 1
   activateOnEnable: 0
   activationDelay: 0
-  selectionButton: 3
+  selectionButton: 10
   selectOnPress: 0
   selectionDelay: 0
   selectAfterHoverDuration: 0
