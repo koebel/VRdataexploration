@@ -6708,6 +6708,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 08be6706b9114f446a7d27ffe558bb62, type: 2}
+  matHighest: {fileID: 0}
+  matHigh: {fileID: 0}
+  matMedium: {fileID: 0}
+  matLow: {fileID: 0}
+  matLowest: {fileID: 0}
   root: {fileID: 594771111}
 --- !u!1001 &596709403
 Prefab:
@@ -25773,6 +25778,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2056985715}
   - component: {fileID: 2056985716}
+  - component: {fileID: 2056985717}
   m_Layer: 0
   m_Name: Volumes
   m_TagString: Untagged
@@ -25978,7 +25984,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 659b9bb77fd348345a8b7bb1c193beb5, type: 2}
+  matHighest: {fileID: 2100000, guid: 3d41b90b480e7481da3b180052a44f97, type: 2}
+  matHigh: {fileID: 2100000, guid: 3d41b90b480e7481da3b180052a44f97, type: 2}
+  matMedium: {fileID: 2100000, guid: 26df81da93d0ca546bbeb8c0ca13fe11, type: 2}
+  matLow: {fileID: 2100000, guid: c105f1e09ab8b4c4c908e3a36160b9cd, type: 2}
+  matLowest: {fileID: 2100000, guid: c105f1e09ab8b4c4c908e3a36160b9cd, type: 2}
   root: {fileID: 2056985714}
+--- !u!114 &2056985717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2056985714}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01d7686b82210b7479d1777c09bedb65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldVolumes: {fileID: 2056985714}
+  matHighest: {fileID: 2100000, guid: 3d41b90b480e7481da3b180052a44f97, type: 2}
+  matHigh: {fileID: 2100000, guid: 3d41b90b480e7481da3b180052a44f97, type: 2}
+  matMedium: {fileID: 2100000, guid: 26df81da93d0ca546bbeb8c0ca13fe11, type: 2}
+  matLow: {fileID: 2100000, guid: 60b4d44b99973ea4e827c9c46613b856, type: 2}
+  matLowest: {fileID: 2100000, guid: 60b4d44b99973ea4e827c9c46613b856, type: 2}
 --- !u!1001 &2057693157
 Prefab:
   m_ObjectHideFlags: 0

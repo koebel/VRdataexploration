@@ -31,6 +31,7 @@ namespace CollectionDataHandlingSpace {
                 countryStats = new Dictionary<string, int>();
             }
 
+            // methods
             public static void addCollectionItem(CollectionItem item) {
                 allItems.Add(item);
 
@@ -56,6 +57,17 @@ namespace CollectionDataHandlingSpace {
                     }
                 }
                 return null;
+            }
+
+            public static int getHighestDictionaryValue() {
+                var max = 0;
+                foreach (KeyValuePair<string, int> p in countryStats)
+                {
+                    if (p.Value > max) {
+                        max = p.Value;
+                    }
+                }
+                return max;
             }
 
             public static string SaveToJsonString() {
