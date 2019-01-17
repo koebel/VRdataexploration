@@ -14,10 +14,9 @@ public class CollectionItem : MonoBehaviour {
     private GameObject background;
 
     private Material pictureMaterial;
-    public Material backgroundMaterial;
+    private Material backgroundMaterial;
 
-    private Color backgroundColor;
-    private float backgroundOpacity = 0.2f;
+    private float backgroundOpacity = 0.8f;
 
     private Text itemText;
     private string demoText = "Demo Text... Lorem Ipsum bla bla bla... ";
@@ -29,10 +28,10 @@ public class CollectionItem : MonoBehaviour {
     void Start () {
 
         // define materials
-        // backgroundMaterial = (Material)Resources.Load("Materials/Backstein", typeof(Material));
+        backgroundMaterial = (Material)Resources.Load("Objects/Materials/BackgroundObjects", typeof(Material));
 
         picturePath = string.Concat(materialPath, reference);
-        //pictureMaterial = (Material)Resources.Load("Objects/Materials/RAF721", typeof(Material));
+        // TODO: test if this is a valid material?
         pictureMaterial = (Material)Resources.Load(picturePath, typeof(Material));
 
         // set references to child objects
@@ -43,10 +42,10 @@ public class CollectionItem : MonoBehaviour {
         // set materials
         // background material & opacity
         background.GetComponent<MeshRenderer>().material = backgroundMaterial;
-        backgroundColor = background.GetComponent<Renderer>().material.color;
-        // unity doesn't allow to directly access the alpha value because not all materials have an alpha
-        backgroundColor.a = backgroundOpacity;
-        background.GetComponent<Renderer>().material.color = backgroundColor;
+        // reduce opacity, unity doesn't allow to directly access the alpha value because not all materials have an alpha
+        var col = background.GetComponent<Renderer>().material.color;
+        col.a = backgroundOpacity;
+        background.GetComponent<Renderer>().material.color = col;
 
         // set picture
         picture.GetComponent<MeshRenderer>().material = pictureMaterial;

@@ -2594,8 +2594,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reference: RAF721
-  pictureMaterial: {fileID: 2100000, guid: 26df81da93d0ca546bbeb8c0ca13fe11, type: 2}
-  backgroundMaterial: {fileID: 2100000, guid: 3d41b90b480e7481da3b180052a44f97, type: 2}
 --- !u!114 &228653981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11638,7 +11636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &906477549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22164,7 +22162,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 5cd6015e5b071f344bdeba4b76ee9436, type: 2}
+  - {fileID: 2100000, guid: c364409614a4df14280d82f666517742, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -22392,7 +22390,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1688416851
 Transform:
   m_ObjectHideFlags: 0
@@ -23896,7 +23894,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1809338239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24622,7 +24620,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: f72f7903c2e9bfb499b1fb4e21415074, type: 2}
+  - {fileID: 2100000, guid: c364409614a4df14280d82f666517742, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
