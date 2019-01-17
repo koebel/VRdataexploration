@@ -60,7 +60,7 @@ public class SetCollectionItem : MonoBehaviour {
         itemText.GetComponent<Text>().supportRichText = true;
         // TODO decide what info should be displayed
         if (collectionItem != null) {
-            currentItemText = "<b>" + collectionItem.title + " </b><br><br>" + collectionItem.objectRef + "<br>" + collectionItem.country;
+            currentItemText = "<b>" + collectionItem.title + " </b><br><br>" + collectionItem.geographyDescription + "<br>" + collectionItem.timeDescription + "<br>" + collectionItem.material;
         }
         itemText.text = currentItemText.Replace("<br>", "\n");
     }

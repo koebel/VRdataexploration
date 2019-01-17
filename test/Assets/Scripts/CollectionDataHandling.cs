@@ -137,8 +137,8 @@ namespace CollectionDataHandlingSpace {
                     {
                         //Debug.Log("last item");
                         lastInstance = true;
-                        //item = input.ToString();
-                        Debug.Log(item);
+                        item = input.ToString();
+                        //Debug.Log(item);
                         currentItem = JsonUtility.FromJson<CollectionItem>(item);
                         addCollectionItem(currentItem);
                         //Debug.Log(currentItem.title);
