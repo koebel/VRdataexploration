@@ -144,15 +144,8 @@ namespace CollectionDataHandlingSpace {
                         //Debug.Log(currentItem.title);
                     } 
                 }
-                Debug.Log("all Items count: " + allItems.Count);
+                //Debug.Log("all Items count: " + allItems.Count);
             }
-
-            /*
-            public static CollectionData CreateFromJSON(string jsonString)
-            {
-                return JsonUtility.FromJson<CollectionData>(jsonString);
-            }
-            */
         }
 
 
@@ -210,7 +203,6 @@ namespace CollectionDataHandlingSpace {
 
         public void Start()
         {
-            // TODO: Loading Data does not work yet...
             LoadData();
 
             // Create some collection item objects
@@ -225,24 +217,13 @@ namespace CollectionDataHandlingSpace {
             CollectionData.addCollectionItem(myItem3);
             */
 
-            /*
-            Debug.Log("*****************************************");
-            Debug.Log(CollectionData.allItems.Count);
-            foreach (CollectionItem i in CollectionData.allItems) {
-                Debug.Log(i.title);
-            }
-            Debug.Log("*****************************************");
-            */
-
             // display objects
-            
             /*
             CollectionData.displayCollectionItems();
             string x = CollectionData.SaveToJsonString();
             Debug.Log(x);
             CollectionData.CreateCollectionDataFromJsonString(x);
             */
-            
 
             // test writing and reading json
             // string s = myItem.SaveToString();
@@ -257,7 +238,6 @@ namespace CollectionDataHandlingSpace {
             string filePath = Path.Combine(Application.streamingAssetsPath, dataFileName);
 
             if (File.Exists(filePath)) {
-                //Debug.Log("file exists");
 
                 // read json from file into a string
                 string dataAsJson = File.ReadAllText(filePath);

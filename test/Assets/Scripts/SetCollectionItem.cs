@@ -33,7 +33,7 @@ public class SetCollectionItem : MonoBehaviour {
         backgroundMaterial = (Material)Resources.Load("Objects/Materials/BackgroundObjects", typeof(Material));
 
         picturePath = string.Concat(materialPath, reference);
-        // TODO: test if this is a valid material?
+        // TODO: maybe test if this is a valid material?
         pictureMaterial = (Material)Resources.Load(picturePath, typeof(Material));
 
         // set references to child objects
@@ -54,15 +54,14 @@ public class SetCollectionItem : MonoBehaviour {
 
         // connect to data set
         collectionItem = (CollectionDataHandling.CollectionItem)CollectionDataHandling.CollectionData.getItemByReference(reference);
-        Debug.Log(collectionItem.title);
-        Debug.Log(collectionItem.objectRef);
-
-        Debug.Log("*******************************************************");
 
         // set text
         itemText = ui.GetComponentInChildren<Text>();
         itemText.GetComponent<Text>().supportRichText = true;
-        currentItemText = "<b>" + collectionItem.title + " </b><br><br>" + collectionItem.objectRef + "<br>" + collectionItem.country;
+        // TODO decide what info should be displayed
+        if (collectionItem != null) {
+            currentItemText = "<b>" + collectionItem.title + " </b><br><br>" + collectionItem.objectRef + "<br>" + collectionItem.country;
+        }
         itemText.text = currentItemText.Replace("<br>", "\n");
     }
 	
