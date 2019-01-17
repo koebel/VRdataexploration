@@ -22,19 +22,30 @@ namespace CollectionDataHandlingSpace {
         {
             // attributes
             public static List<CollectionItem> allItems;
-        
+            public static Dictionary<string, int> countryStats;
+
+
             // constructor
             static CollectionData() {
                 allItems = new List<CollectionItem>();
+                countryStats = new Dictionary<string, int>();
             }
 
             public static void addCollectionItem(CollectionItem item) {
                 allItems.Add(item);
+
+                // add country to countryStats
+                if (countryStats.ContainsKey(item.country))
+                {
+                    countryStats[item.country] += 1;
+                }
+                else {
+                    countryStats.Add(item.country, 1);
+                }
             }
 
             public static void displayCollectionItems() {
                 foreach (CollectionItem i in allItems) {
-                    //Debug.Log(i.title);
                 }
             }
 
@@ -130,7 +141,7 @@ namespace CollectionDataHandlingSpace {
                         //Debug.Log(item);
                         currentItem = JsonUtility.FromJson<CollectionItem>(item);
                         addCollectionItem(currentItem);
-                        //Debug.Log(currentItem.title);
+                        Debug.Log(currentItem.title);
                         input.Remove(0, index);
                     }
                     else
@@ -141,10 +152,10 @@ namespace CollectionDataHandlingSpace {
                         //Debug.Log(item);
                         currentItem = JsonUtility.FromJson<CollectionItem>(item);
                         addCollectionItem(currentItem);
-                        //Debug.Log(currentItem.title);
+                        Debug.Log(currentItem.title);
                     } 
                 }
-                //Debug.Log("all Items count: " + allItems.Count);
+                Debug.Log("all Items count: " + allItems.Count);
             }
         }
 
@@ -242,6 +253,11 @@ namespace CollectionDataHandlingSpace {
                 // read json from file into a string
                 string dataAsJson = File.ReadAllText(filePath);
                 CollectionData.CreateCollectionDataFromJsonString(dataAsJson);
+
+                // print country Stats
+                foreach (KeyValuePair<string, int> p in CollectionData.countryStats) {
+                    Debug.Log(p);
+                }
             }
         }
     }
