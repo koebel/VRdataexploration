@@ -1,17 +1,14 @@
 {
     "collection": {
         "object": {
-        	"objectID": "721",
-        	"objectRef": "RAF721",
+        	    "objectID": "721",
+        	    "objectRef": "RAF721",
             "title": "Maske, batcham/tsesah",
             "artist": "Bamileke-Meister von Bamendjo, Batcham-Region",
             "geographyDescription": "Kamerun, Bamileke, Bamendjo",
             "country": "CM",
             "continent": "AFRICA",
-            "coordinates": {
-                        "lat": "5.4012679",
-						"long": "10.311141"
-                    },
+            "coordinates": ["5.4012679", "10.311141"],
             "timeDescription": "19. Jh.",
             "timeStart": "1801",
             "timeEnd": "1900",
@@ -22,7 +19,28 @@
 						   "Field Museum Chicago", 
 						   "ab 1920: Sally Falk, Mannheim",
 						   "ca. 1920-1924: Karl Nierendorf, Berlin"],
-			"description": ""              
+			"description": "something"              
+        }, 
+		"object": {
+        	    "objectID": "722",
+        	    "objectRef": "RAF722",
+            "title": "Maske",
+            "artist": "Bamileke-Meister von Bamendjo, Batcham-Region",
+            "geographyDescription": "Kamerun, Bamileke, Bamendjo",
+            "country": "CM",
+            "continent": "AFRICA",
+            "coordinates": ["5.4012679", "10.311141"],
+            "timeDescription": "19. Jh.",
+            "timeStart": "1801",
+            "timeEnd": "1900",
+            "material": "Holz",
+            "size": "72 x 51 x 37 cm",
+            "origin": "Geschenk Eduard von der Heydt",
+			"provenance": ["ab vor 1914: Gustav Umlauff, Hamburg", 
+						   "Field Museum Chicago", 
+						   "ab 1920: Sally Falk, Mannheim",
+						   "ca. 1920-1924: Karl Nierendorf, Berlin"],
+			"description": "bla lala"              
         }
     }
 }
