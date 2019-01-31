@@ -17948,7 +17948,7 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1172138718}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -22782,6 +22782,19 @@ MonoBehaviour:
   selectedMaterial: {fileID: 2100000, guid: 659b9bb77fd348345a8b7bb1c193beb5, type: 2}
   markerSize: 0.05
   speed: 0.1
+--- !u!114 &1475887497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1475887486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09e403065b1a1c24cb741d0360f49012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root: {fileID: 1475887486}
+  allMeshes: []
 --- !u!114 &1475887498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22803,6 +22816,19 @@ MonoBehaviour:
     type: 2}
   inactiveMaterial: {fileID: 2100000, guid: ba5e9098b4551f748a5e3b11be8cce84, type: 2}
   markerSize: 0.05
+--- !u!114 &1475887499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1475887487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09e403065b1a1c24cb741d0360f49012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root: {fileID: 1475887487}
+  allMeshes: []
 --- !u!114 &1475887500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23140,7 +23166,7 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1498332076}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1

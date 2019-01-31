@@ -167,7 +167,7 @@ public class FilterInteract : MonoBehaviour {
 
         filterButton.GetComponent<MeshRenderer>().material = standardCenterMaterial;
         applyButton.GetComponent<MeshRenderer>().material = standardCenterMaterial;
-        //backButton.GetComponent<MeshRenderer>().material = standardCenterMaterial;
+        backButton.GetComponent<MeshRenderer>().material = standardCenterMaterial;
 
         mainTimespan.GetComponent<MeshRenderer>().material = standardMaterial;
         mainRegion.GetComponent<MeshRenderer>().material = standardMaterial;
