@@ -2309,7 +2309,7 @@ GameObject:
   - component: {fileID: 228653980}
   m_Layer: 0
   m_Name: item with border
-  m_TagString: ExcludeTeleport
+  m_TagString: CollectionItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10882,7 +10882,6 @@ GameObject:
   - component: {fileID: 906477553}
   - component: {fileID: 906477552}
   - component: {fileID: 906477551}
-  - component: {fileID: 906477550}
   - component: {fileID: 906477549}
   m_Layer: 0
   m_Name: RVI501
@@ -10903,37 +10902,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 625350385}
---- !u!114 &906477550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 906477548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae52b42c532c28b4888c2a7aeded2238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  object_ref: 
-  object_id: 0
-  title: 
-  artist: 
-  geography: 
-  continent: 
-  coord_lat: 0
-  coord_long: 0
-  time: 
-  time_from: 0
-  time_to: 0
-  material: 
-  size: 
-  origin: 
-  provenance1: 
-  provenance2: 
-  provenance3: 
-  provenance4: 
-  provenance5: 
-  description: 
 --- !u!65 &906477551
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18936,6 +18904,27 @@ MonoBehaviour:
   selectedMaterial: {fileID: 2100000, guid: 659b9bb77fd348345a8b7bb1c193beb5, type: 2}
   markerSize: 0.05
   speed: 0.1
+--- !u!114 &1475887497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1475887487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9854b21356ca90c4297dcbbfe7bf4bb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  matHighest: {fileID: 2100000, guid: 3d41b90b480e7481da3b180052a44f97, type: 2}
+  matHigh: {fileID: 2100000, guid: 3d41b90b480e7481da3b180052a44f97, type: 2}
+  matMedium: {fileID: 2100000, guid: 26df81da93d0ca546bbeb8c0ca13fe11, type: 2}
+  matLow: {fileID: 2100000, guid: 26df81da93d0ca546bbeb8c0ca13fe11, type: 2}
+  matLowest: {fileID: 2100000, guid: 26df81da93d0ca546bbeb8c0ca13fe11, type: 2}
+  matDefault: {fileID: 2100000, guid: bd4920b322b9d754b85d70b2f132f98d, type: 2}
+  elevation: 10
+  scaleFactor: 2
+  rootCountryVolumes: {fileID: 2056985714}
+  rootCollectionItems: {fileID: 464795000}
 --- !u!114 &1475887498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23487,7 +23476,6 @@ GameObject:
   - component: {fileID: 1809338243}
   - component: {fileID: 1809338242}
   - component: {fileID: 1809338241}
-  - component: {fileID: 1809338240}
   - component: {fileID: 1809338239}
   m_Layer: 0
   m_Name: RAF721
@@ -23508,37 +23496,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 625350385}
---- !u!114 &1809338240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1809338238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae52b42c532c28b4888c2a7aeded2238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  object_ref: 
-  object_id: 0
-  title: 
-  artist: 
-  geography: 
-  continent: 
-  coord_lat: 0
-  coord_long: 0
-  time: 
-  time_from: 0
-  time_to: 0
-  material: 
-  size: 
-  origin: 
-  provenance1: 
-  provenance2: 
-  provenance3: 
-  provenance4: 
-  provenance5: 
-  description: 
 --- !u!65 &1809338241
 BoxCollider:
   m_ObjectHideFlags: 0

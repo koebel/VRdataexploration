@@ -2,6 +2,8 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
+using CollectionDataHandlingSpace;
+
 [RequireComponent(typeof(SteamVR_TrackedObject))]
 public class FilterInteract : MonoBehaviour {
 
@@ -369,12 +371,17 @@ public class FilterInteract : MonoBehaviour {
                         metaMenu.SetActive(false);
                         filterActive = false;
 
+                        /*
                         Debug.Log("Selected Regions:");
                         Debug.Log("America: " + subRegionAmericaSelected);
                         Debug.Log("Africa: " + subRegionAfricaSelected);
                         Debug.Log("Europe: " + subRegionEuropeSelected);
                         Debug.Log("Asia: " + subRegionAsiaSelected);
                         Debug.Log("Oceania: " + subRegionOzeaniaSelected);
+                        */
+
+                        CollectionDataHandling.CollectionData.selectItemsByRegion(subRegionAmericaSelected, subRegionAfricaSelected, subRegionEuropeSelected, subRegionAsiaSelected, subRegionOzeaniaSelected);
+                        GetComponent<DataVisualisation>().applySelection();
                     }
                 }
 

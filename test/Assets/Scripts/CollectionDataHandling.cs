@@ -22,13 +22,16 @@ namespace CollectionDataHandlingSpace {
         {
             // attributes
             public static List<CollectionItem> allItems;
+            public static List<CollectionItem> selectedItems;
             public static Dictionary<string, int> countryStats;
-
+            public static Dictionary<string, int> countryStatsSelection;
 
             // constructor
             static CollectionData() {
                 allItems = new List<CollectionItem>();
+                selectedItems = new List<CollectionItem>();
                 countryStats = new Dictionary<string, int>();
+                countryStatsSelection = new Dictionary<string, int>();
             }
 
             // methods
@@ -42,6 +45,23 @@ namespace CollectionDataHandlingSpace {
                 }
                 else {
                     countryStats.Add(item.country, 1);
+                }
+            }
+
+            public static void updateCountryStatsSelection() {
+                countryStatsSelection = new Dictionary<string, int>();
+
+                foreach (CollectionItem item in selectedItems)
+                {
+                    // add country to countryStats
+                    if (countryStatsSelection.ContainsKey(item.country))
+                    {
+                        countryStatsSelection[item.country] += 1;
+                    }
+                    else
+                    {
+                        countryStatsSelection.Add(item.country, 1);
+                    }
                 }
             }
 
@@ -68,6 +88,36 @@ namespace CollectionDataHandlingSpace {
                     }
                 }
                 return max;
+            }
+
+            public static void selectItemsByRegion(bool america, bool africa, bool europe, bool asia, bool oceania) {
+                selectedItems = new List<CollectionItem>();
+
+                foreach (CollectionItem i in allItems)
+                {
+                    if (america && i.continent == "AMERICA")
+                    {
+                        selectedItems.Add(i);
+                    }
+                    else if (africa && i.continent == "AFRICA")
+                    {
+                        selectedItems.Add(i);
+                    }
+                    else if (europe && i.continent == "EUROPE")
+                    {
+                        selectedItems.Add(i);
+                    }
+                    else if (asia && i.continent == "ASIA")
+                    {
+                        selectedItems.Add(i);
+                    }
+                    else if (oceania && i.continent == "OCEANIA")
+                    {
+                        selectedItems.Add(i);
+                    }
+                }
+
+                updateCountryStatsSelection();
             }
 
             public static string SaveToJsonString() {
