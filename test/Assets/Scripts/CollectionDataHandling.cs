@@ -90,6 +90,19 @@ namespace CollectionDataHandlingSpace {
                 return max;
             }
 
+            public static int getHighestSelectionDictionaryValue()
+            {
+                var max = 0;
+                foreach (KeyValuePair<string, int> p in countryStatsSelection)
+                {
+                    if (p.Value > max)
+                    {
+                        max = p.Value;
+                    }
+                }
+                return max;
+            }
+
             public static void selectItemsByRegion(bool america, bool africa, bool europe, bool asia, bool oceania) {
                 selectedItems = new List<CollectionItem>();
 

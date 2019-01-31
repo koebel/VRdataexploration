@@ -371,15 +371,7 @@ public class FilterInteract : MonoBehaviour {
                         metaMenu.SetActive(false);
                         filterActive = false;
 
-                        /*
-                        Debug.Log("Selected Regions:");
-                        Debug.Log("America: " + subRegionAmericaSelected);
-                        Debug.Log("Africa: " + subRegionAfricaSelected);
-                        Debug.Log("Europe: " + subRegionEuropeSelected);
-                        Debug.Log("Asia: " + subRegionAsiaSelected);
-                        Debug.Log("Oceania: " + subRegionOzeaniaSelected);
-                        */
-
+                        GetComponent<DataVisualisation>().resetDataVisualisation();
                         CollectionDataHandling.CollectionData.selectItemsByRegion(subRegionAmericaSelected, subRegionAfricaSelected, subRegionEuropeSelected, subRegionAsiaSelected, subRegionOzeaniaSelected);
                         GetComponent<DataVisualisation>().applySelection();
                     }
@@ -494,6 +486,7 @@ public class FilterInteract : MonoBehaviour {
                         Debug.Log("settings clicked");
                         // DO SOMETHING
                         //metaSettings.GetComponent<MeshRenderer>().material = selectedMaterial;
+                        GetComponent<DataVisualisation>().resetDataVisualisation();
                     }
 
                     //check for input mainsections
