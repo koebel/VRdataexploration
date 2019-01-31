@@ -20,6 +20,8 @@ public class FilterInteract : MonoBehaviour {
     private GameObject filterButton;
     private GameObject apply;
     private GameObject applyButton;
+    private GameObject back;
+    private GameObject backButton;
 
     private GameObject mainMenu;
     private GameObject metaMenu;
@@ -73,6 +75,12 @@ public class FilterInteract : MonoBehaviour {
     private bool typeSelected = false;
     private bool exhibitionSelected = false;
 
+    private bool subRegionAmericaSelected = false;
+    private bool subRegionAfricaSelected = false;
+    private bool subRegionEuropeSelected = false;
+    private bool subRegionAsiaSelected = false;
+    private bool subRegionOzeaniaSelected = false;
+
     private bool filterActive = false;
     private float currAngle = 0.0f;
 
@@ -101,6 +109,10 @@ public class FilterInteract : MonoBehaviour {
         apply = filterInteractor.transform.Find("Apply").gameObject;
         applyButton = apply.transform.Find("btn-apply").gameObject;
         applyButton = applyButton.transform.Find("default").gameObject;
+
+        back = filterInteractor.transform.Find("Back").gameObject;
+        backButton = back.transform.Find("btn-back").gameObject;
+        backButton = backButton.transform.Find("default").gameObject;
 
         // Main Menu
         mainMenu = filterInteractor.transform.Find("MainMenu").gameObject;
@@ -141,14 +153,6 @@ public class FilterInteract : MonoBehaviour {
         subRegionOzeania = subMenuRegion.transform.Find("segment-5-5").gameObject;
         subRegionOzeania = subRegionOzeania.transform.Find("default").gameObject;
 
-        /*
-        // find child objects of filter interactor old
-        topLeft = filterInteractor.transform.Find("TopLeft").gameObject;
-        topRight = filterInteractor.transform.Find("TopRight").gameObject;
-        bottomLeft = filterInteractor.transform.Find("BottomLeft").gameObject;
-        bottomRight = filterInteractor.transform.Find("BottomRight").gameObject;
-        center = filterInteractor.transform.Find("Center").gameObject;
-        */
 
         // load Materials
         /*
@@ -157,16 +161,11 @@ public class FilterInteract : MonoBehaviour {
         matType = (Material)Resources.Load("Experiments/Materials/experiment3", typeof(Material));
         matExhibition = (Material)Resources.Load("Experiments/Materials/experiment4", typeof(Material));
         matApply = (Material)Resources.Load("Materials/PinkMaterial", typeof(Material));
-
-        topLeft.GetComponent<MeshRenderer>().material = matRegion;
-        topRight.GetComponent<MeshRenderer>().material = matTimespan;
-        bottomLeft.GetComponent<MeshRenderer>().material = matExhibition;
-        bottomRight.GetComponent<MeshRenderer>().material = matType;
-        center.GetComponent<MeshRenderer>().material = standardMaterial;
         */
 
         filterButton.GetComponent<MeshRenderer>().material = standardCenterMaterial;
         applyButton.GetComponent<MeshRenderer>().material = standardCenterMaterial;
+        //backButton.GetComponent<MeshRenderer>().material = standardCenterMaterial;
 
         mainTimespan.GetComponent<MeshRenderer>().material = standardMaterial;
         mainRegion.GetComponent<MeshRenderer>().material = standardMaterial;
@@ -185,6 +184,7 @@ public class FilterInteract : MonoBehaviour {
 
         // hide menus
         apply.SetActive(false);
+        back.SetActive(false);
         mainMenu.SetActive(false);
         metaMenu.SetActive(false);
         subMenuRegion.SetActive(false);
@@ -229,7 +229,6 @@ public class FilterInteract : MonoBehaviour {
             // display filter menu
             if (!filterActive)
             {
-                //filterInteractor.SetActive(true);
                 filter.SetActive(false);
                 apply.SetActive(true);
                 mainMenu.SetActive(true);
@@ -239,9 +238,9 @@ public class FilterInteract : MonoBehaviour {
             // hide filter menu
             else
             {
-                //filterInteractor.SetActive(false);
                 filter.SetActive(true);
                 apply.SetActive(false);
+                back.SetActive(false);
                 mainMenu.SetActive(false);
                 metaMenu.SetActive(false);
                 filterActive = false;
@@ -347,12 +346,36 @@ public class FilterInteract : MonoBehaviour {
 
                     Debug.Log("center clicked");
 
-                    // go back to filter, hide menu
-                    filter.SetActive(true);
-                    apply.SetActive(false);
-                    mainMenu.SetActive(false);
-                    metaMenu.SetActive(false);
-                    filterActive = false;
+                    if (regionSelected)
+                    {
+                        regionSelected = false;
+                        Debug.Log("back to main menu");
+
+                        // hide sub menu region & update material
+                        mainMenu.SetActive(true);
+                        subMenuRegion.SetActive(false);
+                        apply.SetActive(true);
+                        back.SetActive(false);
+                        //mainRegion.GetComponent<MeshRenderer>().material = standardMaterial;
+                    }
+
+                    // no submenu selected
+                    else
+                    {
+                        // go back to filter, hide menu
+                        filter.SetActive(true);
+                        apply.SetActive(false);
+                        mainMenu.SetActive(false);
+                        metaMenu.SetActive(false);
+                        filterActive = false;
+
+                        Debug.Log("Selected Regions:");
+                        Debug.Log("America: " + subRegionAmericaSelected);
+                        Debug.Log("Africa: " + subRegionAfricaSelected);
+                        Debug.Log("Europe: " + subRegionEuropeSelected);
+                        Debug.Log("Asia: " + subRegionAsiaSelected);
+                        Debug.Log("Oceania: " + subRegionOzeaniaSelected);
+                    }
                 }
 
                 // input outside center area
@@ -364,16 +387,86 @@ public class FilterInteract : MonoBehaviour {
                         timespanSelected = false;
                         // DO SOMETHING
                     }
-
+                    */
                     if (regionSelected)
                     {
-                        regionSelected = false;
+                        if (currAngle > 0 && currAngle < 48) {
+                            Debug.Log("America clicked");
+                            subRegionAmericaSelected = !subRegionAmericaSelected;
 
-                        mainMenu.SetActive(true);
-                        subMenuRegion.SetActive(false);
-                        // DO SOMETHING
+                            // update material
+                            if (subRegionAmericaSelected)
+                            {
+                                subRegionAmerica.GetComponent<MeshRenderer>().material = selectedMaterial;
+                            }
+                            else
+                            {
+                                subRegionAmerica.GetComponent<MeshRenderer>().material = standardMaterial;
+                            }
+                        }
+                        else if (currAngle > 48 && currAngle < 96)
+                        {
+                            Debug.Log("Africa clicked");
+                            subRegionAfricaSelected = !subRegionAfricaSelected;
+
+                            // update material
+                            if (subRegionAfricaSelected)
+                            {
+                                subRegionAfrica.GetComponent<MeshRenderer>().material = selectedMaterial;
+                            }
+                            else
+                            {
+                                subRegionAfrica.GetComponent<MeshRenderer>().material = standardMaterial;
+                            }
+                        }
+                        else if (currAngle > 96 && currAngle < 144)
+                        {
+                            Debug.Log("Europe clicked");
+                            subRegionEuropeSelected = !subRegionEuropeSelected;
+
+                            // update material
+                            if (subRegionEuropeSelected)
+                            {
+                                subRegionEurope.GetComponent<MeshRenderer>().material = selectedMaterial;
+                            }
+                            else
+                            {
+                                subRegionEurope.GetComponent<MeshRenderer>().material = standardMaterial;
+                            }
+                        }
+                        else if (currAngle > 144 && currAngle < 192)
+                        {
+                            Debug.Log("Asia clicked");
+                            subRegionAsiaSelected = !subRegionAsiaSelected;
+
+                            // update material
+                            if (subRegionAsiaSelected)
+                            {
+                                subRegionAsia.GetComponent<MeshRenderer>().material = selectedMaterial;
+                            }
+                            else
+                            {
+                                subRegionAsia.GetComponent<MeshRenderer>().material = standardMaterial;
+                            }
+                        }
+                        else if (currAngle > 192 && currAngle < 240)
+                        {
+                            Debug.Log("Oceania clicked");
+                            subRegionOzeaniaSelected = !subRegionOzeaniaSelected;
+
+                            // update material
+                            if (subRegionOzeaniaSelected)
+                            {
+                                subRegionOzeania.GetComponent<MeshRenderer>().material = selectedMaterial;
+                            }
+                            else
+                            {
+                                subRegionOzeania.GetComponent<MeshRenderer>().material = standardMaterial;
+                            }
+                        }
                     }
 
+                    /*
                     if (typeSelected)
                     {
                         typeSelected = false;
@@ -421,20 +514,13 @@ public class FilterInteract : MonoBehaviour {
                     {
                         Debug.Log("region clicked");
 
-                        regionSelected = !regionSelected;
-
-                        // mainMenu.SetActive(false);
-                        // subMenuRegion.SetActive(true);
-
-                        // update material
-                        if (regionSelected)
-                        {
-                            mainRegion.GetComponent<MeshRenderer>().material = selectedMaterial;
-                        }
-                        else
-                        {
-                            mainRegion.GetComponent<MeshRenderer>().material = standardMaterial;
-                        }
+                        // show sub menu region & update material
+                        subMenuRegion.SetActive(true);
+                        mainMenu.SetActive(false);
+                        back.SetActive(true);
+                        apply.SetActive(false);
+                        // mainRegion.GetComponent<MeshRenderer>().material = selectedMaterial;
+                        regionSelected = true;
                     }
 
                     // type
@@ -473,79 +559,6 @@ public class FilterInteract : MonoBehaviour {
                         }
                     }
                 }
-
-                /*                
-                //top left
-                //else if (device.GetAxis().x < 0 && device.GetAxis().y > 0)
-                else if (currAngle > 90 && currAngle < 180)
-                {
-                    // update selection 
-                    regionSelected = !regionSelected;
-
-                    // update material
-                    if (regionSelected)
-                    {
-                        topLeft.GetComponent<MeshRenderer>().material = selectedMaterial;
-                    }
-                    else {
-                        topLeft.GetComponent<MeshRenderer>().material = standardMaterial;
-                    }
-                }
-
-                //top right
-                //else if (device.GetAxis().x > 0 && device.GetAxis().y > 0)
-                else if (currAngle > 180 && currAngle < 270)
-                {
-                    // update selection 
-                    timespanSelected = !timespanSelected;
-
-                    // update material
-                    if (timespanSelected)
-                    {
-                        topRight.GetComponent<MeshRenderer>().material = selectedMaterial;
-                    }
-                    else
-                    {
-                        topRight.GetComponent<MeshRenderer>().material = standardMaterial;
-                    }
-                }
-
-                //bottom left
-                //else if (device.GetAxis().x < 0 && device.GetAxis().y < 0)
-                else if (currAngle < 90)
-                {
-                    // update selection 
-                    exhibitionSelected = !exhibitionSelected;
-
-                    // update material
-                    if (exhibitionSelected)
-                    {
-                        bottomLeft.GetComponent<MeshRenderer>().material = selectedMaterial;
-                    }
-                    else
-                    {
-                        bottomLeft.GetComponent<MeshRenderer>().material = standardMaterial;
-                    }
-                }
-
-                //top right
-                //else if (device.GetAxis().x > 0 && device.GetAxis().y < 0)
-                else if (currAngle > 270)
-                {
-                    // update selection 
-                    typeSelected = !typeSelected;
-
-                    // update material
-                    if (typeSelected)
-                    {
-                        bottomRight.GetComponent<MeshRenderer>().material = selectedMaterial;
-                    }
-                    else
-                    {
-                        bottomRight.GetComponent<MeshRenderer>().material = standardMaterial;
-                    }
-                }
-                */
             }
 
             // filter menu not active
