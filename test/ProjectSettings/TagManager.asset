@@ -8,6 +8,9 @@ TagManager:
   - Wall
   - Grid
   - CollectionItem
+  - ExcludeTeleport
+  - Volume
+  - Outline
   layers:
   - Default
   - TransparentFX
