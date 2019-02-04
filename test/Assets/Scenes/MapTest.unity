@@ -14397,6 +14397,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 659b9bb77fd348345a8b7bb1c193beb5, type: 2}
+    - target: {fileID: 100000, guid: eddc04b3949906e4797e90287e23394a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eddc04b3949906e4797e90287e23394a, type: 3}
   m_IsPrefabAsset: 0
@@ -39049,7 +39053,7 @@ MonoBehaviour:
   matLow: {fileID: 2100000, guid: 685d9f9128d252d408b6a51840dffe48, type: 2}
   matLowest: {fileID: 2100000, guid: a5c5fa35e88f1d749b96fa96f443988a, type: 2}
   matDefault: {fileID: 2100000, guid: 659b9bb77fd348345a8b7bb1c193beb5, type: 2}
-  elevation: 5
+  elevation: 3
   scaleFactor: 2
   rootCountryVolumes: {fileID: 2056985714}
   rootCollectionItems: {fileID: 464795000}

@@ -19,11 +19,19 @@ public class DataVisualisation : MonoBehaviour {
     public float scaleFactor = 2.0f;
     private float collectionItemDepth = 0.02f;
 
+    private float collectionItemHeight = 1.1f;
+    private float countryHeight;
+
     public GameObject rootCountryVolumes;
     public GameObject rootCollectionItems;
     private GameObject temp;
 
+    private float tempXPosition;
+    private float tempYPosition;
+    private float tempZPosition;
+
     private int maxValue;
+    private int countryValue;
 
     // Use this for initialization
     void Start()
@@ -44,7 +52,7 @@ public class DataVisualisation : MonoBehaviour {
         // reset country volumes to default
         foreach (KeyValuePair<string, int> p in CollectionDataHandling.CollectionData.countryStats)
         {
-            Debug.Log(p.Key);
+            //Debug.Log(p.Key);
             if (rootCountryVolumes.transform.Find(p.Key).gameObject != null) {
                 temp = rootCountryVolumes.transform.Find(p.Key).gameObject;
                 temp = temp.transform.Find("default").gameObject;
@@ -69,6 +77,12 @@ public class DataVisualisation : MonoBehaviour {
             temp = rootCollectionItems.transform.Find(item.objectRef).gameObject;
             // reset size
             temp.transform.localScale = new Vector3(1, 1, collectionItemDepth);
+
+            // resize height
+            tempXPosition = temp.transform.position.x;
+            tempYPosition = temp.transform.position.y;
+            tempZPosition = temp.transform.position.z;
+            temp.transform.position = new Vector3(tempXPosition, collectionItemHeight, tempZPosition);
         }
     }
 
@@ -127,6 +141,40 @@ public class DataVisualisation : MonoBehaviour {
         {
             temp = rootCollectionItems.transform.Find(item.objectRef).gameObject;
             temp.transform.localScale = new Vector3(scaleFactor, scaleFactor, collectionItemDepth);
+
+            // get position
+            tempXPosition = temp.transform.position.x;
+            tempYPosition = temp.transform.position.y;
+            tempZPosition = temp.transform.position.z;
+
+            // set height
+            countryValue = CollectionDataHandling.CollectionData.countryStatsSelection[item.country];
+            Debug.Log(countryValue);
+
+            if (countryValue > maxValue * 0.9f)
+            {
+                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation, tempZPosition);
+            }
+
+            else if (countryValue > maxValue * 0.7f)
+            {
+                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.8f, tempZPosition);
+            }
+
+            else if (countryValue > maxValue * 0.5f)
+            {
+                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.6f, tempZPosition);
+            }
+
+            else if (countryValue > maxValue * 0.3f)
+            {
+                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.4f, tempZPosition);
+            }
+
+            else if (countryValue > 0)
+            {
+                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.2f, tempZPosition);
+            }
         }
     }
 
@@ -176,6 +224,40 @@ public class DataVisualisation : MonoBehaviour {
         {
             temp = rootCollectionItems.transform.Find(item.objectRef).gameObject;
             temp.transform.localScale = new Vector3(scaleFactor, scaleFactor, collectionItemDepth);
+
+            // get position
+            tempXPosition = temp.transform.position.x;
+            tempYPosition = temp.transform.position.y;
+            tempZPosition = temp.transform.position.z;
+
+            // set height
+            countryValue = CollectionDataHandling.CollectionData.countryStatsSelection[item.country];
+            Debug.Log(countryValue);
+
+            if (countryValue > maxValue * 0.9f)
+            {
+                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation, tempZPosition);
+            }
+
+            else if (countryValue > maxValue * 0.7f)
+            {
+                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.8f, tempZPosition);
+            }
+
+            else if (countryValue > maxValue * 0.5f)
+            {
+                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.6f, tempZPosition);
+            }
+
+            else if (countryValue > maxValue * 0.3f)
+            {
+                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.4f, tempZPosition);
+            }
+
+            else if (countryValue > 0)
+            {
+                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.2f, tempZPosition);
+            }
         }
     }
 }
