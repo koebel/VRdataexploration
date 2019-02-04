@@ -44,14 +44,22 @@ public class DataVisualisation : MonoBehaviour {
         // reset country volumes to default
         foreach (KeyValuePair<string, int> p in CollectionDataHandling.CollectionData.countryStats)
         {
-            temp = rootCountryVolumes.transform.Find(p.Key).gameObject;
-            temp = temp.transform.Find("default").gameObject;
+            Debug.Log(p.Key);
+            if (rootCountryVolumes.transform.Find(p.Key).gameObject != null) {
+                temp = rootCountryVolumes.transform.Find(p.Key).gameObject;
+                temp = temp.transform.Find("default").gameObject;
             
-            // reset material & size
-            if (temp.GetComponent<MeshRenderer>() != null)
+                // reset material & size
+                if (temp.GetComponent<MeshRenderer>() != null)
+                {
+                    temp.GetComponent<MeshRenderer>().material = matDefault;
+                    temp.transform.localScale = new Vector3(1, 1, 1);
+                }
+            }
+            else
             {
-                temp.GetComponent<MeshRenderer>().material = matDefault;
-                temp.transform.localScale = new Vector3(1, 1, 1);
+                Debug.Log("Key not found");
+                Debug.Log(p.Key);
             }
         }
 
@@ -71,38 +79,46 @@ public class DataVisualisation : MonoBehaviour {
         // apply to country volumes
         foreach (KeyValuePair<string, int> p in CollectionDataHandling.CollectionData.countryStats)
         {
-            temp = rootCountryVolumes.transform.Find(p.Key).gameObject;
-            temp = temp.transform.Find("default").gameObject;
-
-            // set color intervals & elevation
-            if (p.Value > maxValue * 0.9f && temp.GetComponent<MeshRenderer>() != null)
+            Debug.Log(p.Key);
+            if (rootCountryVolumes.transform.Find(p.Key).gameObject != null)
             {
-                temp.GetComponent<MeshRenderer>().material = matHighest;
-                temp.transform.localScale = new Vector3(1, elevation, 1);
+                temp = rootCountryVolumes.transform.Find(p.Key).gameObject;
+                temp = temp.transform.Find("default").gameObject;
+
+                // set color intervals & elevation
+                if (p.Value > maxValue * 0.9f && temp.GetComponent<MeshRenderer>() != null)
+                {
+                    temp.GetComponent<MeshRenderer>().material = matHighest;
+                    temp.transform.localScale = new Vector3(1, elevation, 1);
+                }
+
+                else if (p.Value > maxValue * 0.7f && temp.GetComponent<MeshRenderer>() != null)
+                {
+                    temp.GetComponent<MeshRenderer>().material = matHigh;
+                    temp.transform.localScale = new Vector3(1, elevation * 0.8f, 1);
+                }
+
+                else if (p.Value > maxValue * 0.5f && temp.GetComponent<MeshRenderer>() != null)
+                {
+                    temp.GetComponent<MeshRenderer>().material = matMedium;
+                    temp.transform.localScale = new Vector3(1, elevation * 0.6f, 1);
+                }
+
+                else if (p.Value > maxValue * 0.3f && temp.GetComponent<MeshRenderer>() != null)
+                {
+                    temp.GetComponent<MeshRenderer>().material = matLow;
+                    temp.transform.localScale = new Vector3(1, elevation * 0.4f, 1);
+                }
+
+                else if (p.Value > 0 && temp.GetComponent<MeshRenderer>() != null)
+                {
+                    temp.GetComponent<MeshRenderer>().material = matLowest;
+                    temp.transform.localScale = new Vector3(1, elevation * 0.2f, 1);
+                }
             }
-
-            else if (p.Value > maxValue * 0.7f && temp.GetComponent<MeshRenderer>() != null)
-            {
-                temp.GetComponent<MeshRenderer>().material = matHigh;
-                temp.transform.localScale = new Vector3(1, elevation * 0.8f, 1);
-            }
-
-            else if (p.Value > maxValue * 0.5f && temp.GetComponent<MeshRenderer>() != null)
-            {
-                temp.GetComponent<MeshRenderer>().material = matMedium;
-                temp.transform.localScale = new Vector3(1, elevation * 0.6f, 1);
-            }
-
-            else if (p.Value > maxValue * 0.3f && temp.GetComponent<MeshRenderer>() != null)
-            {
-                temp.GetComponent<MeshRenderer>().material = matLow;
-                temp.transform.localScale = new Vector3(1, elevation * 0.4f, 1);
-            }
-
-            else if (p.Value > 0 && temp.GetComponent<MeshRenderer>() != null)
-            {
-                temp.GetComponent<MeshRenderer>().material = matLowest;
-                temp.transform.localScale = new Vector3(1, elevation * 0.2f, 1);
+            else {
+                Debug.Log("Key not found");
+                Debug.Log(p.Key);
             }
         }
 

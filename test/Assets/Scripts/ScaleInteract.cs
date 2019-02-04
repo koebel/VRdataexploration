@@ -64,10 +64,12 @@ public class ScaleInteract : MonoBehaviour {
         bottom = zoomInteractor.transform.Find("zoom-bottom").gameObject;
         bottom = bottom.transform.Find("default").gameObject;
 
-        plus = zoomInteractor.transform.Find("zoom-plus").gameObject;
+        //plus = zoomInteractor.transform.Find("zoom-plus").gameObject;
+        plus = zoomInteractor.transform.Find("zoom-icn-up").gameObject;
         plus = plus.transform.Find("default").gameObject;
 
-        minus = zoomInteractor.transform.Find("zoom-minus").gameObject;
+        //minus = zoomInteractor.transform.Find("zoom-minus").gameObject;
+        minus = zoomInteractor.transform.Find("zoom-icn-down").gameObject;
         minus = minus.transform.Find("default").gameObject;
 
         top.GetComponent<MeshRenderer>().material = standardMaterial;
