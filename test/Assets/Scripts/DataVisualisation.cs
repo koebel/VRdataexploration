@@ -148,8 +148,7 @@ public class DataVisualisation : MonoBehaviour {
             tempZPosition = temp.transform.position.z;
 
             // set height
-            countryValue = CollectionDataHandling.CollectionData.countryStatsSelection[item.country];
-            Debug.Log(countryValue);
+            countryValue = CollectionDataHandling.CollectionData.countryStats[item.country];
 
             if (countryValue > maxValue * 0.9f)
             {
