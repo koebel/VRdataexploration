@@ -15,6 +15,7 @@ public class DataVisualisation : MonoBehaviour {
     public Material matDefault;
 
     public float elevation = 10.0f;
+    public float defaultHeight = 1.0f;
 
     public float scaleFactor = 2.0f;
     private float collectionItemDepth = 0.02f;
@@ -61,13 +62,12 @@ public class DataVisualisation : MonoBehaviour {
                 if (temp.GetComponent<MeshRenderer>() != null)
                 {
                     temp.GetComponent<MeshRenderer>().material = matDefault;
-                    temp.transform.localScale = new Vector3(1, 1, 1);
+                    temp.transform.localScale = new Vector3(1, defaultHeight, 1);
                 }
             }
             else
             {
-                Debug.Log("Key not found");
-                Debug.Log(p.Key);
+                Debug.Log("Key not found: " + p.Key);
             }
         }
 
@@ -103,36 +103,35 @@ public class DataVisualisation : MonoBehaviour {
                 if (p.Value > maxValue * 0.9f && temp.GetComponent<MeshRenderer>() != null)
                 {
                     temp.GetComponent<MeshRenderer>().material = matHighest;
-                    temp.transform.localScale = new Vector3(1, elevation, 1);
+                    temp.transform.localScale = new Vector3(1, defaultHeight+elevation, 1);
                 }
 
                 else if (p.Value > maxValue * 0.7f && temp.GetComponent<MeshRenderer>() != null)
                 {
                     temp.GetComponent<MeshRenderer>().material = matHigh;
-                    temp.transform.localScale = new Vector3(1, elevation * 0.8f, 1);
+                    temp.transform.localScale = new Vector3(1, defaultHeight + elevation * 0.8f, 1);
                 }
 
                 else if (p.Value > maxValue * 0.5f && temp.GetComponent<MeshRenderer>() != null)
                 {
                     temp.GetComponent<MeshRenderer>().material = matMedium;
-                    temp.transform.localScale = new Vector3(1, elevation * 0.6f, 1);
+                    temp.transform.localScale = new Vector3(1, defaultHeight + elevation * 0.6f, 1);
                 }
 
                 else if (p.Value > maxValue * 0.3f && temp.GetComponent<MeshRenderer>() != null)
                 {
                     temp.GetComponent<MeshRenderer>().material = matLow;
-                    temp.transform.localScale = new Vector3(1, elevation * 0.4f, 1);
+                    temp.transform.localScale = new Vector3(1, defaultHeight + elevation * 0.4f, 1);
                 }
 
                 else if (p.Value > 0 && temp.GetComponent<MeshRenderer>() != null)
                 {
                     temp.GetComponent<MeshRenderer>().material = matLowest;
-                    temp.transform.localScale = new Vector3(1, elevation * 0.2f, 1);
+                    temp.transform.localScale = new Vector3(1, defaultHeight + elevation * 0.2f, 1);
                 }
             }
             else {
-                Debug.Log("Key not found");
-                Debug.Log(p.Key);
+                Debug.Log("Key not found: " + p.Key);
             }
         }
 
@@ -152,27 +151,27 @@ public class DataVisualisation : MonoBehaviour {
 
             if (countryValue > maxValue * 0.9f)
             {
-                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation, tempZPosition);
+                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.5f, tempZPosition);
             }
 
             else if (countryValue > maxValue * 0.7f)
             {
-                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.8f, tempZPosition);
+                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.4f, tempZPosition);
             }
 
             else if (countryValue > maxValue * 0.5f)
             {
-                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.6f, tempZPosition);
+                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.3f, tempZPosition);
             }
 
             else if (countryValue > maxValue * 0.3f)
             {
-                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.4f, tempZPosition);
+                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.2f, tempZPosition);
             }
 
             else if (countryValue > 0)
             {
-                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.2f, tempZPosition);
+                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.1f, tempZPosition);
             }
         }
     }
@@ -190,31 +189,31 @@ public class DataVisualisation : MonoBehaviour {
             if (p.Value > maxValue * 0.9f && temp.GetComponent<MeshRenderer>() != null)
             {
                 temp.GetComponent<MeshRenderer>().material = matHighest;
-                temp.transform.localScale = new Vector3(1, elevation, 1);
+                temp.transform.localScale = new Vector3(1, defaultHeight + elevation, 1);
             }
 
             else if (p.Value > maxValue * 0.7f && temp.GetComponent<MeshRenderer>() != null)
             {
                 temp.GetComponent<MeshRenderer>().material = matHigh;
-                temp.transform.localScale = new Vector3(1, elevation * 0.8f, 1);
+                temp.transform.localScale = new Vector3(1, defaultHeight + elevation * 0.8f, 1);
             }
 
             else if (p.Value > maxValue * 0.5f && temp.GetComponent<MeshRenderer>() != null)
             {
                 temp.GetComponent<MeshRenderer>().material = matMedium;
-                temp.transform.localScale = new Vector3(1, elevation * 0.6f, 1);
+                temp.transform.localScale = new Vector3(1, defaultHeight + elevation * 0.6f, 1);
             }
 
             else if (p.Value > maxValue * 0.3f && temp.GetComponent<MeshRenderer>() != null)
             {
                 temp.GetComponent<MeshRenderer>().material = matLow;
-                temp.transform.localScale = new Vector3(1, elevation * 0.4f, 1);
+                temp.transform.localScale = new Vector3(1, defaultHeight + elevation * 0.4f, 1);
             }
 
             else if (p.Value > 0 && temp.GetComponent<MeshRenderer>() != null)
             {
                 temp.GetComponent<MeshRenderer>().material = matLowest;
-                temp.transform.localScale = new Vector3(1, elevation * 0.2f, 1);
+                temp.transform.localScale = new Vector3(1, defaultHeight + elevation * 0.2f, 1);
             }
         }
 
@@ -235,27 +234,27 @@ public class DataVisualisation : MonoBehaviour {
 
             if (countryValue > maxValue * 0.9f)
             {
-                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation, tempZPosition);
+                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.5f, tempZPosition);
             }
 
             else if (countryValue > maxValue * 0.7f)
             {
-                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.8f, tempZPosition);
+                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.4f, tempZPosition);
             }
 
             else if (countryValue > maxValue * 0.5f)
             {
-                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.6f, tempZPosition);
+                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.3f, tempZPosition);
             }
 
             else if (countryValue > maxValue * 0.3f)
             {
-                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.4f, tempZPosition);
+                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.2f, tempZPosition);
             }
 
             else if (countryValue > 0)
             {
-                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.2f, tempZPosition);
+                temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.1f, tempZPosition);
             }
         }
     }

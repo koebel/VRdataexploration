@@ -22437,7 +22437,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 7f02437da09fb134380a7e003870c2dd, type: 2}
+  - {fileID: 2100000, guid: 302788e18a3e7594ba176be5eaec44c3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -38952,7 +38952,8 @@ MonoBehaviour:
   matLowest: {fileID: 2100000, guid: a5c5fa35e88f1d749b96fa96f443988a, type: 2}
   matDefault: {fileID: 2100000, guid: 659b9bb77fd348345a8b7bb1c193beb5, type: 2}
   elevation: 3
-  scaleFactor: 2
+  defaultHeight: 1
+  scaleFactor: 3
   rootCountryVolumes: {fileID: 2056985714}
   rootCollectionItems: {fileID: 464795000}
 --- !u!114 &1475887513
