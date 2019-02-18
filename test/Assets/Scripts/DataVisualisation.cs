@@ -22,8 +22,10 @@ public class DataVisualisation : MonoBehaviour {
 
     private float collectionItemHeight = 1.1f;
     private float countryHeight;
+    private float outlineHeight = 0.05f;
 
     public GameObject rootCountryVolumes;
+    public GameObject rootCountryOutlines;
     public GameObject rootCollectionItems;
     private GameObject temp;
 
@@ -33,6 +35,9 @@ public class DataVisualisation : MonoBehaviour {
 
     private int maxValue;
     private int countryValue;
+
+    private string outlineKey;
+
 
     // Use this for initialization
     void Start()
@@ -53,6 +58,7 @@ public class DataVisualisation : MonoBehaviour {
         // reset country volumes to default
         foreach (KeyValuePair<string, int> p in CollectionDataHandling.CollectionData.countryStats)
         {
+            // reset Country Volume
             //Debug.Log(p.Key);
             if (rootCountryVolumes.transform.Find(p.Key).gameObject != null) {
                 temp = rootCountryVolumes.transform.Find(p.Key).gameObject;
@@ -68,6 +74,22 @@ public class DataVisualisation : MonoBehaviour {
             else
             {
                 Debug.Log("Key not found: " + p.Key);
+            }
+
+            // reset Country Outline
+            outlineKey = p.Key + "_outline";
+            //Debug.Log(outlineKey);
+            if (rootCountryOutlines.transform.Find(outlineKey).gameObject != null)
+            {
+                temp = rootCountryOutlines.transform.Find(outlineKey).gameObject;
+                //temp = temp.transform.Find("default").gameObject;
+
+                // reset size
+                temp.transform.localPosition = new Vector3(0, 0, 0);
+            }
+            else
+            {
+                Debug.Log("Key not found: " + outlineKey);
             }
         }
 
@@ -93,7 +115,8 @@ public class DataVisualisation : MonoBehaviour {
         // apply to country volumes
         foreach (KeyValuePair<string, int> p in CollectionDataHandling.CollectionData.countryStats)
         {
-            Debug.Log(p.Key);
+            //set country volume height
+            //Debug.Log(p.Key);
             if (rootCountryVolumes.transform.Find(p.Key).gameObject != null)
             {
                 temp = rootCountryVolumes.transform.Find(p.Key).gameObject;
@@ -132,6 +155,45 @@ public class DataVisualisation : MonoBehaviour {
             }
             else {
                 Debug.Log("Key not found: " + p.Key);
+            }
+
+            // set Country Outline
+            outlineKey = p.Key + "_outline";
+            //Debug.Log(outlineKey);
+            if (rootCountryOutlines.transform.Find(outlineKey).gameObject != null)
+            {
+                temp = rootCountryOutlines.transform.Find(outlineKey).gameObject;
+                //temp = temp.transform.Find("default").gameObject;
+
+                // set elevation
+                if (p.Value > maxValue * 0.9f)
+                {
+                    temp.transform.localPosition = new Vector3(0, elevation * 0.5f * 0.005f, 0);
+                }
+
+                else if (p.Value > maxValue * 0.7f)
+                {
+                    temp.transform.localPosition = new Vector3(0, elevation * 0.4f * 0.005f, 0);
+                }
+
+                else if (p.Value > maxValue * 0.5f)
+                {
+                    temp.transform.localPosition = new Vector3(0, elevation * 0.3f * 0.005f, 0);
+                }
+
+                else if (p.Value > maxValue * 0.3f)
+                {
+                    temp.transform.localPosition = new Vector3(0, elevation * 0.2f * 0.005f, 0);
+                }
+
+                else if (p.Value > 0)
+                {
+                    temp.transform.localPosition = new Vector3(0, elevation * 0.1f * 0.005f, 0);
+                }
+            }
+            else
+            {
+                Debug.Log("Key not found: " + outlineKey);
             }
         }
 
