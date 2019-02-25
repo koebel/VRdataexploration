@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
@@ -52,10 +52,41 @@ public class ScaleInteract : MonoBehaviour {
     private float camrigY;
     private float camrigZ;
 
+    // ZoomLevels
+    public GameObject rootOutlinesLevel1;
+    public GameObject rootOutlinesLevel2;
+    public GameObject rootOutlinesLevel3;
+
+    private int zoomLevel1Boundary;
+    private int zoomLevel2Boundary;
+    //private int zoomLevel3Boundary;
+
+    private bool zoomLevel1Active = false;
+    private bool zoomLevel2Active = false;
+    private bool zoomLevel3Active = false;
+
+    public float zoomFactorItemsLevel1 = 3.0f;
+    public float zoomFactorItemsLevel2 = 2.0f;
+    public float zoomFactorItemsLevel3 = 1.0f;
+
+
     void Start() {
         //currentScaleFactor = 1f;
         currentScaleFactor = maxScale/scaleFactor;
         camrig.transform.localScale = new Vector3(currentScaleFactor, currentScaleFactor, currentScaleFactor);
+
+        //calculate zoom level boundaries
+        zoomLevel1Boundary = (int) (currentScaleFactor / scaleFactor);
+        zoomLevel2Boundary = (int) (zoomLevel1Boundary / scaleFactor);
+        //zoomLevel3Boundary = (int) (ZoomLevel2Boundary / scaleFactor);
+
+        Debug.Log("Zoom Level 1 Boundary: " + zoomLevel1Boundary);
+        Debug.Log("Zoom Level 2 Boundary: " + zoomLevel2Boundary);
+
+
+        // set outlines to zoomlevel
+        //zoomLevel1Active = true;
+        SetZoomLevel(currentScaleFactor);
 
         // find child objects of zoom interactor 
         top = zoomInteractor.transform.Find("zoom-top").gameObject;
@@ -194,6 +225,9 @@ public class ScaleInteract : MonoBehaviour {
 
                 //Transform transform = cube.transform;
                 camrig.transform.localScale = new Vector3(currentScaleFactor, currentScaleFactor, currentScaleFactor);
+
+                //set ZoomLevels
+                SetZoomLevel(currentScaleFactor);
             }
 
             // scale down (zoom in)
@@ -204,6 +238,9 @@ public class ScaleInteract : MonoBehaviour {
 
                 //Transform transform = cube.transform;
                 camrig.transform.localScale = new Vector3(currentScaleFactor, currentScaleFactor, currentScaleFactor);
+
+                //set ZoomLevels
+                SetZoomLevel(currentScaleFactor);
             }
         }
 
@@ -219,5 +256,54 @@ public class ScaleInteract : MonoBehaviour {
 
             touched = false;
         }   
+    }
+
+    public void SetZoomLevel(float f) {
+
+        //activate Zoom Level 1
+        if (f > zoomLevel1Boundary)
+        {
+            if (!zoomLevel1Active) {
+                rootOutlinesLevel1.SetActive(true);
+                rootOutlinesLevel2.SetActive(false);
+                rootOutlinesLevel3.SetActive(false);
+
+                zoomLevel1Active = true;
+                zoomLevel2Active = false;
+                zoomLevel3Active = false;
+                //Debug.Log("Zoom Level 1 active");
+            }   
+        }
+
+        // activate Zoom Level 2
+        else if (f > zoomLevel2Boundary)
+        {
+            if (!zoomLevel2Active)
+            {
+                rootOutlinesLevel1.SetActive(false);
+                rootOutlinesLevel2.SetActive(true);
+                rootOutlinesLevel3.SetActive(false);
+
+                zoomLevel1Active = false;
+                zoomLevel2Active = true;
+                zoomLevel3Active = false;
+                //Debug.Log("Zoom Level 2 active");
+            }
+        }
+
+        // activate Zoom Level 3
+        else {
+            if (!zoomLevel3Active)
+            {
+                rootOutlinesLevel1.SetActive(false);
+                rootOutlinesLevel2.SetActive(false);
+                rootOutlinesLevel3.SetActive(true);
+
+                zoomLevel1Active = false;
+                zoomLevel2Active = false;
+                zoomLevel3Active = true;
+                //Debug.Log("Zoom Level 3 active");
+            }
+        }
     }
 }
