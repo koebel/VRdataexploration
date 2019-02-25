@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 
+namespace ScaleInteractionSpace { 
+
 [RequireComponent(typeof(SteamVR_TrackedObject))]
 public class ScaleInteract : MonoBehaviour {
 
@@ -65,9 +67,7 @@ public class ScaleInteract : MonoBehaviour {
     private bool zoomLevel2Active = false;
     private bool zoomLevel3Active = false;
 
-    public float zoomFactorItemsLevel1 = 3.0f;
-    public float zoomFactorItemsLevel2 = 2.0f;
-    public float zoomFactorItemsLevel3 = 1.0f;
+    public static int currentZoomLevel = -1;
 
 
     void Start() {
@@ -79,10 +79,6 @@ public class ScaleInteract : MonoBehaviour {
         zoomLevel1Boundary = (int) (currentScaleFactor / scaleFactor);
         zoomLevel2Boundary = (int) (zoomLevel1Boundary / scaleFactor);
         //zoomLevel3Boundary = (int) (ZoomLevel2Boundary / scaleFactor);
-
-        Debug.Log("Zoom Level 1 Boundary: " + zoomLevel1Boundary);
-        Debug.Log("Zoom Level 2 Boundary: " + zoomLevel2Boundary);
-
 
         // set outlines to zoomlevel
         //zoomLevel1Active = true;
@@ -234,7 +230,7 @@ public class ScaleInteract : MonoBehaviour {
             else if (device.GetAxis().y < 0 && currentScaleFactor > minScale)
             {
                 currentScaleFactor /= scaleFactor;
-                Debug.Log("Scalefactor " + currentScaleFactor);
+                //Debug.Log("Scalefactor " + currentScaleFactor);
 
                 //Transform transform = cube.transform;
                 camrig.transform.localScale = new Vector3(currentScaleFactor, currentScaleFactor, currentScaleFactor);
@@ -271,7 +267,8 @@ public class ScaleInteract : MonoBehaviour {
                 zoomLevel1Active = true;
                 zoomLevel2Active = false;
                 zoomLevel3Active = false;
-                //Debug.Log("Zoom Level 1 active");
+
+                currentZoomLevel = 1;
             }   
         }
 
@@ -287,7 +284,8 @@ public class ScaleInteract : MonoBehaviour {
                 zoomLevel1Active = false;
                 zoomLevel2Active = true;
                 zoomLevel3Active = false;
-                //Debug.Log("Zoom Level 2 active");
+
+                currentZoomLevel = 2;
             }
         }
 
@@ -302,8 +300,37 @@ public class ScaleInteract : MonoBehaviour {
                 zoomLevel1Active = false;
                 zoomLevel2Active = false;
                 zoomLevel3Active = true;
-                //Debug.Log("Zoom Level 3 active");
+
+                currentZoomLevel = 3;
             }
         }
+
+        //Debug.Log("current Zoomlevel: " + currentZoomLevel);
     }
+
+    public int getZoomLevel()
+    {
+            /*
+            if (zoomLevel1Active) {
+                return 1;
+            }
+
+            if (zoomLevel2Active)
+            {
+                return 2;
+            }
+
+            if (zoomLevel3Active)
+            {
+                return 3;
+            }
+
+            else {
+                return -1;
+            }
+            */
+            return currentZoomLevel;
+    }
+}
+
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using CollectionDataHandlingSpace;
+using ScaleInteractionSpace;
 
 public class DataVisualisation : MonoBehaviour {
 
@@ -38,19 +39,38 @@ public class DataVisualisation : MonoBehaviour {
 
     private string outlineKey;
 
+    private int currZoomLevel;
+    private int prevZoomLevel;
+
+    public float zoomFactorItemsLevel1 = 3.0f;
+    public float zoomFactorItemsLevel2 = 2.0f;
+    public float zoomFactorItemsLevel3 = 1.0f;
+
+    private float zoomFactorItems;
+
 
     // Use this for initialization
     void Start()
     {
-        // set materials
+        // set zoom level/factor
+        currZoomLevel = ScaleInteract.currentZoomLevel;
+        zoomFactorItems = zoomFactorItemsLevel1;
 
+        // set materials
         applyDataVisualisation();
     }
 
     // Update is called once per frame
     void Update()
     {
+        prevZoomLevel = currZoomLevel;
+        currZoomLevel = ScaleInteract.currentZoomLevel;
 
+        // check if zoom level has changed
+        if (prevZoomLevel != currZoomLevel) {
+            //Debug.Log("ZoomLevelChanged");
+            UpdateZoomLevel(currZoomLevel);
+        }
     }
 
     public void resetDataVisualisation() {
@@ -319,5 +339,63 @@ public class DataVisualisation : MonoBehaviour {
                 temp.transform.position = new Vector3(tempXPosition, tempYPosition + elevation * 0.1f, tempZPosition);
             }
         }
+    }
+
+    public void UpdateZoomLevel(int z) {
+        Debug.Log("UpdateZoomLevel");
+
+        if (z == 1) {
+            Debug.Log("ZoomLevel 1");
+            zoomFactorItems = zoomFactorItemsLevel1;
+        }
+
+        if (z == 2)
+        {
+            Debug.Log("ZoomLevel 2");
+            zoomFactorItems = zoomFactorItemsLevel2;
+        }
+
+        if (z == 3)
+        {
+            Debug.Log("ZoomLevel 3");
+            zoomFactorItems = zoomFactorItemsLevel3;
+        }
+
+        else {
+            Debug.Log("Invalid ZoomLevel");
+            //zoomFactorItems = zoomFactorItemsLevel1;
+        }
+
+        // resize collection items
+        foreach (CollectionDataHandling.CollectionItem item in CollectionDataHandling.CollectionData.allItems)
+        {
+            temp = rootCollectionItems.transform.Find(item.objectRef).gameObject;
+            // reset size
+            temp.transform.localScale = new Vector3(zoomFactorItems, zoomFactorItems, collectionItemDepth);
+
+            // resize height
+            /*
+            tempXPosition = temp.transform.position.x;
+            tempYPosition = temp.transform.position.y;
+            tempZPosition = temp.transform.position.z;
+            temp.transform.position = new Vector3(tempXPosition, collectionItemHeight, tempZPosition);
+            */
+        }
+
+        // resize selected collection items
+        foreach (CollectionDataHandling.CollectionItem item in CollectionDataHandling.CollectionData.allItems)
+        {
+            temp = rootCollectionItems.transform.Find(item.objectRef).gameObject;
+            temp.transform.localScale = new Vector3(scaleFactor * zoomFactorItems, scaleFactor * zoomFactorItems, collectionItemDepth);
+
+            // resize height
+            /*
+            tempXPosition = temp.transform.position.x;
+            tempYPosition = temp.transform.position.y;
+            tempZPosition = temp.transform.position.z;
+            temp.transform.position = new Vector3(tempXPosition, collectionItemHeight, tempZPosition);
+            */
+        }
+
     }
 }

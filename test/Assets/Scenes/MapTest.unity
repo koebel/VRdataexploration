@@ -59629,9 +59629,6 @@ MonoBehaviour:
   rootOutlinesLevel1: {fileID: 192136273}
   rootOutlinesLevel2: {fileID: 1424664515}
   rootOutlinesLevel3: {fileID: 320919998}
-  zoomFactorItemsLevel1: 3
-  zoomFactorItemsLevel2: 2
-  zoomFactorItemsLevel3: 1
 --- !u!114 &1475887498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59690,6 +59687,9 @@ MonoBehaviour:
   rootCountryVolumes: {fileID: 2056985714}
   rootCountryOutlines: {fileID: 594771111}
   rootCollectionItems: {fileID: 464795000}
+  zoomFactorItemsLevel1: 6
+  zoomFactorItemsLevel2: 4
+  zoomFactorItemsLevel3: 2
 --- !u!114 &1475887513
 MonoBehaviour:
   m_ObjectHideFlags: 0
