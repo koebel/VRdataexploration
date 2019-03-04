@@ -373,12 +373,12 @@ public class DataVisualisation : MonoBehaviour {
             // reset size
             temp.transform.localScale = new Vector3(zoomFactorItems, zoomFactorItems, collectionItemDepth);
 
-            // resize height
+            // adjust height
             /*
             tempXPosition = temp.transform.position.x;
             tempYPosition = temp.transform.position.y;
             tempZPosition = temp.transform.position.z;
-            temp.transform.position = new Vector3(tempXPosition, collectionItemHeight, tempZPosition);
+            temp.transform.position = new Vector3(tempXPosition, collectionItemHeight + zoomFactorItems/2, tempZPosition);
             */
         }
 
@@ -388,12 +388,12 @@ public class DataVisualisation : MonoBehaviour {
             temp = rootCollectionItems.transform.Find(item.objectRef).gameObject;
             temp.transform.localScale = new Vector3(scaleFactor * zoomFactorItems, scaleFactor * zoomFactorItems, collectionItemDepth);
 
-            // resize height
+            // adjust height
             /*
             tempXPosition = temp.transform.position.x;
             tempYPosition = temp.transform.position.y;
             tempZPosition = temp.transform.position.z;
-            temp.transform.position = new Vector3(tempXPosition, collectionItemHeight, tempZPosition);
+            temp.transform.position = new Vector3(tempXPosition, collectionItemHeight + scaleFactor * zoomFactorItems / 2, tempZPosition);
             */
         }
 

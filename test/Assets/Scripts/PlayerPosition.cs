@@ -1,11 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+using CollectionDataHandlingSpace;
+using ScaleInteractionSpace;
 
 public class PlayerPosition : MonoBehaviour {
 
     public GameObject player;
     public GameObject countryVolumes;
+    public GameObject controllcenterUI;
+    private Text controllcenterText;
+    private string currentText = "";
 
     private GameObject currentCountry;
     private string currentLocation;
@@ -25,6 +32,11 @@ public class PlayerPosition : MonoBehaviour {
 
         currPos = player.transform.position;
 
+        // set controllcenter text
+        controllcenterText = controllcenterUI.GetComponentInChildren<Text>();
+        controllcenterText.GetComponent<Text>().supportRichText = true;
+        currentText = "position: " + currentText;
+        controllcenterText.text = currentText.Replace("<br>", "\n");
     }
 
     // Update is called once per frame
@@ -35,7 +47,11 @@ public class PlayerPosition : MonoBehaviour {
         prevPos = currPos;
         currPos = player.transform.position;
         //Debug.Log(currPos);
-        //Debug.Log("current coordinates: " + currPos.x + "/" + currPos.z);
+        //TODO convert pos to proper Geo Coordinates
+        currentText = "position: " + currPos.x + "/" + currPos.z + "<br>" + 
+            "altitude: " + ScaleInteract.currentStaticScaleFactor;
+
+        controllcenterText.text = currentText.Replace("<br>", "\n");
 
         if (currPos != prevPos)
         {
