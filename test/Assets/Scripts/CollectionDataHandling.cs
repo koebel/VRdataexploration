@@ -290,33 +290,6 @@ namespace CollectionDataHandlingSpace {
         public void Start()
         {
             LoadData();
-
-            // Create some collection item objects
-            CollectionItem myItem = new CollectionItem("something");
-            CollectionItem myItem2 = new CollectionItem("another item");
-            CollectionItem myItem3 = new CollectionItem("test");
-
-            /*
-            // add them to collection data
-            CollectionData.addCollectionItem(myItem);
-            CollectionData.addCollectionItem(myItem2);
-            CollectionData.addCollectionItem(myItem3);
-            */
-
-            // display objects
-            /*
-            CollectionData.displayCollectionItems();
-            string x = CollectionData.SaveToJsonString();
-            Debug.Log(x);
-            CollectionData.CreateCollectionDataFromJsonString(x);
-            */
-
-            // test writing and reading json
-            // string s = myItem.SaveToString();
-            // CollectionItem r = JsonUtility.FromJson<CollectionItem>(s);
-            // Debug.Log(r.title);
-            // this returns : {"objectID":123,"objectRef":"R123","title":"something","artist":"","geographyDescription":"somewhere under the rainbow","country":"CH","continent":3,"coordinates":[],"timeDescription":"","timeStart":0,"timeEnd":0,"material":"","size":"","origin":"","provenance":[],"description":"something"}
-            //Debug.Log(myItem.getTitle());
         }
 
 
