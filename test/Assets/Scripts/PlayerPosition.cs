@@ -20,8 +20,8 @@ public class PlayerPosition : MonoBehaviour {
     private float currentXCoordinate;
     private float currentYCoordinate;
 
+    private Vector3 currExactPos;
     private Vector3 currPos;
-    private Vector3 currPosEyes;
     private Vector3 prevPos;
 
     private Ray ray;
@@ -31,9 +31,11 @@ public class PlayerPosition : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        currPos = player.transform.position;
 
-        currPos = player.transform.position + eyes.transform.position;
-        //currPosEyes = eyes.transform.position;
+        // combine player & eyes position to get the real position of the user
+        // because player position only changes with teleportation
+        currExactPos = player.transform.position + eyes.transform.position;
 
         // set controllcenter text
         controllcenterText = controllcenterUI.GetComponentInChildren<Text>();
@@ -42,18 +44,19 @@ public class PlayerPosition : MonoBehaviour {
         controllcenterText.text = currentText.Replace("<br>", "\n");
     }
 
+
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log( + player.transform.position.x + " / " + player.transform.position.z);
-
         prevPos = currPos;
-        currPos = player.transform.position + eyes.transform.position;
-        //Debug.Log(currPos);
-        //TODO convert pos to proper Geo Coordinates
-        currentText = "position: " + currPos.x + "/" + currPos.z + "<br>" + 
+        currPos = player.transform.position;
+        currExactPos = player.transform.position + eyes.transform.position;
+
+        // update controllcenter content
+        currentText = "position: " + convertPositionToGeoCoordinate(currExactPos) + "<br>" + 
             "altitude: " + ScaleInteract.currentStaticScaleFactor;
 
+        // set new text
         controllcenterText.text = currentText.Replace("<br>", "\n");
 
         if (currPos != prevPos)
@@ -140,5 +143,12 @@ public class PlayerPosition : MonoBehaviour {
             }
             */
         }
+    }
+
+    // convert position to Geocoordinate
+    public string convertPositionToGeoCoordinate(Vector3 pos)
+    {
+        // TODO transform position into proper GeoCoordinate
+        return pos.x + "/" + pos.z;
     }
 }

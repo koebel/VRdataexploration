@@ -6536,6 +6536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1475887492}
+  eyes: {fileID: 1475887485}
   countryVolumes: {fileID: 2056985714}
   controllcenterUI: {fileID: 1144855971}
   rayDistance: 500
