@@ -9,6 +9,7 @@ using ScaleInteractionSpace;
 public class PlayerPosition : MonoBehaviour {
 
     public GameObject player;
+    public GameObject eyes;
     public GameObject countryVolumes;
     public GameObject controllcenterUI;
     private Text controllcenterText;
@@ -20,6 +21,7 @@ public class PlayerPosition : MonoBehaviour {
     private float currentYCoordinate;
 
     private Vector3 currPos;
+    private Vector3 currPosEyes;
     private Vector3 prevPos;
 
     private Ray ray;
@@ -30,7 +32,8 @@ public class PlayerPosition : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        currPos = player.transform.position;
+        currPos = player.transform.position + eyes.transform.position;
+        //currPosEyes = eyes.transform.position;
 
         // set controllcenter text
         controllcenterText = controllcenterUI.GetComponentInChildren<Text>();
@@ -45,7 +48,7 @@ public class PlayerPosition : MonoBehaviour {
         //Debug.Log( + player.transform.position.x + " / " + player.transform.position.z);
 
         prevPos = currPos;
-        currPos = player.transform.position;
+        currPos = player.transform.position + eyes.transform.position;
         //Debug.Log(currPos);
         //TODO convert pos to proper Geo Coordinates
         currentText = "position: " + currPos.x + "/" + currPos.z + "<br>" + 
