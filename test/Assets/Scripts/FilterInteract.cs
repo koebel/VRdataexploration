@@ -157,14 +157,6 @@ public class FilterInteract : MonoBehaviour {
 
 
         // load Materials
-        /*
-        matTimespan = (Material)Resources.Load("Experiments/Materials/experiment1", typeof(Material));
-        matRegion = (Material)Resources.Load("Experiments/Materials/experiment2", typeof(Material));
-        matType = (Material)Resources.Load("Experiments/Materials/experiment3", typeof(Material));
-        matExhibition = (Material)Resources.Load("Experiments/Materials/experiment4", typeof(Material));
-        matApply = (Material)Resources.Load("Materials/PinkMaterial", typeof(Material));
-        */
-
         filterButton.GetComponent<MeshRenderer>().material = standardCenterMaterial;
         applyButton.GetComponent<MeshRenderer>().material = standardCenterMaterial;
         backButton.GetComponent<MeshRenderer>().material = standardCenterMaterial;
@@ -223,7 +215,6 @@ public class FilterInteract : MonoBehaviour {
         currAngle = (currAngle + 300) % 360;
         // transfor value so that values from 0 to 240 apply to the Menu
         // and values larger than 240 applies to the Meta Menu
-        // Debug.Log("Angle: " + currAngle);
 
         // show filter menu
         if (device.GetPressUp(SteamVR_Controller.ButtonMask.ApplicationMenu))
@@ -272,55 +263,13 @@ public class FilterInteract : MonoBehaviour {
                 {
                     marker.transform.localPosition = new Vector3(device.GetAxis().x * markerRadiusFactorMenu * (-1) + markerOffsetHorizontal, markerOffsetDepth, (device.GetAxis().y * markerRadiusFactorMenu * (-1) + markerOffsetVertical));
 
-                    // TODO change color of apply button if curser is in this region
+                    // TODO change color of apply button if curser is in this region?
                     if (Mathf.Sqrt(Mathf.Abs(device.GetAxis().x) * Mathf.Abs(device.GetAxis().x) + Mathf.Abs(device.GetAxis().y) * Mathf.Abs(device.GetAxis().y)) < centerRadius)
                     {
                         applyButton.GetComponent<MeshRenderer>().material = selectedCenterMaterial;
                     }
                     else {
                         applyButton.GetComponent<MeshRenderer>().material = standardCenterMaterial;
-
-                        /*
-                        // TODO: Hover of buttons Main Menu?!?
-                        // code below doesn't work...
-                        if (currAngle > 0 && currAngle < 60 && !timespanSelected) {
-                            mainTimespan.GetComponent<MeshRenderer>().material = hoverMaterial;
-                        }
-
-                        else if (currAngle > 60 && currAngle < 120 && !regionSelected)
-                        {
-                            mainRegion.GetComponent<MeshRenderer>().material = hoverMaterial;
-                        }
-
-                        else if (currAngle > 120 && currAngle < 180 && !typeSelected)
-                        {
-                            mainType.GetComponent<MeshRenderer>().material = hoverMaterial;
-                        }
-
-                        else if (currAngle > 180 && currAngle < 240 && !exhibitionSelected)
-                        {
-                            mainExhibition.GetComponent<MeshRenderer>().material = hoverMaterial;
-                        }
-
-                        else if (!timespanSelected) {
-                            mainTimespan.GetComponent<MeshRenderer>().material = standardMaterial;
-                        }
-
-                        else if (!regionSelected)
-                        {
-                            mainRegion.GetComponent<MeshRenderer>().material = standardMaterial;
-                        }
-
-                        else if (!typeSelected)
-                        {
-                            mainType.GetComponent<MeshRenderer>().material = standardMaterial;
-                        }
-
-                        else if (!exhibitionSelected)
-                        {
-                            mainExhibition.GetComponent<MeshRenderer>().material = standardMaterial;
-                        }
-                        */
                     }
                 }
 
@@ -342,11 +291,7 @@ public class FilterInteract : MonoBehaviour {
 
                     Debug.Log("Distance: " + Mathf.Sqrt(Mathf.Abs(device.GetAxis().x) * Mathf.Abs(device.GetAxis().x) + Mathf.Abs(device.GetAxis().y) * Mathf.Abs(device.GetAxis().y)));
                     // update selection 
-
-                    // applySelected = !applySelected;
-                    // TODO apply selection to dataset :)
-
-                    Debug.Log("center clicked");
+                    //Debug.Log("center clicked");
 
                     if (regionSelected)
                     {
@@ -358,7 +303,6 @@ public class FilterInteract : MonoBehaviour {
                         subMenuRegion.SetActive(false);
                         apply.SetActive(true);
                         back.SetActive(false);
-                        //mainRegion.GetComponent<MeshRenderer>().material = standardMaterial;
                     }
 
                     // no submenu selected
@@ -371,6 +315,7 @@ public class FilterInteract : MonoBehaviour {
                         metaMenu.SetActive(false);
                         filterActive = false;
 
+                        // apply selection to data visualisation
                         GetComponent<DataVisualisation>().resetDataVisualisation();
                         CollectionDataHandling.CollectionData.selectItemsByRegion(subRegionAmericaSelected, subRegionAfricaSelected, subRegionEuropeSelected, subRegionAsiaSelected, subRegionOzeaniaSelected);
                         GetComponent<DataVisualisation>().applySelection();
@@ -483,9 +428,8 @@ public class FilterInteract : MonoBehaviour {
                     //check for input metamenu (bottom) --> do not implement yet
                     if (currAngle > 240)
                     {
-                        Debug.Log("settings clicked");
-                        // DO SOMETHING
-                        //metaSettings.GetComponent<MeshRenderer>().material = selectedMaterial;
+                        //Debug.Log("settings clicked");
+                        // apply reset data visualisation
                         GetComponent<DataVisualisation>().resetDataVisualisation();
                     }
 
@@ -494,7 +438,7 @@ public class FilterInteract : MonoBehaviour {
                     // timespan
                     else if (currAngle > 0 && currAngle < 60)
                     {
-                        Debug.Log("timespan clicked");
+                        //Debug.Log("timespan clicked");
 
                         timespanSelected = !timespanSelected;
 
@@ -512,21 +456,20 @@ public class FilterInteract : MonoBehaviour {
                     // region
                     else if (currAngle > 60 && currAngle < 120)
                     {
-                        Debug.Log("region clicked");
+                        //Debug.Log("region clicked");
 
                         // show sub menu region & update material
                         subMenuRegion.SetActive(true);
                         mainMenu.SetActive(false);
                         back.SetActive(true);
                         apply.SetActive(false);
-                        // mainRegion.GetComponent<MeshRenderer>().material = selectedMaterial;
                         regionSelected = true;
                     }
 
                     // type
                     else if (currAngle > 120 && currAngle < 180)
                     {
-                        Debug.Log("type clicked");
+                        //Debug.Log("type clicked");
 
                         typeSelected = !typeSelected;
 
@@ -544,7 +487,7 @@ public class FilterInteract : MonoBehaviour {
                     // exhibition
                     else if (currAngle > 180 && currAngle < 240)
                     {
-                        Debug.Log("exhibition clicked");
+                        //Debug.Log("exhibition clicked");
 
                         exhibitionSelected = !exhibitionSelected;
 
@@ -572,16 +515,12 @@ public class FilterInteract : MonoBehaviour {
             }
         }
 
-
         // hide marker if touch is released
         if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Touchpad))
         {
             touched = false;
             applyButton.GetComponent<MeshRenderer>().material = standardCenterMaterial;
             marker.SetActive(false);
-
-            // just for testing purposes
-            // metaSettings.GetComponent<MeshRenderer>().material = inactiveMaterial;
         }   
     }
 }
