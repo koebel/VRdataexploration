@@ -149,7 +149,37 @@ public class PlayerPosition : MonoBehaviour {
     // convert position to Geocoordinate
     public string convertPositionToGeoCoordinate(Vector3 pos)
     {
+        // x coordinates go from -512 to +512 and have to be mapped to -180 to +180
+        float xCoord = pos.x * 180 / 512;
+        float xDegree = Mathf.Floor(Mathf.Abs(xCoord));
+        float diff = Mathf.Abs(xCoord) - xDegree;
+        float xMin = Mathf.Floor(diff * 90);
+        float xSec = Mathf.Floor((diff * 90 - xMin) * 90);
+
+        // output as string
+        string xString;
+        if (xCoord > 0)
+        {
+            xString = xDegree + "° " + xMin + "' " + xSec + "'' E";
+        }
+        else {
+            xString = xDegree + "° " + xMin + "' " + xSec + "'' W";
+        }
+
+        float y = pos.y;
+
         // TODO transform position into proper GeoCoordinate
+        // output should have the format XX° XX' XX'' NS / XX° XX' XX'' EW
+        // x --> EW?!?
+        // y --> NS?!?
+        
+        // multiply by given factor to get correct value (max x should be +- 180, max y +- 90
+
+        // x coordinate: -512 to +512
+        // format it
+        // distinguish positive/negative
+        // set direction and add output as abs
+
         return pos.x + " / " + pos.z;
     }
 }
