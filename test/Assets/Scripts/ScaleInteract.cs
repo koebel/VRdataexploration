@@ -178,7 +178,7 @@ namespace ScaleInteractionSpace {
                 }
 
                 // set color of buttons when active
-                // plus
+                // plus/up
                 if (device.GetAxis().y > 0)
                 {
                     bottom.GetComponent<MeshRenderer>().material = standardMaterial;
@@ -191,7 +191,7 @@ namespace ScaleInteractionSpace {
                         top.GetComponent<MeshRenderer>().material = standardMaterial;
                     }
                 }
-                // minus
+                // minus/down
                 else if (device.GetAxis().y < 0)
                 {
                     top.GetComponent<MeshRenderer>().material = standardMaterial;
@@ -220,10 +220,9 @@ namespace ScaleInteractionSpace {
                 {
                     currentScaleFactor *= scaleFactor;
                     currentStaticScaleFactor = currentScaleFactor;
-                    //Debug.Log("Scalefactor " + currentScaleFactor);
 
-                        //Transform transform = cube.transform;
-                        camrig.transform.localScale = new Vector3(currentScaleFactor, currentScaleFactor, currentScaleFactor);
+                    //Transform transform = cube.transform;
+                    camrig.transform.localScale = new Vector3(currentScaleFactor, currentScaleFactor, currentScaleFactor);
 
                     //set ZoomLevels
                     SetZoomLevel(currentScaleFactor);

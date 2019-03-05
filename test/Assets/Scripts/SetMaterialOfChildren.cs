@@ -16,6 +16,7 @@ public class SetMaterialOfChildren : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        Debug.Log("Set Material of " + root.name);
 
         // count number of children of root object
         numberOfChildren = root.transform.childCount;

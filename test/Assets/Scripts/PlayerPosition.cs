@@ -54,7 +54,8 @@ public class PlayerPosition : MonoBehaviour {
 
         // update controllcenter content
         currentText = "position: " + convertPositionToGeoCoordinate(currExactPos) + "<br>" + 
-            "altitude: " + ScaleInteract.currentStaticScaleFactor;
+            "altitude: " + ScaleInteract.currentZoomLevel + " / " + ScaleInteract.currentStaticScaleFactor + "<br>" + 
+            "selected items: " + CollectionDataHandling.CollectionData.countryStats.Count + " / " + CollectionDataHandling.CollectionData.countryStatsSelection.Count;
 
         // set new text
         controllcenterText.text = currentText.Replace("<br>", "\n");
@@ -149,6 +150,6 @@ public class PlayerPosition : MonoBehaviour {
     public string convertPositionToGeoCoordinate(Vector3 pos)
     {
         // TODO transform position into proper GeoCoordinate
-        return pos.x + "/" + pos.z;
+        return pos.x + " / " + pos.z;
     }
 }

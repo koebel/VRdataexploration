@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 using CollectionDataHandlingSpace;
+using DataVisualisationSpace;
+
 
 [RequireComponent(typeof(SteamVR_TrackedObject))]
 public class FilterInteract : MonoBehaviour {
@@ -13,7 +15,6 @@ public class FilterInteract : MonoBehaviour {
     // Filter Interactor
     public GameObject filterInteractor;
     private GameObject controller;
-    private GameObject camrig;
 
     public float centerRadius = 0.4f;
 
@@ -96,11 +97,16 @@ public class FilterInteract : MonoBehaviour {
     private float markerOffsetDepth = 0.05f;
     private bool touched = false;
 
+    // components
+    private DataVisualisationSpace.DataVisualisation dv;
+
 
     void Start() {
+
+        dv = GetComponent<DataVisualisation>();
+
         // assign parent objects of filter interactor
         controller = filterInteractor.transform.parent.gameObject;
-        camrig = controller.transform.parent.gameObject;
 
         // find child objects of filter interactor
         // Filter & Apply
@@ -316,9 +322,9 @@ public class FilterInteract : MonoBehaviour {
                         filterActive = false;
 
                         // apply selection to data visualisation
-                        GetComponent<DataVisualisation>().resetDataVisualisation();
+                        dv.resetDataVisualisation();
                         CollectionDataHandling.CollectionData.selectItemsByRegion(subRegionAmericaSelected, subRegionAfricaSelected, subRegionEuropeSelected, subRegionAsiaSelected, subRegionOzeaniaSelected);
-                        GetComponent<DataVisualisation>().applySelection();
+                        dv.applySelection();
                     }
                 }
 
@@ -428,9 +434,22 @@ public class FilterInteract : MonoBehaviour {
                     //check for input metamenu (bottom) --> do not implement yet
                     if (currAngle > 240)
                     {
-                        //Debug.Log("settings clicked");
+                        // reset all selections
+                        CollectionDataHandlingSpace.CollectionDataHandling.CollectionData.deselectAll();
+                        
+                        timespanSelected = false;
+                        regionSelected = false;
+                        typeSelected = false;
+                        exhibitionSelected = false;
+
+                        subRegionAmericaSelected = false;
+                        subRegionAfricaSelected = false;
+                        subRegionEuropeSelected = false;
+                        subRegionAsiaSelected = false;
+                        subRegionOzeaniaSelected = false;
+
                         // apply reset data visualisation
-                        GetComponent<DataVisualisation>().resetDataVisualisation();
+                        dv.resetDataVisualisation();
                     }
 
                     //check for input mainsections
@@ -438,8 +457,6 @@ public class FilterInteract : MonoBehaviour {
                     // timespan
                     else if (currAngle > 0 && currAngle < 60)
                     {
-                        //Debug.Log("timespan clicked");
-
                         timespanSelected = !timespanSelected;
 
                         // update material
@@ -456,8 +473,6 @@ public class FilterInteract : MonoBehaviour {
                     // region
                     else if (currAngle > 60 && currAngle < 120)
                     {
-                        //Debug.Log("region clicked");
-
                         // show sub menu region & update material
                         subMenuRegion.SetActive(true);
                         mainMenu.SetActive(false);
@@ -469,8 +484,6 @@ public class FilterInteract : MonoBehaviour {
                     // type
                     else if (currAngle > 120 && currAngle < 180)
                     {
-                        //Debug.Log("type clicked");
-
                         typeSelected = !typeSelected;
 
                         // update material
@@ -487,8 +500,6 @@ public class FilterInteract : MonoBehaviour {
                     // exhibition
                     else if (currAngle > 180 && currAngle < 240)
                     {
-                        //Debug.Log("exhibition clicked");
-
                         exhibitionSelected = !exhibitionSelected;
 
                         // update material

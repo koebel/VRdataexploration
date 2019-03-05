@@ -133,6 +133,12 @@ namespace CollectionDataHandlingSpace {
                 updateCountryStatsSelection();
             }
 
+            public static void deselectAll()
+            {
+                selectedItems = new List<CollectionItem>();
+                updateCountryStatsSelection();
+            }
+
             public static string SaveToJsonString() {
                 StringBuilder json = new StringBuilder();
 
@@ -216,7 +222,7 @@ namespace CollectionDataHandlingSpace {
                         //Debug.Log(item);
                         currentItem = JsonUtility.FromJson<CollectionItem>(item);
                         addCollectionItem(currentItem);
-                        Debug.Log(currentItem.title);
+                        //Debug.Log(currentItem.title);
                         input.Remove(0, index);
                     }
                     else
@@ -227,10 +233,10 @@ namespace CollectionDataHandlingSpace {
                         //Debug.Log(item);
                         currentItem = JsonUtility.FromJson<CollectionItem>(item);
                         addCollectionItem(currentItem);
-                        Debug.Log(currentItem.title);
+                        //Debug.Log(currentItem.title);
                     } 
                 }
-                Debug.Log("all Items count: " + allItems.Count);
+                //Debug.Log("all Items count: " + allItems.Count);
             }
         }
 
@@ -303,9 +309,11 @@ namespace CollectionDataHandlingSpace {
                 CollectionData.CreateCollectionDataFromJsonString(dataAsJson);
 
                 // print country Stats
+                /*
                 foreach (KeyValuePair<string, int> p in CollectionData.countryStats) {
                     Debug.Log(p);
                 }
+                */
             }
         }
     }
