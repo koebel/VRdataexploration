@@ -55456,7 +55456,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1395011447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59949,32 +59949,6 @@ MonoBehaviour:
   rootOutlinesLevel1: {fileID: 192136273}
   rootOutlinesLevel2: {fileID: 1424664515}
   rootOutlinesLevel3: {fileID: 320919998}
---- !u!114 &1475887497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1475887487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9854b21356ca90c4297dcbbfe7bf4bb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  matHighest: {fileID: 2100000, guid: bd26c955cccf1ec478d828f70518b183, type: 2}
-  matHigh: {fileID: 2100000, guid: 70ff66339c89ece4c85778024b2f2873, type: 2}
-  matMedium: {fileID: 2100000, guid: 51dbe4b2ce0b2554fbc7ad03517c6779, type: 2}
-  matLow: {fileID: 2100000, guid: a295c576038faed49b398d8a6afca174, type: 2}
-  matLowest: {fileID: 2100000, guid: 9b8e2db9d7d68394994ca2b870cfe2bf, type: 2}
-  matDefault: {fileID: 2100000, guid: 659b9bb77fd348345a8b7bb1c193beb5, type: 2}
-  elevation: 3
-  defaultHeight: 1
-  scaleFactor: 3
-  rootCountryVolumes: {fileID: 2056985714}
-  rootCountryOutlines: {fileID: 594771111}
-  rootCollectionItems: {fileID: 464795000}
-  zoomFactorItemsLevel1: 6
-  zoomFactorItemsLevel2: 4
-  zoomFactorItemsLevel3: 2
 --- !u!114 &1475887498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60010,6 +59984,32 @@ MonoBehaviour:
   _head: {fileID: 1475887483}
   _ears: {fileID: 1475887484}
   wireframe: 0
+--- !u!114 &1475887512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1475887487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9854b21356ca90c4297dcbbfe7bf4bb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  matHighest: {fileID: 2100000, guid: bd26c955cccf1ec478d828f70518b183, type: 2}
+  matHigh: {fileID: 2100000, guid: 70ff66339c89ece4c85778024b2f2873, type: 2}
+  matMedium: {fileID: 2100000, guid: 51dbe4b2ce0b2554fbc7ad03517c6779, type: 2}
+  matLow: {fileID: 2100000, guid: a295c576038faed49b398d8a6afca174, type: 2}
+  matLowest: {fileID: 2100000, guid: 9b8e2db9d7d68394994ca2b870cfe2bf, type: 2}
+  matDefault: {fileID: 2100000, guid: 08be6706b9114f446a7d27ffe558bb62, type: 2}
+  elevation: 3
+  defaultHeight: 1
+  scaleFactor: 3
+  rootCountryVolumes: {fileID: 2056985714}
+  rootCountryOutlines: {fileID: 594771111}
+  rootCollectionItems: {fileID: 464795000}
+  zoomFactorItemsLevel1: 6
+  zoomFactorItemsLevel2: 4
+  zoomFactorItemsLevel3: 2
 --- !u!1001 &1476686506
 Prefab:
   m_ObjectHideFlags: 0

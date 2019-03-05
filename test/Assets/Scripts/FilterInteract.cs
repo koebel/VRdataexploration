@@ -78,11 +78,11 @@ public class FilterInteract : MonoBehaviour {
     private bool typeSelected = false;
     private bool exhibitionSelected = false;
 
-    private bool subRegionAmericaSelected = false;
-    private bool subRegionAfricaSelected = false;
-    private bool subRegionEuropeSelected = false;
-    private bool subRegionAsiaSelected = false;
-    private bool subRegionOzeaniaSelected = false;
+    private bool subRegionAmericaSelected = true;
+    private bool subRegionAfricaSelected = true;
+    private bool subRegionEuropeSelected = true;
+    private bool subRegionAsiaSelected = true;
+    private bool subRegionOzeaniaSelected = true;
 
     private bool filterActive = false;
     private float currAngle = 0.0f;
@@ -176,11 +176,11 @@ public class FilterInteract : MonoBehaviour {
         //metaSelectNone.GetComponent<MeshRenderer>().material = inactiveMaterial;
         metaSettings.GetComponent<MeshRenderer>().material = inactiveMaterial;
 
-        subRegionAmerica.GetComponent<MeshRenderer>().material = standardMaterial;
-        subRegionAfrica.GetComponent<MeshRenderer>().material = standardMaterial;
-        subRegionEurope.GetComponent<MeshRenderer>().material = standardMaterial;
-        subRegionAsia.GetComponent<MeshRenderer>().material = standardMaterial;
-        subRegionOzeania.GetComponent<MeshRenderer>().material = standardMaterial;
+        subRegionAmerica.GetComponent<MeshRenderer>().material = selectedMaterial;
+        subRegionAfrica.GetComponent<MeshRenderer>().material = selectedMaterial;
+        subRegionEurope.GetComponent<MeshRenderer>().material = selectedMaterial;
+        subRegionAsia.GetComponent<MeshRenderer>().material = selectedMaterial;
+        subRegionOzeania.GetComponent<MeshRenderer>().material = selectedMaterial;
 
         // hide menus
         apply.SetActive(false);
@@ -450,6 +450,7 @@ public class FilterInteract : MonoBehaviour {
 
                         // apply reset data visualisation
                         dv.resetDataVisualisation();
+                        dv.applyDataVisualisation();
                     }
 
                     //check for input mainsections

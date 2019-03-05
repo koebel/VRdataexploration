@@ -65,8 +65,10 @@ public class SetCollectionItem : MonoBehaviour {
         itemText.text = currentItemText.Replace("<br>", "\n");
     }
 	
+
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
 }

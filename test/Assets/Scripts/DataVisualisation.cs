@@ -61,7 +61,7 @@ namespace DataVisualisationSpace {
         // Use this for initialization
         void Start()
         {
-            Debug.Log( "Data Visualization called for the first time");
+            //Debug.Log( "Data Visualization called for the first time");
 
             // set materials
             /*
@@ -81,7 +81,13 @@ namespace DataVisualisationSpace {
 
             // apply data visualisation to the dataset as a whole 
             // (no particular selection)
-            applyDataVisualisation();
+            // applyDataVisualisation();
+
+            // all items selected at start
+            // consequently all subregions in FilterInteract.cs need to be set to true 
+            // and materials set to selectedMaterial
+            CollectionDataHandling.CollectionData.selectItemsByRegion(true, true, true, true, true);
+            applySelection();
         }
 
         // Update is called once per frame
@@ -98,7 +104,7 @@ namespace DataVisualisationSpace {
 
         // put all country volumes & outlines & collection items back to default position
         public void resetDataVisualisation() {
-            Debug.Log("Reset Data Visualisation");
+            //Debug.Log("Reset Data Visualisation");
 
             // reset country volumes to default
             foreach (KeyValuePair<string, int> p in CollectionDataHandling.CollectionData.countryStats)
@@ -141,7 +147,7 @@ namespace DataVisualisationSpace {
 
 
         public void resetDataVisualisationCollectionItems() {
-            Debug.Log("Reset Data Visualisation of Collection Items");
+            //Debug.Log("Reset Data Visualisation of Collection Items");
 
             foreach (CollectionDataHandling.CollectionItem item in CollectionDataHandling.CollectionData.allItems)
             {
@@ -159,7 +165,7 @@ namespace DataVisualisationSpace {
 
         // apply data visualisation to all items, no selection
         public void applyDataVisualisation() {
-            Debug.Log("Apply Data Visualisation to all items");
+            //Debug.Log("Apply Data Visualisation to all items");
             maxValue = CollectionDataHandling.CollectionData.getHighestDictionaryValue();
 
             // apply to country volumes
@@ -180,7 +186,7 @@ namespace DataVisualisationSpace {
 
         // apply data visualisation to selected items
         public void applySelection() {
-            Debug.Log("Apply Data Visualisation to selected items");
+            //Debug.Log("Apply Data Visualisation to selected items");
             maxValue = CollectionDataHandling.CollectionData.getHighestSelectionDictionaryValue();
 
             // apply to country volumes
@@ -202,7 +208,7 @@ namespace DataVisualisationSpace {
 
 
         public void applyDataVisualizationCollectionItems() {
-            Debug.Log("Apply Data Visualisation to Collection Items");
+            //Debug.Log("Apply Data Visualisation to Collection Items");
 
             maxValue = CollectionDataHandling.CollectionData.getHighestDictionaryValue();
 
@@ -215,7 +221,7 @@ namespace DataVisualisationSpace {
 
 
         public void applySelectionCollectionItems() {
-            Debug.Log("Apply Data Visualisation to selected Collection Items");
+            //Debug.Log("Apply Data Visualisation to selected Collection Items");
 
             maxValue = CollectionDataHandling.CollectionData.getHighestSelectionDictionaryValue();
 
@@ -223,43 +229,6 @@ namespace DataVisualisationSpace {
             {
                 // apply to collection items
                 setCollectionItemProperties(item, maxValue, scaleFactor, true);
-
-                /*
-                temp = rootCollectionItems.transform.Find(item.objectRef).gameObject;
-                temp.transform.localScale = new Vector3(scaleFactor * getZoomFactorItems(), scaleFactor * getZoomFactorItems(), collectionItemDepth);
-
-                // get position
-                tempXPosition = temp.transform.position.x;
-                tempZPosition = temp.transform.position.z;
-
-                // set height
-                countryValue = CollectionDataHandling.CollectionData.countryStatsSelection[item.country];
-
-                if (countryValue > maxValue * 0.9f)
-                {
-                    temp.transform.position = new Vector3(tempXPosition, (float)(collectionItemHeight + elevation * 0.5f + scaleFactor * getZoomFactorItems() * 0.5), tempZPosition);
-                }
-
-                else if (countryValue > maxValue * 0.7f)
-                {
-                    temp.transform.position = new Vector3(tempXPosition, (float)(collectionItemHeight + elevation * 0.4f + scaleFactor * getZoomFactorItems() * 0.5), tempZPosition);
-                }
-
-                else if (countryValue > maxValue * 0.5f)
-                {
-                    temp.transform.position = new Vector3(tempXPosition, (float)(collectionItemHeight + elevation * 0.3f + scaleFactor * getZoomFactorItems() * 0.5), tempZPosition);
-                }
-
-                else if (countryValue > maxValue * 0.3f)
-                {
-                    temp.transform.position = new Vector3(tempXPosition, (float)(collectionItemHeight + elevation * 0.2f + scaleFactor * getZoomFactorItems() * 0.5), tempZPosition);
-                }
-
-                else if (countryValue > 0)
-                {
-                    temp.transform.position = new Vector3(tempXPosition, (float)(collectionItemHeight + elevation * 0.1f + scaleFactor * getZoomFactorItems() * 0.5f), tempZPosition);
-                }
-                */
             }
         }
 
@@ -395,7 +364,7 @@ namespace DataVisualisationSpace {
 
 
         public void updateZoomLevel(int z) {
-            Debug.Log("Update ZoomLevel");
+            //Debug.Log("Update ZoomLevel");
 
             if (z == 1) {
                 zoomFactorItems = zoomFactorItemsLevel1;
