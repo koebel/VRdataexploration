@@ -26,7 +26,7 @@ namespace ScaleInteractionSpace {
         //Scale Factor
         public float scaleFactor = 2;
         private float currentScaleFactor;
-        private float maxScale = 300.0f;
+        private float maxScale = 250.0f;
         private float minScale = 1.0f;
         private bool scalingActive = true;
 
@@ -79,7 +79,7 @@ namespace ScaleInteractionSpace {
 
             //calculate zoom level boundaries
             zoomLevel1Boundary = (int) (currentScaleFactor / scaleFactor);
-            zoomLevel2Boundary = (int) (zoomLevel1Boundary / scaleFactor);
+            zoomLevel2Boundary = (int) (zoomLevel1Boundary / scaleFactor / scaleFactor);
             //zoomLevel3Boundary = (int) (ZoomLevel2Boundary / scaleFactor);
 
             // set outlines to zoomlevel
