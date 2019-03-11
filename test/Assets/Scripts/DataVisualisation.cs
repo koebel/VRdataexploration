@@ -36,6 +36,7 @@ namespace DataVisualisationSpace {
 
         public GameObject rootCountryVolumes;
         public GameObject rootCountryOutlines;
+        public GameObject rootCountryLabels;
         public GameObject rootCollectionItems;
         private GameObject temp;
 
@@ -126,6 +127,17 @@ namespace DataVisualisationSpace {
                     Debug.Log("Country Volume Key not found: " + p.Key);
                 }
 
+                // hide Country Labels
+                if (rootCountryLabels.transform.Find(p.Key).gameObject != null)
+                {
+                    temp = rootCountryLabels.transform.Find(p.Key).gameObject;
+                    temp.SetActive(false);
+                }
+                else
+                {
+                    Debug.Log("Country Label Key not found: " + p.Key);
+                }
+                
                 // reset Country Outline
                 outlineKey = p.Key + "_outline";
                 if (rootCountryOutlines.transform.Find(outlineKey).gameObject != null)
@@ -171,8 +183,19 @@ namespace DataVisualisationSpace {
             // apply to country volumes
             foreach (KeyValuePair<string, int> p in CollectionDataHandling.CollectionData.countryStats)
             {
-                //set country volume height
+                // set country volume height
                 setCountryVolumeHeight(p.Key, p.Value, maxValue);
+
+                // show label
+                if (rootCountryLabels.transform.Find(p.Key).gameObject != null)
+                {
+                    temp = rootCountryLabels.transform.Find(p.Key).gameObject;
+                    temp.SetActive(true);
+                }
+                else
+                {
+                    Debug.Log("Country Label Key not found: " + p.Key);
+                }
 
                 // set Country Outline
                 outlineKey = p.Key + "_outline";
@@ -195,11 +218,21 @@ namespace DataVisualisationSpace {
                 //set country volume height
                 setCountryVolumeHeight(p.Key, p.Value, maxValue);
 
+                // show label
+                if (rootCountryLabels.transform.Find(p.Key).gameObject != null)
+                {
+                    Debug.Log("activate Label " + p.Key);
+                    temp = rootCountryLabels.transform.Find(p.Key).gameObject;
+                    temp.SetActive(true);
+                }
+                else
+                {
+                    Debug.Log("Country Label Key not found: " + p.Key);
+                }
+
                 // set Country Outline
-                /*
                 outlineKey = p.Key + "_outline";
                 setCountryOutlineHeight(outlineKey, p.Value, maxValue);
-                */
             }
 
             // apply selection to items
