@@ -115,8 +115,6 @@ public class PlayerPosition : MonoBehaviour {
             */
 
 
-
-
             /*
             if (Physics.Raycast(player.transform.position, Vector3.down, 500)) {
                 print("There is something in front of the object!");
@@ -166,20 +164,41 @@ public class PlayerPosition : MonoBehaviour {
             xString = xDegree + "° " + xMin + "' " + xSec + "'' W";
         }
 
-        float y = pos.y;
+        // x coordinates go from approx -320 to +320 and have to be mapped to -90 to +90
+        // 90 --> approx 30deg
+        // 140 --> approx 45deg
+        // 195 --> approx 60deg
+        // 275 --> approx 75deg
 
-        // TODO transform position into proper GeoCoordinate
+        // TODO better conversion
+        float yCoord = pos.z / 3.2f;
+
+        if (yCoord > 90) {
+            yCoord = 90;
+        }
+
+        if (yCoord < -90)
+        {
+            yCoord = -90;
+        }
+
+        float yDegree = Mathf.Floor(Mathf.Abs(yCoord));
+        diff = Mathf.Abs(yCoord) - yDegree;
+        float yMin = Mathf.Floor(diff * 90);
+        float ySec = Mathf.Floor((diff * 90 - yMin) * 90);
+
+        // output as string
+        string yString;
+        if (yCoord > 0)
+        {
+            yString = yDegree + "° " + yMin + "' " + ySec + "'' N";
+        }
+        else
+        {
+            yString = yDegree + "° " + yMin + "' " + ySec + "'' S";
+        }
+
         // output should have the format XX° XX' XX'' NS / XX° XX' XX'' EW
-        // x --> EW?!?
-        // y --> NS?!?
-        
-        // multiply by given factor to get correct value (max x should be +- 180, max y +- 90
-
-        // x coordinate: -512 to +512
-        // format it
-        // distinguish positive/negative
-        // set direction and add output as abs
-
-        return pos.x + " / " + pos.z;
+        return yString + " / " + xString;
     }
 }
