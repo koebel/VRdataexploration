@@ -186,7 +186,7 @@ namespace DataVisualisationSpace {
                 // set country volume height
                 setCountryVolumeHeight(p.Key, p.Value, maxValue);
 
-                // show label
+                // show country label
                 if (rootCountryLabels.transform.Find(p.Key).gameObject != null)
                 {
                     temp = rootCountryLabels.transform.Find(p.Key).gameObject;
@@ -221,7 +221,6 @@ namespace DataVisualisationSpace {
                 // show label
                 if (rootCountryLabels.transform.Find(p.Key).gameObject != null)
                 {
-                    Debug.Log("activate Label " + p.Key);
                     temp = rootCountryLabels.transform.Find(p.Key).gameObject;
                     temp.SetActive(true);
                 }

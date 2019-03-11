@@ -67,18 +67,19 @@ public class PlayerPosition : MonoBehaviour {
 
             //Vector3 fwd = transform.TransformDirection(Vector3.forward);
 
-            Vector3 down = transform.TransformDirection(Vector3.forward) * 300;
-            Debug.DrawRay(transform.position, down, Color.green);
-            Debug.DrawRay(player.transform.position, down, Color.red);
+            Vector3 down = transform.TransformDirection(Vector3.down) * 300;
+            Debug.DrawRay(currExactPos, down, Color.green);
+            //Debug.DrawRay(player.transform.position, down, Color.red);
 
             RaycastHit hit;
 
             Debug.Log(player.transform.position);
             // Does the ray intersect any objects excluding the player layer
-            if (Physics.Raycast(player.transform.position, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity))
+            if (Physics.Raycast(player.transform.position + eyes.transform.position, transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity))
             {
-                Debug.DrawRay(player.transform.position, transform.TransformDirection(Vector3.up) * hit.distance, Color.yellow);
+                Debug.DrawRay(player.transform.position + eyes.transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
                 Debug.Log("Did Hit");
+                // TODO check what was hit !!!!!!
             }
             else
             {
