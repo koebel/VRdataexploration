@@ -19,6 +19,7 @@ public class PlayerPosition : MonoBehaviour {
     private string currentLocation;
     private float currentXCoordinate;
     private float currentYCoordinate;
+    private string currentCountryName = "somewhere over the rainbow";
 
     private Vector3 currExactPos;
     private Vector3 currPos;
@@ -54,7 +55,7 @@ public class PlayerPosition : MonoBehaviour {
 
         // update controllcenter content
         currentText = "position: " + convertPositionToGeoCoordinate(currExactPos) + "<br>" + 
-            "altitude: " + ScaleInteract.currentZoomLevel + " / " + ScaleInteract.currentStaticScaleFactor + "<br>" + 
+            "altitude: " + ScaleInteract.currentStaticScaleFactor + " above " + currentCountryName + "<br>" + 
             "selected items: " + CollectionDataHandling.CollectionData.countryStats.Count + " / " + CollectionDataHandling.CollectionData.countryStatsSelection.Count;
 
         // set new text
@@ -65,25 +66,20 @@ public class PlayerPosition : MonoBehaviour {
             //Debug.Log("Location changed");
             // TODO: check for country volume below
 
-            //Vector3 fwd = transform.TransformDirection(Vector3.forward);
-
-            Vector3 down = transform.TransformDirection(Vector3.down) * 300;
-            Debug.DrawRay(currExactPos, down, Color.green);
-            //Debug.DrawRay(player.transform.position, down, Color.red);
 
             RaycastHit hit;
 
-            Debug.Log(player.transform.position);
+            Debug.Log(player.transform.position + eyes.transform.position + transform.TransformDirection(Vector3.up));
             // Does the ray intersect any objects excluding the player layer
-            if (Physics.Raycast(player.transform.position + eyes.transform.position, transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity))
+            if (Physics.Raycast(player.transform.position + eyes.transform.position + transform.TransformDirection(Vector3.up), transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity))
             {
-                Debug.DrawRay(player.transform.position + eyes.transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
-                Debug.Log("Did Hit");
+                Debug.DrawRay(player.transform.position + eyes.transform.position + transform.TransformDirection(Vector3.up), transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
+                Debug.Log("Did Hit " + hit.collider.gameObject);
+                //currentCountryName = hit.collider;
                 // TODO check what was hit !!!!!!
             }
             else
             {
-                Debug.DrawRay(player.transform.position, transform.TransformDirection(Vector3.up) * 1000, Color.white);
                 Debug.Log("Did not Hit");
             }
 
