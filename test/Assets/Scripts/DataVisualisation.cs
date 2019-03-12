@@ -128,9 +128,8 @@ namespace DataVisualisationSpace {
                     Debug.Log("Country Volume Key not found: " + p.Key);
                 }
 
-                // hide Country Labels
+                // reset (hide) Country Labels
                 labelKey = "label-" + p.Key;
-                //Debug.Log(labelKey);
                 if (rootCountryLabels.transform.Find(labelKey).gameObject != null)
                 {
                     temp = rootCountryLabels.transform.Find(labelKey).gameObject;
@@ -191,15 +190,7 @@ namespace DataVisualisationSpace {
 
                 // show country label
                 labelKey = "label-" + p.Key;
-                if (rootCountryLabels.transform.Find(labelKey).gameObject != null)
-                {
-                    temp = rootCountryLabels.transform.Find(labelKey).gameObject;
-                    temp.SetActive(true);
-                }
-                else
-                {
-                    Debug.Log("Country Label Key not found: " + p.Key);
-                }
+                setCountryLabel(labelKey);
 
                 // set Country Outline
                 outlineKey = p.Key + "_outline";
@@ -224,16 +215,7 @@ namespace DataVisualisationSpace {
 
                 // show label
                 labelKey = "label-" + p.Key;
-                //Debug.Log(labelKey);
-                if (rootCountryLabels.transform.Find(labelKey).gameObject != null)
-                {
-                    temp = rootCountryLabels.transform.Find(labelKey).gameObject;
-                    temp.SetActive(true);
-                }
-                else
-                {
-                    Debug.Log("Country Label Key not found: " + p.Key);
-                }
+                setCountryLabel(labelKey);
 
                 // set Country Outline
                 outlineKey = p.Key + "_outline";
@@ -313,6 +295,20 @@ namespace DataVisualisationSpace {
             {
                 Debug.Log("Country Volume Key not found: " + key);
             }
+        }
+
+
+        public void setCountryLabel(string key) {
+            if (rootCountryLabels.transform.Find(key).gameObject != null)
+            {
+                temp = rootCountryLabels.transform.Find(key).gameObject;
+                temp.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("Country Label Key not found: " + key);
+            }
+
         }
 
 
