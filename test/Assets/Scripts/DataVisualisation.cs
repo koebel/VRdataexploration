@@ -130,7 +130,7 @@ namespace DataVisualisationSpace {
 
                 // hide Country Labels
                 labelKey = "label-" + p.Key;
-                Debug.Log(labelKey);
+                //Debug.Log(labelKey);
                 if (rootCountryLabels.transform.Find(labelKey).gameObject != null)
                 {
                     temp = rootCountryLabels.transform.Find(labelKey).gameObject;
