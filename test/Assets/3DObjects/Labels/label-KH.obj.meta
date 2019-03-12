@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b39d64b3a0d0bca47b68069eafd024d1
+guid: 2e8f1b85b80c7d147a7cd65cf68ba8a6
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -7,8 +7,7 @@ ModelImporter:
     100002: //RootNode
     400000: default
     400002: //RootNode
-    2100000: defaultMat
-    2100002: SVGMat
+    2100000: SVGMat.014
     2300000: default
     3300000: default
     4300000: default
