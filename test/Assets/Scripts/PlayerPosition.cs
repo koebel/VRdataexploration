@@ -23,7 +23,7 @@ public class PlayerPosition : MonoBehaviour {
     private string currentLocation;
     private float currentXCoordinate;
     private float currentYCoordinate;
-    private string currentCountryName = "somewhere over the rainbow";
+    private string currentCountryName = "the world";
 
     private Vector3 currExactPos;
     private Vector3 currPos;
@@ -98,16 +98,16 @@ public class PlayerPosition : MonoBehaviour {
 
         // update controllcenter content
         currentText = "position: " + convertPositionToGeoCoordinate(currExactPos) + "<br>" + 
-            "altitude: " + ScaleInteract.currentStaticScaleFactor + " above " + currentCountryName + "<br>" + 
-            "selected items: " + CollectionDataHandling.CollectionData.countryStats.Count + " / " + CollectionDataHandling.CollectionData.countryStatsSelection.Count;
+            "altitude: " + ScaleInteract.currentStaticScaleFactor + " x above " + currentCountryName + " <br>" + 
+            "items in current selection: " + CollectionDataHandling.CollectionData.countryStatsSelection.Count;
 
         // set new text
         controllcenterText.text = currentText.Replace("<br>", "\n");
 
-        cube.transform.localPosition = new Vector3(currExactPos.x, 2.0f, currExactPos.z);
-
+        //cube.transform.localPosition = new Vector3(currExactPos.x, 2.0f, currExactPos.z);
         
-        // shoot ray
+
+        // get postion when releasing Trigger
         if (device.GetPressUp(SteamVR_Controller.ButtonMask.Trigger))
         {            
             // shoot ray
@@ -192,7 +192,7 @@ public class PlayerPosition : MonoBehaviour {
         if (countryCodes.ContainsKey(countrycode)) {
             return countryCodes[countrycode];
         }
-        return "countrycode not found";
+        return "the world";
     }
 
 
