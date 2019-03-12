@@ -6,7 +6,11 @@ using UnityEngine.UI;
 using CollectionDataHandlingSpace;
 using ScaleInteractionSpace;
 
+[RequireComponent(typeof(SteamVR_TrackedObject))]
 public class PlayerPosition : MonoBehaviour {
+
+    SteamVR_TrackedObject trackedObj;
+    SteamVR_Controller.Device device;
 
     public GameObject player;
     public GameObject eyes;
@@ -27,8 +31,15 @@ public class PlayerPosition : MonoBehaviour {
 
     private Ray ray;
     private RaycastHit hit;
+    private RaycastHit[] hits;
     private GameObject hitObject;
     public float rayDistance = 500.0f;
+
+    public GameObject cube;
+
+
+    private Dictionary<string, string> countryCodes;
+
 
     // Use this for initialization
     void Start () {
@@ -43,12 +54,44 @@ public class PlayerPosition : MonoBehaviour {
         controllcenterText.GetComponent<Text>().supportRichText = true;
         currentText = "position: " + currentText;
         controllcenterText.text = currentText.Replace("<br>", "\n");
+
+        createCountrycodesDictionary();
+    }
+
+
+    void Awake()
+    {
+        trackedObj = GetComponent<SteamVR_TrackedObject>();
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        device = SteamVR_Controller.Input((int)trackedObj.index);
+
+        // get current position
+        ray = new Ray();
+        ray.origin = player.transform.position + eyes.transform.position;
+        ray.direction = transform.TransformDirection(Vector3.down);
+
+        hits = Physics.RaycastAll(player.transform.position + eyes.transform.position, Vector3.down, Mathf.Infinity);
+
+        foreach (RaycastHit rch in hits)
+        {
+            if (rch.collider.gameObject.tag == "Volume")
+            {
+                currentCountry = rch.collider.gameObject;
+                currentCountryName = currentCountry.transform.parent.name;
+            }
+        }
+
+        /*
+        if (currPos != prevPos) {
+            Debug.Log("Location changed");
+        }
+        */
+
         prevPos = currPos;
         currPos = player.transform.position;
         currExactPos = player.transform.position + eyes.transform.position;
@@ -61,85 +104,29 @@ public class PlayerPosition : MonoBehaviour {
         // set new text
         controllcenterText.text = currentText.Replace("<br>", "\n");
 
-        if (currPos != prevPos)
-        {
-            //Debug.Log("Location changed");
-            // TODO: check for country volume below
+        cube.transform.localPosition = new Vector3(currExactPos.x, 2.0f, currExactPos.z);
 
-
-            RaycastHit hit;
-
-            Debug.Log(player.transform.position + eyes.transform.position + transform.TransformDirection(Vector3.up));
-            // Does the ray intersect any objects excluding the player layer
-            if (Physics.Raycast(player.transform.position + eyes.transform.position + transform.TransformDirection(Vector3.up), transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity))
-            {
-                Debug.DrawRay(player.transform.position + eyes.transform.position + transform.TransformDirection(Vector3.up), transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
-                Debug.Log("Did Hit " + hit.collider.gameObject);
-                //currentCountryName = hit.collider;
-                // TODO check what was hit !!!!!!
-            }
-            else
-            {
-                Debug.Log("Did not Hit");
-            }
-
-            /*
-
-            ray = new Ray(transform.position, Vector3.down);
-            if (Physics.Raycast(ray, out hit, rayDistance))
-            {
-                Debug.Log("hit object: " + hit.collider);
-                
-
-            }*/
-
-            /*
-            //Debug.DrawRay(position, direction, Color.green);
-            if (Physics.Raycast(ray, out hit, rayDistance))
-            {
-                // hit object
-                hitObject = hit.collider.gameObject;
-                Debug.Log(hitObject);
-
-                // TODO check if UI is already visible, only call the following code once
-
-                if (hitObject.tag == "Volume")
-                {
-                    currentCountry = hitObject;
-                    Debug.Log(hitObject);
-                }
-            }
-            */
-
-
-            /*
-            if (Physics.Raycast(player.transform.position, Vector3.down, 500)) {
-                print("There is something in front of the object!");
-            }
-            */
-
-            /*
+        
+        // shoot ray
+        if (device.GetPressUp(SteamVR_Controller.ButtonMask.Trigger))
+        {            
+            // shoot ray
             ray = new Ray();
-            ray.origin = player.transform.position;
-            ray.direction = transform.TransformDirection(Vector3.down);
+            ray.origin = trackedObj.transform.position;
+            ray.direction = transform.TransformDirection(Vector3.forward);
 
-            if (Physics.Raycast(ray, out hit, 500))
-            {
-                // retrieve hit object
-                hitObject = hit.collider.gameObject;
-                Debug.Log(hitObject.name);
+            hits = Physics.RaycastAll(ray, rayDistance);
 
-                if (hitObject.tag == Volume)
-                {
-                    currentCountry = hitObject;
-                    currentLocation = currentCountry.name;
-                    //Debug.Log(currentLocation);
+            foreach (RaycastHit rch in hits) {
+                if (rch.collider.gameObject.tag == "Volume") {
+                    currentCountry = rch.collider.gameObject;
+                    //currentCountryName = currentCountry.transform.parent.name;
+                    currentCountryName = getCountryName(currentCountry.transform.parent.name);
                 }
-
             }
-            */
         }
     }
+
 
     // convert position to Geocoordinate
     public string convertPositionToGeoCoordinate(Vector3 pos)
@@ -197,5 +184,194 @@ public class PlayerPosition : MonoBehaviour {
 
         // output should have the format XX° XX' XX'' NS / XX° XX' XX'' EW
         return yString + " / " + xString;
+    }
+
+
+    public string getCountryName(string countrycode)
+    {
+        if (countryCodes.ContainsKey(countrycode)) {
+            return countryCodes[countrycode];
+        }
+        return "countrycode not found";
+    }
+
+
+    public void createCountrycodesDictionary() {
+        countryCodes = new Dictionary<string, string>();
+
+        countryCodes.Add("AE", " ");
+        countryCodes.Add("AF", " ");
+        countryCodes.Add("AL", " ");
+        countryCodes.Add("AM", " ");
+        countryCodes.Add("AO", " ");
+        countryCodes.Add("AR", " ");
+        countryCodes.Add("AT", " ");
+        countryCodes.Add("AU", " ");
+        countryCodes.Add("AZ", " ");
+        countryCodes.Add("BA", " ");
+        countryCodes.Add("BD", " ");
+        countryCodes.Add("BE", " ");
+        countryCodes.Add("BF", " ");
+        countryCodes.Add("BG", " ");
+        countryCodes.Add("BI", " ");
+        countryCodes.Add("BJ", " ");
+        countryCodes.Add("BN", " ");
+        countryCodes.Add("BO", " ");
+        countryCodes.Add("BR", " ");
+        countryCodes.Add("BS", " ");
+        countryCodes.Add("BT", " ");
+        countryCodes.Add("BW", " ");
+        countryCodes.Add("BY", " ");
+        countryCodes.Add("BZ", " ");
+        countryCodes.Add("CA", " ");
+        countryCodes.Add("CD", " ");
+        countryCodes.Add("CF", " ");
+        countryCodes.Add("CG", " ");
+        countryCodes.Add("CH", "Switzerland");
+        countryCodes.Add("CI", " ");
+        countryCodes.Add("CL", " ");
+        countryCodes.Add("CM", "Cameroon");
+        countryCodes.Add("CN", "China");
+        countryCodes.Add("CO", " ");
+        countryCodes.Add("CR", " ");
+        countryCodes.Add("CU", " ");
+        countryCodes.Add("CY", " ");
+        countryCodes.Add("CZ", " ");
+        countryCodes.Add("DE", "Germany");
+        countryCodes.Add("DJ", " ");
+        countryCodes.Add("DK", "Denmark");
+        countryCodes.Add("DO", " ");
+        countryCodes.Add("DZ", " ");
+        countryCodes.Add("EC", " ");
+        countryCodes.Add("EE", " ");
+        countryCodes.Add("EG", " ");
+        countryCodes.Add("EH", " ");
+        countryCodes.Add("ER", " ");
+        countryCodes.Add("ES", "Spain");
+        countryCodes.Add("ET", " ");
+        countryCodes.Add("FI", "Finland");
+        countryCodes.Add("FJ", " ");
+        countryCodes.Add("FK", " ");
+        countryCodes.Add("FR", "France");
+        countryCodes.Add("GA", " ");
+        countryCodes.Add("GB", " ");
+        countryCodes.Add("GE", " ");
+        countryCodes.Add("GF", " ");
+        countryCodes.Add("GH", " ");
+        countryCodes.Add("GL", " ");
+        countryCodes.Add("GM", " ");
+        countryCodes.Add("GN", " ");
+        countryCodes.Add("GQ", " ");
+        countryCodes.Add("GR", " ");
+        countryCodes.Add("GS", " ");
+        countryCodes.Add("GT", " ");
+        countryCodes.Add("GW", " ");
+        countryCodes.Add("GY", " ");
+        countryCodes.Add("HN", " ");
+        countryCodes.Add("HR", " ");
+        countryCodes.Add("HT", " ");
+        countryCodes.Add("HU", " ");
+        countryCodes.Add("ID", " ");
+        countryCodes.Add("IE", " ");
+        countryCodes.Add("IL", " ");
+        countryCodes.Add("IN", "India");
+        countryCodes.Add("IQ", " ");
+        countryCodes.Add("IR", "Iran");
+        countryCodes.Add("IS", " ");
+        countryCodes.Add("IT", "Italy");
+        countryCodes.Add("JM", "Jemen");
+        countryCodes.Add("JO", "Jordan");
+        countryCodes.Add("JP", "Japan");
+        countryCodes.Add("KE", " ");
+        countryCodes.Add("KG", " ");
+        countryCodes.Add("KH", "Cambodia");
+        countryCodes.Add("KP", " ");
+        countryCodes.Add("KR", " ");
+        countryCodes.Add("KW", " ");
+        countryCodes.Add("KZ", " ");
+        countryCodes.Add("LA", " ");
+        countryCodes.Add("LB", " ");
+        countryCodes.Add("LK", " ");
+        countryCodes.Add("LR", " ");
+        countryCodes.Add("LS", " ");
+        countryCodes.Add("LT", " ");
+        countryCodes.Add("LU", " ");
+        countryCodes.Add("LV", " ");
+        countryCodes.Add("LY", " ");
+        countryCodes.Add("MD", " ");
+        countryCodes.Add("ME", " ");
+        countryCodes.Add("MG", " ");
+        countryCodes.Add("MK", " ");
+        countryCodes.Add("ML", "Mali");
+        countryCodes.Add("MM", " ");
+        countryCodes.Add("MN", " ");
+        countryCodes.Add("MO", " ");
+        countryCodes.Add("MR", " ");
+        countryCodes.Add("MW", " ");
+        countryCodes.Add("MX", " ");
+        countryCodes.Add("MY", " ");
+        countryCodes.Add("MZ", " ");
+        countryCodes.Add("NA", " ");
+        countryCodes.Add("NC", " ");
+        countryCodes.Add("NE", " ");
+        countryCodes.Add("NG", " ");
+        countryCodes.Add("NI", " ");
+        countryCodes.Add("NL", " ");
+        countryCodes.Add("NO", " ");
+        countryCodes.Add("NP", " ");
+        countryCodes.Add("NZ", " ");
+        countryCodes.Add("OM", " ");
+        countryCodes.Add("PA", " ");
+        countryCodes.Add("PE", "Peru");
+        countryCodes.Add("PG", " ");
+        countryCodes.Add("PH", " ");
+        countryCodes.Add("PK", "Pakistan");
+        countryCodes.Add("PL", " ");
+        countryCodes.Add("PR", " ");
+        countryCodes.Add("PS", " ");
+        countryCodes.Add("PT", " ");
+        countryCodes.Add("PY", " ");
+        countryCodes.Add("QA", " ");
+        countryCodes.Add("RO", " ");
+        countryCodes.Add("RS", " ");
+        countryCodes.Add("RU", " ");
+        countryCodes.Add("RW", " ");
+        countryCodes.Add("SA", " ");
+        countryCodes.Add("SB", " ");
+        countryCodes.Add("SD", " ");
+        countryCodes.Add("SE", " ");
+        countryCodes.Add("SI", " ");
+        countryCodes.Add("SK", " ");
+        countryCodes.Add("SL", " ");
+        countryCodes.Add("SN", " ");
+        countryCodes.Add("SO", " ");
+        countryCodes.Add("SR", " ");
+        countryCodes.Add("SV", "El Salvador");
+        countryCodes.Add("SY", " ");
+        countryCodes.Add("SZ", " ");
+        countryCodes.Add("TD", " ");
+        countryCodes.Add("TF", " ");
+        countryCodes.Add("TG", " ");
+        countryCodes.Add("TH", "Thailand");
+        countryCodes.Add("TJ", " ");
+        countryCodes.Add("TL", " ");
+        countryCodes.Add("TM", " ");
+        countryCodes.Add("TN", " ");
+        countryCodes.Add("TR", " ");
+        countryCodes.Add("TT", " ");
+        countryCodes.Add("TZ", " ");
+        countryCodes.Add("UA", " ");
+        countryCodes.Add("UG", " ");
+        countryCodes.Add("US", "United States");
+        countryCodes.Add("UY", " ");
+        countryCodes.Add("UZ", " ");
+        countryCodes.Add("VE", " ");
+        countryCodes.Add("VN", "Vietnam");
+        countryCodes.Add("YE", " ");
+        countryCodes.Add("ZA", " ");
+        countryCodes.Add("ZM", " ");
+        countryCodes.Add("ZW", " ");
+
+        Debug.Log("Country Codes Dictionary created with " + countryCodes.Count + " items");
     }
 }
