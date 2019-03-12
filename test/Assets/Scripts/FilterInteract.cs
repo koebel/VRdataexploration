@@ -448,6 +448,12 @@ public class FilterInteract : MonoBehaviour {
                         subRegionAsiaSelected = false;
                         subRegionOzeaniaSelected = false;
 
+                        subRegionAmerica.GetComponent<MeshRenderer>().material = standardMaterial;
+                        subRegionAfrica.GetComponent<MeshRenderer>().material = standardMaterial;
+                        subRegionEurope.GetComponent<MeshRenderer>().material = standardMaterial;
+                        subRegionAsia.GetComponent<MeshRenderer>().material = standardMaterial;
+                        subRegionOzeania.GetComponent<MeshRenderer>().material = standardMaterial;
+
                         // apply reset data visualisation
                         dv.resetDataVisualisation();
                         dv.applyDataVisualisation();
