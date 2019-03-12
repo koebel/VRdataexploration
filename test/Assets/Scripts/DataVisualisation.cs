@@ -48,6 +48,7 @@ namespace DataVisualisationSpace {
         private int countryValue;
 
         private string outlineKey;
+        private string labelKey;
 
         private int currZoomLevel;
         private int prevZoomLevel;
@@ -128,9 +129,11 @@ namespace DataVisualisationSpace {
                 }
 
                 // hide Country Labels
-                if (rootCountryLabels.transform.Find(p.Key).gameObject != null)
+                labelKey = "label-" + p.Key;
+                Debug.Log(labelKey);
+                if (rootCountryLabels.transform.Find(labelKey).gameObject != null)
                 {
-                    temp = rootCountryLabels.transform.Find(p.Key).gameObject;
+                    temp = rootCountryLabels.transform.Find(labelKey).gameObject;
                     temp.SetActive(false);
                 }
                 else
@@ -187,9 +190,10 @@ namespace DataVisualisationSpace {
                 setCountryVolumeHeight(p.Key, p.Value, maxValue);
 
                 // show country label
-                if (rootCountryLabels.transform.Find(p.Key).gameObject != null)
+                labelKey = "label-" + p.Key;
+                if (rootCountryLabels.transform.Find(labelKey).gameObject != null)
                 {
-                    temp = rootCountryLabels.transform.Find(p.Key).gameObject;
+                    temp = rootCountryLabels.transform.Find(labelKey).gameObject;
                     temp.SetActive(true);
                 }
                 else
@@ -219,9 +223,11 @@ namespace DataVisualisationSpace {
                 setCountryVolumeHeight(p.Key, p.Value, maxValue);
 
                 // show label
-                if (rootCountryLabels.transform.Find(p.Key).gameObject != null)
+                labelKey = "label-" + p.Key;
+                //Debug.Log(labelKey);
+                if (rootCountryLabels.transform.Find(labelKey).gameObject != null)
                 {
-                    temp = rootCountryLabels.transform.Find(p.Key).gameObject;
+                    temp = rootCountryLabels.transform.Find(labelKey).gameObject;
                     temp.SetActive(true);
                 }
                 else
