@@ -103,7 +103,7 @@ namespace CollectionDataHandlingSpace {
                 return max;
             }
 
-            public static void selectItemsByRegion(bool america, bool africa, bool europe, bool asia, bool oceania) {
+            public static void selectItemsByRegion(bool america, bool africa, bool europe, bool asia, bool ozeania) {
                 selectedItems = new List<CollectionItem>();
 
                 foreach (CollectionItem i in allItems)
@@ -124,7 +124,7 @@ namespace CollectionDataHandlingSpace {
                     {
                         selectedItems.Add(i);
                     }
-                    else if (oceania && i.continent == "OCEANIA")
+                    else if (ozeania && i.continent == "OZEANIA")
                     {
                         selectedItems.Add(i);
                     }
