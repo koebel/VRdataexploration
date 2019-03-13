@@ -72,6 +72,7 @@ public class PlayerPosition : MonoBehaviour {
 
         // get current position based on body & head movement
         // doesn't work properly with teleportation...
+        // might need to move this into fixed update?!?
         /*
         ray = new Ray();
         ray.origin = player.transform.position + eyes.transform.position;
@@ -103,7 +104,7 @@ public class PlayerPosition : MonoBehaviour {
         // update controllcenter content
         currentText = "position: " + convertPositionToGeoCoordinate(currExactPos) + "<br>" + 
             "altitude: " + ScaleInteract.currentStaticScaleFactor + " x above " + currentCountryName + " <br>" + 
-            "items in current selection: " + CollectionDataHandling.CollectionData.countryStatsSelection.Count;
+            "items in current selection: " + CollectionDataHandling.CollectionData.selectedItems.Count;
 
         // set new text
         controllcenterText.text = currentText.Replace("<br>", "\n");

@@ -295,7 +295,7 @@ public class FilterInteract : MonoBehaviour {
                 if (Mathf.Sqrt(Mathf.Abs(device.GetAxis().x) * Mathf.Abs(device.GetAxis().x) + Mathf.Abs(device.GetAxis().y) * Mathf.Abs(device.GetAxis().y)) < centerRadius)
                 {
 
-                    Debug.Log("Distance: " + Mathf.Sqrt(Mathf.Abs(device.GetAxis().x) * Mathf.Abs(device.GetAxis().x) + Mathf.Abs(device.GetAxis().y) * Mathf.Abs(device.GetAxis().y)));
+                    // Debug.Log("Distance: " + Mathf.Sqrt(Mathf.Abs(device.GetAxis().x) * Mathf.Abs(device.GetAxis().x) + Mathf.Abs(device.GetAxis().y) * Mathf.Abs(device.GetAxis().y)));
                     // update selection 
                     //Debug.Log("center clicked");
 
@@ -317,8 +317,10 @@ public class FilterInteract : MonoBehaviour {
                         // go back to filter, hide menu
                         filter.SetActive(true);
                         apply.SetActive(false);
+                        back.SetActive(false);
                         mainMenu.SetActive(false);
                         metaMenu.SetActive(false);
+                        subMenuRegion.SetActive(false);
                         filterActive = false;
 
                         // apply selection to data visualisation
