@@ -70,12 +70,15 @@ public class PlayerPosition : MonoBehaviour {
     {
         device = SteamVR_Controller.Input((int)trackedObj.index);
 
-        // get current position
+        // get current position based on body & head movement
+        // doesn't work properly with teleportation...
+        /*
         ray = new Ray();
         ray.origin = player.transform.position + eyes.transform.position;
         ray.direction = transform.TransformDirection(Vector3.down);
 
         hits = Physics.RaycastAll(player.transform.position + eyes.transform.position, Vector3.down, Mathf.Infinity);
+        currentCountryName = "the world";
 
         foreach (RaycastHit rch in hits)
         {
@@ -85,6 +88,7 @@ public class PlayerPosition : MonoBehaviour {
                 currentCountryName = currentCountry.transform.parent.name;
             }
         }
+        */
 
         /*
         if (currPos != prevPos) {
@@ -116,11 +120,11 @@ public class PlayerPosition : MonoBehaviour {
             ray.direction = transform.TransformDirection(Vector3.forward);
 
             hits = Physics.RaycastAll(ray, rayDistance);
+            currentCountryName = "the world";
 
             foreach (RaycastHit rch in hits) {
                 if (rch.collider.gameObject.tag == "Volume") {
                     currentCountry = rch.collider.gameObject;
-                    //currentCountryName = currentCountry.transform.parent.name;
                     currentCountryName = getCountryName(currentCountry.transform.parent.name);
                 }
             }
@@ -225,7 +229,7 @@ public class PlayerPosition : MonoBehaviour {
         countryCodes.Add("BY", "Belarus");
         countryCodes.Add("BZ", "Belize");
         countryCodes.Add("CA", "Canada");
-        countryCodes.Add("CD", "Democratic Republic of the Congo");
+        countryCodes.Add("CD", "Democratic Republic of Congo");
         countryCodes.Add("CF", "Central African Republic");
         countryCodes.Add("CG", "Congo");
         countryCodes.Add("CH", "Switzerland");
@@ -251,127 +255,127 @@ public class PlayerPosition : MonoBehaviour {
         countryCodes.Add("ES", "Spain");
         countryCodes.Add("ET", "Ethiopia");
         countryCodes.Add("FI", "Finland");
-        countryCodes.Add("FJ", " ");
-        countryCodes.Add("FK", " ");
+        countryCodes.Add("FJ", "Fiji");
+        countryCodes.Add("FK", "Falkland Islands ");
         countryCodes.Add("FR", "France");
-        countryCodes.Add("GA", " ");
-        countryCodes.Add("GB", " ");
-        countryCodes.Add("GE", " ");
-        countryCodes.Add("GF", " ");
-        countryCodes.Add("GH", " ");
-        countryCodes.Add("GL", " ");
-        countryCodes.Add("GM", " ");
-        countryCodes.Add("GN", " ");
-        countryCodes.Add("GQ", " ");
-        countryCodes.Add("GR", " ");
-        countryCodes.Add("GS", " ");
-        countryCodes.Add("GT", " ");
-        countryCodes.Add("GW", " ");
-        countryCodes.Add("GY", " ");
-        countryCodes.Add("HN", " ");
-        countryCodes.Add("HR", " ");
-        countryCodes.Add("HT", " ");
-        countryCodes.Add("HU", " ");
-        countryCodes.Add("ID", " ");
-        countryCodes.Add("IE", " ");
-        countryCodes.Add("IL", " ");
+        countryCodes.Add("GA", "Gabon");
+        countryCodes.Add("GB", "United Kingdom");
+        countryCodes.Add("GE", "Georgia");
+        countryCodes.Add("GF", "French Guiana");
+        countryCodes.Add("GH", "Ghana");
+        countryCodes.Add("GL", "Greenland");
+        countryCodes.Add("GM", "Gambia");
+        countryCodes.Add("GN", "Guinea");
+        countryCodes.Add("GQ", "Equatorial Guinea");
+        countryCodes.Add("GR", "Greece");
+        countryCodes.Add("GS", "South Georgia and the South Sandwich Islands");
+        countryCodes.Add("GT", "Guatemala");
+        countryCodes.Add("GW", "Guinea-Bissau");
+        countryCodes.Add("GY", "Guyana");
+        countryCodes.Add("HN", "Honduras");
+        countryCodes.Add("HR", "Croatia");
+        countryCodes.Add("HT", "Haiti");
+        countryCodes.Add("HU", "Hungary");
+        countryCodes.Add("ID", "Indonesia");
+        countryCodes.Add("IE", "Ireland");
+        countryCodes.Add("IL", "Israel");
         countryCodes.Add("IN", "India");
-        countryCodes.Add("IQ", " ");
+        countryCodes.Add("IQ", "Iraq");
         countryCodes.Add("IR", "Iran");
-        countryCodes.Add("IS", " ");
+        countryCodes.Add("IS", "Iceland");
         countryCodes.Add("IT", "Italy");
         countryCodes.Add("JM", "Jemen");
         countryCodes.Add("JO", "Jordan");
         countryCodes.Add("JP", "Japan");
-        countryCodes.Add("KE", " ");
-        countryCodes.Add("KG", " ");
+        countryCodes.Add("KE", "Kenya");
+        countryCodes.Add("KG", "Kyrgyzstan");
         countryCodes.Add("KH", "Cambodia");
-        countryCodes.Add("KP", " ");
-        countryCodes.Add("KR", " ");
-        countryCodes.Add("KW", " ");
-        countryCodes.Add("KZ", " ");
-        countryCodes.Add("LA", " ");
-        countryCodes.Add("LB", " ");
-        countryCodes.Add("LK", " ");
-        countryCodes.Add("LR", " ");
-        countryCodes.Add("LS", " ");
-        countryCodes.Add("LT", " ");
-        countryCodes.Add("LU", " ");
-        countryCodes.Add("LV", " ");
-        countryCodes.Add("LY", " ");
-        countryCodes.Add("MD", " ");
-        countryCodes.Add("ME", " ");
-        countryCodes.Add("MG", " ");
-        countryCodes.Add("MK", " ");
+        countryCodes.Add("KP", "North Korea");
+        countryCodes.Add("KR", "South Korea");
+        countryCodes.Add("KW", "Kuwait");
+        countryCodes.Add("KZ", "Kazakhstan");
+        countryCodes.Add("LA", "Laos");
+        countryCodes.Add("LB", "Lebanon");
+        countryCodes.Add("LK", "Sri Lanka");
+        countryCodes.Add("LR", "Liberia");
+        countryCodes.Add("LS", "Lesotho");
+        countryCodes.Add("LT", "Lithuania");
+        countryCodes.Add("LU", "Luxembourg");
+        countryCodes.Add("LV", "Latvia");
+        countryCodes.Add("LY", "Libya");
+        countryCodes.Add("MD", "Moldova");
+        countryCodes.Add("ME", "Montenegro");
+        countryCodes.Add("MG", "Madagascar");
+        countryCodes.Add("MK", "Macedonia");
         countryCodes.Add("ML", "Mali");
-        countryCodes.Add("MM", " ");
-        countryCodes.Add("MN", " ");
-        countryCodes.Add("MO", " ");
-        countryCodes.Add("MR", " ");
-        countryCodes.Add("MW", " ");
-        countryCodes.Add("MX", " ");
-        countryCodes.Add("MY", " ");
-        countryCodes.Add("MZ", " ");
-        countryCodes.Add("NA", " ");
-        countryCodes.Add("NC", " ");
-        countryCodes.Add("NE", " ");
-        countryCodes.Add("NG", " ");
-        countryCodes.Add("NI", " ");
-        countryCodes.Add("NL", " ");
-        countryCodes.Add("NO", " ");
-        countryCodes.Add("NP", " ");
-        countryCodes.Add("NZ", " ");
-        countryCodes.Add("OM", " ");
-        countryCodes.Add("PA", " ");
+        countryCodes.Add("MM", "Myanmar");
+        countryCodes.Add("MN", "Mongolia");
+        countryCodes.Add("MO", "Morocco"); // sometimes the abbreviation MA is used for Morocco and MO can also apply to Macao
+        countryCodes.Add("MR", "Mauritania");
+        countryCodes.Add("MW", "Malawi");
+        countryCodes.Add("MX", "Mexico");
+        countryCodes.Add("MY", "Malaysia");
+        countryCodes.Add("MZ", "Mozambique");
+        countryCodes.Add("NA", "Namibia");
+        countryCodes.Add("NC", "New Caledonia");
+        countryCodes.Add("NE", "Niger");
+        countryCodes.Add("NG", "Nigeria");
+        countryCodes.Add("NI", "Nicaragua");
+        countryCodes.Add("NL", "Netherlands");
+        countryCodes.Add("NO", "Norway");
+        countryCodes.Add("NP", "Nepal");
+        countryCodes.Add("NZ", "New Zealand");
+        countryCodes.Add("OM", "Oman");
+        countryCodes.Add("PA", "Panama");
         countryCodes.Add("PE", "Peru");
-        countryCodes.Add("PG", " ");
-        countryCodes.Add("PH", " ");
+        countryCodes.Add("PG", "Papua New Guinea");
+        countryCodes.Add("PH", "Philippines");
         countryCodes.Add("PK", "Pakistan");
-        countryCodes.Add("PL", " ");
-        countryCodes.Add("PR", " ");
-        countryCodes.Add("PS", " ");
-        countryCodes.Add("PT", " ");
-        countryCodes.Add("PY", " ");
-        countryCodes.Add("QA", " ");
-        countryCodes.Add("RO", " ");
-        countryCodes.Add("RS", " ");
-        countryCodes.Add("RU", " ");
-        countryCodes.Add("RW", " ");
-        countryCodes.Add("SA", " ");
-        countryCodes.Add("SB", " ");
-        countryCodes.Add("SD", " ");
-        countryCodes.Add("SE", " ");
-        countryCodes.Add("SI", " ");
-        countryCodes.Add("SK", " ");
-        countryCodes.Add("SL", " ");
-        countryCodes.Add("SN", " ");
-        countryCodes.Add("SO", " ");
-        countryCodes.Add("SR", " ");
+        countryCodes.Add("PL", "Poland");
+        countryCodes.Add("PR", "Puerto Rico");
+        countryCodes.Add("PS", "Palestine");
+        countryCodes.Add("PT", "Portugal");
+        countryCodes.Add("PY", "Paraguay");
+        countryCodes.Add("QA", "Qatar");
+        countryCodes.Add("RO", "Romania");
+        countryCodes.Add("RS", "Serbia");
+        countryCodes.Add("RU", "Russia");
+        countryCodes.Add("RW", "Rwanda");
+        countryCodes.Add("SA", "Saudi Arabia");
+        countryCodes.Add("SB", "Solomon Islands");
+        countryCodes.Add("SD", "Sudan");
+        countryCodes.Add("SE", "Sweden");
+        countryCodes.Add("SI", "Slovenia");
+        countryCodes.Add("SK", "Slovakia");
+        countryCodes.Add("SL", "Sierra Leone");
+        countryCodes.Add("SN", "Senegal");
+        countryCodes.Add("SO", "Somalia");
+        countryCodes.Add("SR", "Suriname");
         countryCodes.Add("SV", "El Salvador");
-        countryCodes.Add("SY", " ");
-        countryCodes.Add("SZ", " ");
-        countryCodes.Add("TD", " ");
-        countryCodes.Add("TF", " ");
-        countryCodes.Add("TG", " ");
+        countryCodes.Add("SY", "Syria");
+        countryCodes.Add("SZ", "Swaziland");
+        countryCodes.Add("TD", "Chad");
+        countryCodes.Add("TF", "French Southern Territories");
+        countryCodes.Add("TG", "Togo");
         countryCodes.Add("TH", "Thailand");
-        countryCodes.Add("TJ", " ");
-        countryCodes.Add("TL", " ");
-        countryCodes.Add("TM", " ");
-        countryCodes.Add("TN", " ");
-        countryCodes.Add("TR", " ");
-        countryCodes.Add("TT", " ");
-        countryCodes.Add("TZ", " ");
-        countryCodes.Add("UA", " ");
-        countryCodes.Add("UG", " ");
-        countryCodes.Add("US", "United States");
-        countryCodes.Add("UY", " ");
-        countryCodes.Add("UZ", " ");
-        countryCodes.Add("VE", " ");
+        countryCodes.Add("TJ", "Tajikistan");
+        countryCodes.Add("TL", "Timor-Leste");
+        countryCodes.Add("TM", "Turkmenistan");
+        countryCodes.Add("TN", "Tunisia");
+        countryCodes.Add("TR", "Turkey");
+        countryCodes.Add("TT", "Trinidad and Tobago");
+        countryCodes.Add("TZ", "Tanzania");
+        countryCodes.Add("UA", "Ukraine");
+        countryCodes.Add("UG", "Uganda");
+        countryCodes.Add("US", "United States of America");
+        countryCodes.Add("UY", "Uruguay");
+        countryCodes.Add("UZ", "Uzbekistan");
+        countryCodes.Add("VE", "Venezuela");
         countryCodes.Add("VN", "Vietnam");
-        countryCodes.Add("YE", " ");
-        countryCodes.Add("ZA", " ");
-        countryCodes.Add("ZM", " ");
-        countryCodes.Add("ZW", " ");
+        countryCodes.Add("YE", "Yemen");
+        countryCodes.Add("ZA", "South Africa");
+        countryCodes.Add("ZM", "Zambia");
+        countryCodes.Add("ZW", "Zimbabwe");
 
         Debug.Log("Country Codes Dictionary created with " + countryCodes.Count + " items");
     }
