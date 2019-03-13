@@ -49949,7 +49949,7 @@ MonoBehaviour:
   camrig: {fileID: 1475887492}
   zoomInteractor: {fileID: 715335320}
   cube: {fileID: 0}
-  scaleFactor: 2
+  scaleFactor: 1.5
   standardMaterial: {fileID: 2100000, guid: 08be6706b9114f446a7d27ffe558bb62, type: 2}
   selectedMaterial: {fileID: 2100000, guid: 659b9bb77fd348345a8b7bb1c193beb5, type: 2}
   markerSize: 0.05
@@ -71015,7 +71015,7 @@ MonoBehaviour:
   invalidCollisionColor: {r: 0.76862746, g: 0.76862746, b: 0.7372549, a: 1}
   tracerVisibility: 0
   cursorVisibility: 0
-  maximumLength: 250
+  maximumLength: 500
   scaleFactor: 0.01
   cursorScaleMultiplier: 4
   cursorMatchTargetRotation: 0

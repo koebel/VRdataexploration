@@ -78,8 +78,8 @@ namespace ScaleInteractionSpace {
             camrig.transform.localScale = new Vector3(currentScaleFactor, currentScaleFactor, currentScaleFactor);
 
             //calculate zoom level boundaries
-            zoomLevel1Boundary = (int) (currentScaleFactor / scaleFactor);
-            zoomLevel2Boundary = (int) (zoomLevel1Boundary / scaleFactor / scaleFactor);
+            zoomLevel1Boundary = (int) (currentScaleFactor / 2.2f);
+            zoomLevel2Boundary = (int) (zoomLevel1Boundary / 8.0f);
             //zoomLevel3Boundary = (int) (ZoomLevel2Boundary / scaleFactor);
 
             // set outlines to zoomlevel
